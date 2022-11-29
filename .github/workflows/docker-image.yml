@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: leeh8911/cpp-design-pattern:latest
+        tags: leeh8911/math-cpp:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
