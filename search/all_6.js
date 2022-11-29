@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['main_20',['main',['../CMakeCCompilerId_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../main__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main_test.cpp']]],
-  ['main_5ftest_2ecpp_21',['main_test.cpp',['../main__test_8cpp.html',1,'']]],
-  ['math_5fcpp_22',['math_cpp',['../namespacemath__cpp.html',1,'']]],
-  ['matrix_23',['Matrix',['../classmath__cpp_1_1matrix_1_1Matrix.html',1,'Matrix'],['../namespacemath__cpp_1_1matrix.html',1,'math_cpp::matrix'],['../classmath__cpp_1_1matrix_1_1Matrix.html#ad4ebb135997c4dea12f782760503995f',1,'math_cpp::matrix::Matrix::Matrix(std::size_t row, std::size_t col)'],['../classmath__cpp_1_1matrix_1_1Matrix.html#a2ce32fac1e35f3554d82643f8e012481',1,'math_cpp::matrix::Matrix::Matrix(const std::initializer_list&lt; std::initializer_list&lt; double &gt;&gt; &amp;l)'],['../classmath__cpp_1_1matrix_1_1Matrix.html#a10704f28356d8ddc33e01bfb9beef4ad',1,'math_cpp::matrix::Matrix::Matrix(const Matrix &amp;other)=default']]],
-  ['matrix_2ecpp_24',['matrix.cpp',['../matrix_8cpp.html',1,'']]],
-  ['matrix_2eh_25',['matrix.h',['../matrix_8h.html',1,'']]],
-  ['matrix_5ftest_2ecpp_26',['matrix_test.cpp',['../matrix__test_8cpp.html',1,'']]],
-  ['math_20c_2b_2b_27',['Math C++',['../md_readme.html',1,'']]],
-  ['test_28',['test',['../namespacemath__cpp_1_1test.html',1,'math_cpp']]]
+  ['factorya_137',['FactoryA',['../classdesign__pattern_1_1creational_1_1abstract__factory_1_1FactoryA.html',1,'design_pattern::creational::abstract_factory']]],
+  ['factoryb_138',['FactoryB',['../classdesign__pattern_1_1creational_1_1abstract__factory_1_1FactoryB.html',1,'design_pattern::creational::abstract_factory']]],
+  ['factorymap_139',['FactoryMap',['../namespacedesign__pattern_1_1etc_1_1apollo.html#a32bd196b031cdc94c105e5bd63779cfe',1,'design_pattern::etc::apollo']]],
+  ['find_140',['Find',['../classdesign__pattern_1_1behavior_1_1observer_1_1ObstacleRepository.html#a971695b0588cfa9fa2ef13c1daba3a61',1,'design_pattern::behavior::observer::ObstacleRepository']]],
+  ['fit_141',['Fit',['../classdesign__pattern_1_1behavior_1_1strategy_1_1Cluster.html#a238af9cf3916ae4047d00b2645df2fb4',1,'design_pattern::behavior::strategy::Cluster::Fit()'],['../classdesign__pattern_1_1behavior_1_1strategy_1_1IClusterImpl.html#ac8723e100d0431ac3dc3b64f1b4f1b4f',1,'design_pattern::behavior::strategy::IClusterImpl::Fit()'],['../classdesign__pattern_1_1behavior_1_1strategy_1_1BasicCluster.html#a1a907c0a71aeed637e50a7924633661d',1,'design_pattern::behavior::strategy::BasicCluster::Fit()'],['../classdesign__pattern_1_1behavior_1_1strategy_1_1DBSCAN.html#a1a907c0a71aeed637e50a7924633661d',1,'design_pattern::behavior::strategy::DBSCAN::Fit()']]],
+  ['from_142',['From',['../structdesign__pattern_1_1etc_1_1interval_1_1Interval.html#adb0057759c56dd51255b7d214e4cfb32',1,'design_pattern::etc::interval::Interval::From()'],['../classdesign__pattern_1_1etc_1_1interval_1_1NumberInterval.html#a20de019195c186a371eca281b5b1cc8a',1,'design_pattern::etc::interval::NumberInterval::From()']]],
+  ['from_5f_143',['from_',['../classdesign__pattern_1_1etc_1_1interval_1_1NumberInterval.html#a4075d96ab3f56ed3cfdc430d084a3f22',1,'design_pattern::etc::interval::NumberInterval']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['col_5f_79',['col_',['../classmath__cpp_1_1matrix_1_1Matrix.html#a0ee29c9e725e1792ebf90fac45394756',1,'math_cpp::matrix::Matrix']]]
+  ['alive_5fcount_5f_840',['alive_count_',['../classdesign__pattern_1_1etc_1_1object_1_1Object.html#a9e806664a5907121f5949f8cdb457089',1,'design_pattern::etc::object::Object::alive_count_()'],['../classdesign__pattern_1_1etc_1_1object_1_1BoxObject.html#a9e806664a5907121f5949f8cdb457089',1,'design_pattern::etc::object::BoxObject::alive_count_()']]]
 ];
