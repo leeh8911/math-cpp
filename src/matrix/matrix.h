@@ -19,6 +19,7 @@ namespace math_cpp {
 namespace matrix {
 class Matrix {
  public:
+    Matrix() = default;
     Matrix(std::size_t row, std::size_t col);
     Matrix(const std::initializer_list<std::initializer_list<double>>& l);
     Matrix(const Matrix& other) = default;
@@ -28,6 +29,7 @@ class Matrix {
 
     Matrix operator+(const Matrix& other) const;
     Matrix operator-(const Matrix& other) const;
+    Matrix operator*(Matrix& other);
     Matrix operator*(double scalar) const;
     Matrix operator/(double scalar) const;
 
@@ -39,6 +41,13 @@ class Matrix {
     Matrix& operator-();
 
     bool operator==(const Matrix& other) const;
+    bool operator!=(const Matrix& other) const;
+
+    Matrix Inverse();
+
+    // TODO(sangwon): to be tested!!!!
+    Matrix& RowMult(std::size_t idx, double scalar);
+    Matrix& RowAdd(std::size_t idx, const Matrix& row);
 
     friend Matrix operator*(double scalar, const Matrix& other);
 
@@ -47,6 +56,11 @@ class Matrix {
     friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
 
     bool IsSameSize(const Matrix& other) const;
+    bool CanMultiply(const Matrix& other) const;
+
+    Matrix& Copy(std::size_t start_row, std::size_t start_col, Matrix& other);
+
+    static Matrix Concatenate(Matrix& lhs, Matrix& rhs, std::size_t axis = 0);
 
  private:
     bool IsBoundedRow(std::size_t row);
