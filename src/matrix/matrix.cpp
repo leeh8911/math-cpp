@@ -6,12 +6,12 @@
 ///
 /// @copyright Copyright (c) 2022
 ///
-///
 
-#include "matrix/matrix.h"
+#include "src/matrix/matrix.h"
 
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 namespace math_cpp {
 namespace matrix {
@@ -99,6 +99,23 @@ Matrix& Matrix::operator-() {
     return *this;
 }
 
+Matrix Matrix::operator*(Matrix& other) {
+    if (!CanMultiply(other)) {
+        throw std::invalid_argument("cannot matrix multiply, check size!");
+    }
+
+    Matrix result(row_, other.col_);
+
+    for (std::size_t r = 0; r < row_; ++r) {
+        for (std::size_t c = 0; c < other.col_; ++c) {
+            for (std::size_t m = 0; m < col_; ++m) {
+                result(r, c) += (*this)(r, m) * other(m, c);
+            }
+        }
+    }
+    return result;
+}
+
 bool Matrix::operator==(const Matrix& other) const {
     bool equal = true;
     if (!IsSameSize(other)) {
@@ -114,6 +131,23 @@ bool Matrix::operator==(const Matrix& other) const {
         }
     }
     return equal;
+}
+
+bool Matrix::operator!=(const Matrix& other) const { return !(*this == other); }
+
+Matrix Matrix::Inverse() { return *this; }
+
+Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
+    if (idx >= row_) {
+        throw std::invalid_argument("check row index");
+    }
+    auto start = std::next(std::begin(data_), idx * col_);
+    auto finish = std::next(start, col_);
+    for (; start != finish; ++start) {
+        *start = (*start) * scalar;
+    }
+
+    return *this;
 }
 
 Matrix operator*(double scalar, const Matrix& other) { return other * scalar; }
@@ -135,6 +169,46 @@ Matrix& Matrix::operator*=(double scalar) {
 
 bool Matrix::IsSameSize(const Matrix& other) const { return (row_ == other.row_) && (col_ == other.col_); }
 
+bool Matrix::CanMultiply(const Matrix& other) const { return (col_ == other.row_); }
+
+Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, Matrix& other) {
+    for (std::size_t r = 0; r < other.row_; ++r) {
+        for (std::size_t c = 0; c < other.col_; ++c) {
+            (*this)(r + start_row, c + start_col) = other(r, c);
+        }
+    }
+
+    return *this;
+}
+
+Matrix Matrix::Concatenate(Matrix& lhs, Matrix& rhs, std::size_t axis) {
+    Matrix result{};
+
+    if (axis == 0) {
+        if (lhs.col_ != rhs.col_) {
+            throw std::invalid_argument("check matrix size!");
+        }
+        Matrix row_concat(lhs.row_ + rhs.row_, lhs.col_);
+
+        row_concat.Copy(0, 0, lhs);
+        row_concat.Copy(lhs.row_, 0, rhs);
+
+        result = row_concat;
+    } else if (axis == 1) {
+        if (lhs.row_ != rhs.row_) {
+            throw std::invalid_argument("check matrix size!");
+        }
+        Matrix col_concat(lhs.row_, lhs.col_ + rhs.col_);
+
+        col_concat.Copy(0, 0, lhs);
+        col_concat.Copy(0, lhs.col_, rhs);
+
+        result = col_concat;
+    }
+
+    return result;
+}
+
 bool Matrix::IsBoundedRow(std::size_t row) { return (row <= row_); }
 
 bool Matrix::IsBoundedCol(std::size_t col) { return (col <= col_); }
@@ -145,5 +219,4 @@ std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
     return os;
 }
 }  // namespace matrix
-
 }  // namespace math_cpp

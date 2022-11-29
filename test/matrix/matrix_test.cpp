@@ -23,79 +23,6 @@ using math_cpp::matrix::Matrix;
 namespace math_cpp {
 namespace test {
 
-TEST(MatrixTest, CreationCase) {
-    Matrix matrix(2, 2);
-
-    EXPECT_EQ(2, matrix.Row());
-    EXPECT_EQ(2, matrix.Col());
-}
-
-TEST(MatrixTest, CreationByInitializeCase) {
-    Matrix matrix{{1.0, 0.0}, {0.0, 1.0}};
-
-    EXPECT_EQ(2, matrix.Row());
-    EXPECT_EQ(2, matrix.Col());
-
-    EXPECT_EQ(1.0, matrix(0, 0));
-    EXPECT_EQ(1.0, matrix(1, 1));
-    EXPECT_EQ(0.0, matrix(0, 1));
-    EXPECT_EQ(0.0, matrix(1, 0));
-}
-
-TEST(MatrixTest, CreationByInitialize2Case) {
-    Matrix matrix{{1.0, 2.0}, {3.0, 4.0}};
-
-    EXPECT_EQ(2, matrix.Row());
-    EXPECT_EQ(2, matrix.Col());
-
-    EXPECT_EQ(1.0, matrix(0, 0));
-    EXPECT_EQ(2.0, matrix(0, 1));
-    EXPECT_EQ(3.0, matrix(1, 0));
-    EXPECT_EQ(4.0, matrix(1, 1));
-}
-
-TEST(MatrixTest, AdditionTrivialCase) {
-    Matrix lhs{{0.0, 0.0}, {0.0, 0.0}};
-    Matrix rhs{{0.0, 0.0}, {0.0, 0.0}};
-
-    Matrix add = lhs + rhs;
-
-    EXPECT_EQ(2, add.Row());
-    EXPECT_EQ(2, add.Col());
-
-    EXPECT_EQ(0.0, add(0, 0));
-    EXPECT_EQ(0.0, add(0, 1));
-    EXPECT_EQ(0.0, add(1, 0));
-    EXPECT_EQ(0.0, add(1, 1));
-}
-
-TEST(MatrixTest, AdditionDifferentSizeThrowCase) {
-    Matrix lhs{{0.0, 0.0}, {0.0, 0.0}};
-    Matrix rhs{{0.0}};
-
-    EXPECT_THROW(
-        {
-            try {
-                Matrix add = lhs + rhs;
-            } catch (const std::invalid_argument& e) {
-                // and this tests that it has the correct message
-                EXPECT_STREQ("other matrix must be same size [*this] (2, 2)!", e.what());
-                throw;
-            }
-        },
-        std::invalid_argument);
-}
-TEST(MatrixTest, MultiplyTrivialCase) {
-    Matrix lhs{{0.0, 0.0}, {0.0, 0.0}};
-
-    Matrix result = lhs * 1.0;
-
-    EXPECT_EQ(0.0, result(0, 0));
-    EXPECT_EQ(0.0, result(0, 1));
-    EXPECT_EQ(0.0, result(1, 0));
-    EXPECT_EQ(0.0, result(1, 1));
-}
-
 TEST(MatrixTest, SuperPositionCase) {
     Matrix A{{1.0, 2.0}, {3.0, 4.0}};
     Matrix B{{7.0, -2.0}, {5.0, 8.0}};
@@ -118,6 +45,40 @@ TEST(MatrixTest, SuperPositionTrivialCase) {
     Matrix result = a * A + b * B;
 
     EXPECT_EQ(Matrix(2, 2), (a * A + b * B));
+}
+
+TEST(MatrixTest, MatrixMultiplication) {
+    Matrix A{{1.0, 2.0}, {3.0, 4.0}};
+    Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    EXPECT_EQ(A, (A * B));
+    EXPECT_EQ(A, (B * A));
+}
+
+TEST(MatrixTest, MatrixInverse) {
+    Matrix A{{1.0, 0.0}, {0.0, 1.0}};
+
+    EXPECT_EQ(A, A.Inverse());
+}
+
+TEST(MatrixTest, MatrixRowConcatenate) {
+    Matrix A{{1.0, 0.0}, {0.0, 1.0}};
+    Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    Matrix result = Matrix::Concatenate(A, B, 0);
+    Matrix expect{{1.0, 0.0}, {0.0, 1.0}, {1.0, 0.0}, {0.0, 1.0}};
+
+    EXPECT_EQ(expect, result);
+}
+
+TEST(MatrixTest, MatrixColConcatenate) {
+    Matrix A{{1.0, 0.0}, {0.0, 1.0}};
+    Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    Matrix result = Matrix::Concatenate(A, B, 1);
+    Matrix expect{{1.0, 0.0, 1.0, 0.0}, {0.0, 1.0, 0.0, 1.0}};
+
+    EXPECT_EQ(expect, result);
 }
 
 }  // namespace test
