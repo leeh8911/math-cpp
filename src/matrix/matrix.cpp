@@ -158,39 +158,25 @@ Matrix Matrix::Inverse() {
 
     Matrix eye = Identity(row_);
     Matrix cat = Concatenate(*this, eye, 1);
-    std::cout << "Concatenate Size: " << cat.Row() << ", " << cat.Col() << "\n";
-    std::cout << "Concatenate data_ len: " << cat.data_.size() << "\n";
 
     // Gauss Elimination
-    std::cout << "Gauss Elimination\n";
     for (std::size_t i = 0; i < row_ - 1; ++i) {
         cat.RowMult(i, 1 / cat(i, i));
         Matrix row_matrix = cat.GetRow(i);
-        std::cout << "row_matrix Size: " << row_matrix.Row() << ", " << row_matrix.Col() << "\n";
-        std::cout << "row_matrix data_ len: " << row_matrix.data_.size() << "\n";
 
         for (std::size_t j = i + 1; j < row_; ++j) {
             Matrix temporal_row = row_matrix * (-cat(j, i));
-            std::cout << "temporal_row Size: " << temporal_row.Row() << ", " << temporal_row.Col() << "\n";
-            std::cout << "temporal_row data_ len: " << temporal_row.data_.size() << "\n";
-            std::cout << temporal_row << "\n";
             cat.RowAdd(j, temporal_row);
         }
     }
 
     // Jordan Elimination
-    std::cout << "Jordan Elimination\n";
     for (std::size_t i = row_ - 1; i > 0; --i) {
         cat.RowMult(i, 1 / cat(i, i));
         Matrix row_matrix = cat.GetRow(i);
-        std::cout << "row_matrix Size: " << row_matrix.Row() << ", " << row_matrix.Col() << "\n";
-        std::cout << "row_matrix data_ len: " << row_matrix.data_.size() << "\n";
 
         for (std::size_t j = i - 1; j != std::numeric_limits<std::size_t>::max(); --j) {
             Matrix temporal_row = row_matrix * (-cat(j, i));
-            std::cout << "temporal_row Size: " << temporal_row.Row() << ", " << temporal_row.Col() << "\n";
-            std::cout << "temporal_row data_ len: " << temporal_row.data_.size() << "\n";
-            std::cout << temporal_row << "\n";
             cat.RowAdd(j, temporal_row);
         }
     }
@@ -250,8 +236,9 @@ Matrix Matrix::GetRow(std::size_t idx) {
 Matrix Matrix::GetSubMatrix(std::size_t start_row, std::size_t start_col) {
     Matrix result(row_ - start_row, col_ - start_col);
 
-    std::size_t target_row = 0, target_col = 0;
+    std::size_t target_row = 0;
     for (std::size_t row = start_row; row < row_; ++row, ++target_row) {
+        std::size_t target_col = 0;
         for (std::size_t col = start_col; col < col_; ++col, ++target_col) {
             result(target_row, target_col) = (*this)(row, col);
         }
