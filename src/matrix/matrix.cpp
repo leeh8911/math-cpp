@@ -9,8 +9,10 @@
 
 #include "src/matrix/matrix.h"
 
+#include <limits>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace math_cpp {
@@ -56,6 +58,20 @@ Matrix Matrix::operator+(const Matrix& other) const {
 }
 
 double& Matrix::operator()(std::size_t row, std::size_t col) {
+    if (!IsBoundedRow(row)) {
+        std::string throw_msg =
+            "row must be greater or equal than 0 and less or equal than " + std::to_string(row_) + "!";
+        throw std::invalid_argument(throw_msg);
+    }
+    if (!IsBoundedCol(col)) {
+        std::string throw_msg =
+            "col must be greater or equal than 0 and less or equal than " + std::to_string(col_) + "!";
+        throw std::invalid_argument(throw_msg);
+    }
+    return data_[row * col_ + col];
+}
+
+double Matrix::operator()(std::size_t row, std::size_t col) const {
     if (!IsBoundedRow(row)) {
         std::string throw_msg =
             "row must be greater or equal than 0 and less or equal than " + std::to_string(row_) + "!";
@@ -135,7 +151,54 @@ bool Matrix::operator==(const Matrix& other) const {
 
 bool Matrix::operator!=(const Matrix& other) const { return !(*this == other); }
 
-Matrix Matrix::Inverse() { return *this; }
+Matrix Matrix::Inverse() {
+    if (row_ != col_) {
+        throw std::invalid_argument("matrix should be square");
+    }
+
+    Matrix eye = Identity(row_);
+    Matrix cat = Concatenate(*this, eye, 1);
+    std::cout << "Concatenate Size: " << cat.Row() << ", " << cat.Col() << "\n";
+    std::cout << "Concatenate data_ len: " << cat.data_.size() << "\n";
+
+    // Gauss Elimination
+    std::cout << "Gauss Elimination\n";
+    for (std::size_t i = 0; i < row_ - 1; ++i) {
+        cat.RowMult(i, 1 / cat(i, i));
+        Matrix row_matrix = cat.GetRow(i);
+        std::cout << "row_matrix Size: " << row_matrix.Row() << ", " << row_matrix.Col() << "\n";
+        std::cout << "row_matrix data_ len: " << row_matrix.data_.size() << "\n";
+
+        for (std::size_t j = i + 1; j < row_; ++j) {
+            Matrix temporal_row = row_matrix * (-cat(j, i));
+            std::cout << "temporal_row Size: " << temporal_row.Row() << ", " << temporal_row.Col() << "\n";
+            std::cout << "temporal_row data_ len: " << temporal_row.data_.size() << "\n";
+            std::cout << temporal_row << "\n";
+            cat.RowAdd(j, temporal_row);
+        }
+    }
+
+    // Jordan Elimination
+    std::cout << "Jordan Elimination\n";
+    for (std::size_t i = row_ - 1; i > 0; --i) {
+        cat.RowMult(i, 1 / cat(i, i));
+        Matrix row_matrix = cat.GetRow(i);
+        std::cout << "row_matrix Size: " << row_matrix.Row() << ", " << row_matrix.Col() << "\n";
+        std::cout << "row_matrix data_ len: " << row_matrix.data_.size() << "\n";
+
+        for (std::size_t j = i - 1; j != std::numeric_limits<std::size_t>::max(); --j) {
+            Matrix temporal_row = row_matrix * (-cat(j, i));
+            std::cout << "temporal_row Size: " << temporal_row.Row() << ", " << temporal_row.Col() << "\n";
+            std::cout << "temporal_row data_ len: " << temporal_row.data_.size() << "\n";
+            std::cout << temporal_row << "\n";
+            cat.RowAdd(j, temporal_row);
+        }
+    }
+
+    Matrix result = cat.GetSubMatrix(0, col_);
+
+    return result;
+}
 
 Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     if (idx >= row_) {
@@ -148,6 +211,52 @@ Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     }
 
     return *this;
+}
+
+Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
+    if (col_ != row.col_) {
+        throw std::invalid_argument("check column size");
+    }
+    if (idx >= row_) {
+        throw std::invalid_argument("check row index");
+    }
+    auto start = std::next(std::begin(data_), idx * col_);
+    auto finish = std::next(start, col_);
+    auto row_start = std::cbegin(row.data_);
+    for (; start != finish; ++start, ++row_start) {
+        *start = (*start) + (*row_start);
+    }
+
+    return *this;
+}
+
+Matrix Matrix::GetRow(std::size_t idx) {
+    if (idx >= row_) {
+        throw std::invalid_argument("check row index");
+    }
+
+    Matrix row_matrix(1, col_);
+
+    auto start = std::next(std::begin(data_), idx * col_);
+    auto finish = std::next(start, col_);
+    auto row_start = std::begin(row_matrix.data_);
+    for (; start != finish; ++start, ++row_start) {
+        *row_start = *start;
+    }
+
+    return row_matrix;
+}
+
+Matrix Matrix::GetSubMatrix(std::size_t start_row, std::size_t start_col) {
+    Matrix result(row_ - start_row, col_ - start_col);
+
+    std::size_t target_row = 0, target_col = 0;
+    for (std::size_t row = start_row; row < row_; ++row, ++target_row) {
+        for (std::size_t col = start_col; col < col_; ++col, ++target_col) {
+            result(target_row, target_col) = (*this)(row, col);
+        }
+    }
+    return result;
 }
 
 Matrix operator*(double scalar, const Matrix& other) { return other * scalar; }
@@ -209,9 +318,18 @@ Matrix Matrix::Concatenate(Matrix& lhs, Matrix& rhs, std::size_t axis) {
     return result;
 }
 
-bool Matrix::IsBoundedRow(std::size_t row) { return (row <= row_); }
+Matrix Matrix::Identity(std::size_t size) {
+    Matrix result(size, size);
+    for (std::size_t index = 0; index < size; ++index) {
+        result(index, index) = 1.0;
+    }
 
-bool Matrix::IsBoundedCol(std::size_t col) { return (col <= col_); }
+    return result;
+}
+
+bool Matrix::IsBoundedRow(std::size_t row) const { return (row <= row_); }
+
+bool Matrix::IsBoundedCol(std::size_t col) const { return (col <= col_); }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
     os << mat.Row() << ", " << mat.Col();

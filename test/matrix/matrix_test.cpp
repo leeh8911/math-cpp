@@ -55,12 +55,6 @@ TEST(MatrixTest, MatrixMultiplication) {
     EXPECT_EQ(A, (B * A));
 }
 
-TEST(MatrixTest, MatrixInverse) {
-    Matrix A{{1.0, 0.0}, {0.0, 1.0}};
-
-    EXPECT_EQ(A, A.Inverse());
-}
-
 TEST(MatrixTest, MatrixRowConcatenate) {
     Matrix A{{1.0, 0.0}, {0.0, 1.0}};
     Matrix B{{1.0, 0.0}, {0.0, 1.0}};
@@ -79,6 +73,36 @@ TEST(MatrixTest, MatrixColConcatenate) {
     Matrix expect{{1.0, 0.0, 1.0, 0.0}, {0.0, 1.0, 0.0, 1.0}};
 
     EXPECT_EQ(expect, result);
+}
+
+TEST(MatrixTest, MultRowCase) {
+    Matrix A{{1.0, 1.0}, {1.0, 1.0}};
+
+    A.RowMult(0, 2.0);
+
+    EXPECT_EQ(Matrix({{2.0, 2.0}, {1.0, 1.0}}), A);
+}
+TEST(MatrixTest, AddRowCase) {
+    Matrix A{{1.0, 1.0}, {1.0, 1.0}};
+
+    A.RowAdd(0, Matrix{{1.0, 2.0}});
+
+    EXPECT_EQ(Matrix({{2.0, 3.0}, {1.0, 1.0}}), A);
+}
+
+TEST(MatrixTest, InverseMatrixTrivialCase) {
+    Matrix A{{1.0, 0.0}, {0.0, 1.0}};
+    Matrix invA = A.Inverse();
+
+    EXPECT_EQ(A, invA);
+}
+
+TEST(MatrixTest, InverseMatrixPropertyCase) {
+    Matrix A{{2.0, 0.0}, {0.0, 2.0}};
+    Matrix invA = A.Inverse();
+
+    EXPECT_EQ(Matrix::Identity(2), (A * invA));
+    EXPECT_EQ(Matrix::Identity(2), (invA * A));
 }
 
 }  // namespace test

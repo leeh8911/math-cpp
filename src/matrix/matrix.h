@@ -48,10 +48,13 @@ class Matrix {
     // TODO(sangwon): to be tested!!!!
     Matrix& RowMult(std::size_t idx, double scalar);
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
+    Matrix GetRow(std::size_t idx);
+    Matrix GetSubMatrix(std::size_t start_row, std::size_t start_col);
 
     friend Matrix operator*(double scalar, const Matrix& other);
 
     double& operator()(std::size_t row, std::size_t col);
+    double operator()(std::size_t row, std::size_t col) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
 
@@ -61,10 +64,11 @@ class Matrix {
     Matrix& Copy(std::size_t start_row, std::size_t start_col, Matrix& other);
 
     static Matrix Concatenate(Matrix& lhs, Matrix& rhs, std::size_t axis = 0);
+    static Matrix Identity(std::size_t size);
 
  private:
-    bool IsBoundedRow(std::size_t row);
-    bool IsBoundedCol(std::size_t col);
+    bool IsBoundedRow(std::size_t row) const;
+    bool IsBoundedCol(std::size_t col) const;
     std::vector<double> TransposeData(std::vector<double> src);
     std::size_t row_{};
     std::size_t col_{};
