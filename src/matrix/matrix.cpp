@@ -140,7 +140,9 @@ bool Matrix::operator==(const Matrix& other) const {
         auto this_it = data_.begin();
         auto other_it = other.data_.begin();
         for (; this_it != data_.end(); ++this_it, ++other_it) {
-            if (*this_it != *other_it) {
+            // TODO(sangwon) : How to compare to floating point values.. (there is so many errors..)
+            // below code is just assigned magic number (1e-8). not designed value.
+            if (std::abs(*this_it - *other_it) > 1e-8) {
                 equal = false;
                 break;
             }
@@ -183,6 +185,16 @@ Matrix Matrix::Inverse() {
 
     Matrix result = cat.GetSubMatrix(0, col_);
 
+    return result;
+}
+
+Matrix Matrix::Transpose() {
+    Matrix result(col_, row_);
+    for (std::size_t row = 0; row < row_; ++row) {
+        for (std::size_t col = 0; col < col_; ++col) {
+            result(col, row) = (*this)(row, col);
+        }
+    }
     return result;
 }
 
@@ -319,7 +331,15 @@ bool Matrix::IsBoundedRow(std::size_t row) const { return (row <= row_); }
 bool Matrix::IsBoundedCol(std::size_t col) const { return (col <= col_); }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
-    os << mat.Row() << ", " << mat.Col();
+    os << "[\n";
+    for (std::size_t r = 0; r < mat.row_; ++r) {
+        os << "[";
+        for (std::size_t c = 0; c < mat.col_; ++c) {
+            os << mat(r, c) << " ";
+        }
+        os << "]\n";
+    }
+    os << "]";
 
     return os;
 }

@@ -105,5 +105,20 @@ TEST(MatrixTest, InverseMatrixPropertyCase) {
     EXPECT_EQ(Matrix::Identity(2), (invA * A));
 }
 
+TEST(MatrixTest, InverseMatrixTrivial3x3Case) {
+    Matrix A{{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+    Matrix invA = A.Inverse();
+
+    EXPECT_EQ(A, invA);
+}
+
+TEST(MatrixTest, InverseMatrixProperty3x3Case) {
+    Matrix A{{2.0, 1.0, 3.0}, {-1.0, 2.0, 5.0}, {8.0, 0.0, 2.0}};
+    Matrix invA = A.Inverse();
+
+    EXPECT_EQ(Matrix::Identity(3), (A * invA));
+    EXPECT_EQ(Matrix::Identity(3), (invA * A));
+}
+
 }  // namespace test
 }  // namespace math_cpp

@@ -44,8 +44,8 @@ class Matrix {
     bool operator!=(const Matrix& other) const;
 
     Matrix Inverse();
+    Matrix Transpose();
 
-    // TODO(sangwon): to be tested!!!!
     Matrix& RowMult(std::size_t idx, double scalar);
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
     Matrix GetRow(std::size_t idx);
@@ -69,7 +69,6 @@ class Matrix {
  private:
     bool IsBoundedRow(std::size_t row) const;
     bool IsBoundedCol(std::size_t col) const;
-    std::vector<double> TransposeData(std::vector<double> src);
     std::size_t row_{};
     std::size_t col_{};
     std::vector<double> data_{};
