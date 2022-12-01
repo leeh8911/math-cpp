@@ -9,6 +9,7 @@
 
 #include "src/matrix/matrix.h"
 
+#include <algorithm>
 #include <limits>
 #include <stdexcept>
 #include <string>
@@ -193,11 +194,10 @@ Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     if (idx >= row_) {
         throw std::invalid_argument("check row index");
     }
-    auto start = std::next(std::begin(data_), idx * col_);
-    auto finish = std::next(start, col_);
-    for (; start != finish; ++start) {
-        *start = (*start) * scalar;
-    }
+    auto start = std::next(std::begin(data_), static_cast<std::ptrdiff_t>(idx * col_));
+    auto finish = std::next(start, static_cast<std::ptrdiff_t>(col_));
+
+    std::transform(start, finish, start, [scalar](double elm) { return elm * scalar; });
 
     return *this;
 }
