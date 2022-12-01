@@ -212,9 +212,8 @@ Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
     auto start = std::next(std::begin(data_), static_cast<std::ptrdiff_t>(idx * col_));
     auto finish = std::next(start, static_cast<std::ptrdiff_t>(col_));
     auto row_start = std::cbegin(row.data_);
-    for (; start != finish; ++start, ++row_start) {
-        *start = (*start) + (*row_start);
-    }
+
+    std::transform(start, finish, start, [&row_start](double elm) { return elm + (*(row_start++)); });
 
     return *this;
 }
@@ -229,9 +228,7 @@ Matrix Matrix::GetRow(std::size_t idx) {
     auto start = std::next(std::begin(data_), static_cast<std::ptrdiff_t>(idx * col_));
     auto finish = std::next(start, static_cast<std::ptrdiff_t>(col_));
     auto row_start = std::begin(row_matrix.data_);
-    for (; start != finish; ++start, ++row_start) {
-        *row_start = *start;
-    }
+    std::copy(start, finish, row_start);
 
     return row_matrix;
 }
@@ -259,10 +256,10 @@ Matrix Matrix::operator*(double scalar) const {
 }
 
 Matrix& Matrix::operator*=(double scalar) {
-    auto this_it = data_.begin();
-    for (; this_it != data_.end(); ++this_it) {
-        *this_it *= scalar;
-    }
+    auto start = std::begin(data_);
+    auto finish = std::end(data_);
+    std::transform(start, finish, start, [&scalar](double& elm) { return elm * scalar; });
+
     return *this;
 }
 
