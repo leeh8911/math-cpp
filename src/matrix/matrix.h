@@ -19,8 +19,10 @@ namespace math_cpp {
 namespace matrix {
 class Matrix {
  public:
+    using Shape = std::pair<std::size_t, std::size_t>;
     Matrix() = default;
-    Matrix(std::size_t row, std::size_t col);
+    explicit Matrix(const Shape& shape);
+    explicit Matrix(std::size_t row, std::size_t col);
     Matrix(const std::initializer_list<std::initializer_list<double>>& l);
     Matrix(const Matrix& other) = default;
 
@@ -29,7 +31,7 @@ class Matrix {
 
     Matrix operator+(const Matrix& other) const;
     Matrix operator-(const Matrix& other) const;
-    Matrix operator*(Matrix& other);
+    Matrix operator*(const Matrix& other);
     Matrix operator*(double scalar) const;
     Matrix operator/(double scalar) const;
 
@@ -61,14 +63,15 @@ class Matrix {
     bool IsSameSize(const Matrix& other) const;
     bool CanMultiply(const Matrix& other) const;
 
-    Matrix& Copy(std::size_t start_row, std::size_t start_col, Matrix& other);
+    Matrix& Copy(std::size_t start_row, std::size_t start_col, const Matrix& other);
 
-    static Matrix Concatenate(Matrix& lhs, Matrix& rhs, std::size_t axis = 0);
+    static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
     static Matrix Identity(std::size_t size);
 
  private:
     bool IsBoundedRow(std::size_t row) const;
     bool IsBoundedCol(std::size_t col) const;
+    bool IsBoundedSize(std::size_t row, std::size_t col) const;
     std::size_t row_{};
     std::size_t col_{};
     std::vector<double> data_{};
