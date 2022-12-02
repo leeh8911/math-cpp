@@ -190,6 +190,27 @@ TEST(MatrixTest, EraseRowColMatrixCase12) {
 
     EXPECT_EQ(Matrix({{1.0, 2.0}, {7.0, 8.0}}), result);
 }
+TEST(MatrixTest, PowerIteration) {
+    // http://madrury.github.io/jekyll/update/statistics/2017/10/04/qr-algorithm.html
+    // def power_iteration(A, tol=0.0001):
+    // v = np.random.normal(size=A.shape[1])
+    // v = v / np.linalg.norm(v)
+    // previous = np.empty(shape=A.shape[1])
+    // while True:
+    //     previous[:] = v
+    //     v = A @ v
+    //     v = v / np.linalg.norm(v)
+    //     if np.allclose(v, previous, atol=tol):
+    //         break
+    // return v
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    double tol = 1e-4;
+    Matrix v{{1.0, 0.0, 0.0}};
+    Matrix prev(1, 3);
+
+    auto dist = [](const Matrix& lhs, const Matrix& rhs) { Matrix diff = lhs - rhs; } while ()
+}
 
 }  // namespace test
 }  // namespace math_cpp
