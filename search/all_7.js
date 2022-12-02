@@ -1,15 +1,13 @@
 var searchData=
 [
-  ['generateobstacle_144',['GenerateObstacle',['../classdesign__pattern_1_1behavior_1_1observer_1_1ObstacleRepository.html#a2aaf45d0ed1c67a729c8571750911df7',1,'design_pattern::behavior::observer::ObstacleRepository']]],
-  ['generateobstaclebyid_145',['GenerateObstacleById',['../classdesign__pattern_1_1behavior_1_1observer_1_1ObstacleRepository.html#a0e3c69e1a81dd27f943aabc303b1dc41',1,'design_pattern::behavior::observer::ObstacleRepository']]],
-  ['getemptyid_146',['GetEmptyId',['../classdesign__pattern_1_1behavior_1_1observer_1_1ObstacleRepository.html#ae5ecce470d3c7212b530d9dcb94af8e2',1,'design_pattern::behavior::observer::ObstacleRepository']]],
-  ['getinstance_147',['GetInstance',['../classdesign__pattern_1_1etc_1_1time__checker_1_1ElapseDataBase.html#aafa0032c39224276ecd539187eb281c5',1,'design_pattern::etc::time_checker::ElapseDataBase']]],
-  ['getitem_148',['GetItem',['../classdesign__pattern_1_1etc_1_1mvc_1_1app_1_1Input.html#afb23d9ba507f3f30d965225be52ba8a1',1,'design_pattern::etc::mvc::app::Input::GetItem()'],['../classdesign__pattern_1_1etc_1_1mvc_1_1app_1_1Output.html#aac37d18636330476884f7fba9bc55aad',1,'design_pattern::etc::mvc::app::Output::GetItem()']]],
-  ['getkeylist_149',['GetKeyList',['../classdesign__pattern_1_1etc_1_1time__checker_1_1ElapseDataBase.html#a080ff0ffbd878603866eeeb32604e807',1,'design_pattern::etc::time_checker::ElapseDataBase']]],
-  ['getregisteredclasses_150',['GetRegisteredClasses',['../namespacedesign__pattern_1_1etc_1_1apollo.html#ab11378bab174022df4fe2b12e08da0c8',1,'design_pattern::etc::apollo']]],
-  ['getresult_151',['GetResult',['../structdesign__pattern_1_1creational_1_1builder_1_1IBicycleBuilder.html#a3dc3f2956e16dbca5e756a0073389fc5',1,'design_pattern::creational::builder::IBicycleBuilder::GetResult()'],['../classdesign__pattern_1_1creational_1_1builder_1_1GTBuilder.html#a424087d42726630d5a1656f5744a4de9',1,'design_pattern::creational::builder::GTBuilder::GetResult()'],['../classdesign__pattern_1_1creational_1_1builder_1_1MountainBikeBuildDirector.html#ab839490b7ac2969a4b3a6d9c1a92864f',1,'design_pattern::creational::builder::MountainBikeBuildDirector::GetResult()']]],
-  ['getusedid_152',['GetUsedId',['../classdesign__pattern_1_1behavior_1_1observer_1_1ObstacleRepository.html#a5de53d678123495f2cd946601e186950',1,'design_pattern::behavior::observer::ObstacleRepository']]],
-  ['globalfactorymap_153',['GlobalFactoryMap',['../namespacedesign__pattern_1_1etc_1_1apollo.html#ae98a72a6647a539520276a56b4198118',1,'design_pattern::etc::apollo']]],
-  ['green_154',['Green',['../classdesign__pattern_1_1behavior_1_1state_1_1Green.html',1,'design_pattern::behavior::state']]],
-  ['gtbuilder_155',['GTBuilder',['../classdesign__pattern_1_1creational_1_1builder_1_1GTBuilder.html',1,'design_pattern::creational::builder']]]
+  ['main_28',['main',['../main__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main_test.cpp'],['../CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../CMakeCCompilerId_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCCompilerId.c']]],
+  ['main_5ftest_2ecpp_29',['main_test.cpp',['../main__test_8cpp.html',1,'']]],
+  ['math_20c_2b_2b_30',['Math C++',['../md_readme.html',1,'']]],
+  ['math_5fcpp_31',['math_cpp',['../namespacemath__cpp.html',1,'']]],
+  ['matrix_32',['matrix',['../namespacemath__cpp_1_1matrix.html',1,'math_cpp']]],
+  ['matrix_33',['Matrix',['../classmath__cpp_1_1matrix_1_1Matrix.html',1,'Matrix'],['../classmath__cpp_1_1matrix_1_1Matrix.html#a9a022fb22fe3aad154e6db6009c611ee',1,'math_cpp::matrix::Matrix::Matrix()=default'],['../classmath__cpp_1_1matrix_1_1Matrix.html#a6418afed968196fb8e8b46433b97155f',1,'math_cpp::matrix::Matrix::Matrix(const Shape &amp;shape)'],['../classmath__cpp_1_1matrix_1_1Matrix.html#ad4ebb135997c4dea12f782760503995f',1,'math_cpp::matrix::Matrix::Matrix(std::size_t row, std::size_t col)'],['../classmath__cpp_1_1matrix_1_1Matrix.html#a2ce32fac1e35f3554d82643f8e012481',1,'math_cpp::matrix::Matrix::Matrix(const std::initializer_list&lt; std::initializer_list&lt; double &gt;&gt; &amp;l)'],['../classmath__cpp_1_1matrix_1_1Matrix.html#a10704f28356d8ddc33e01bfb9beef4ad',1,'math_cpp::matrix::Matrix::Matrix(const Matrix &amp;other)=default']]],
+  ['matrix_2ecpp_34',['matrix.cpp',['../matrix_8cpp.html',1,'']]],
+  ['matrix_2eh_35',['matrix.h',['../matrix_8h.html',1,'']]],
+  ['matrix_5ftest_2ecpp_36',['matrix_test.cpp',['../matrix__test_8cpp.html',1,'']]],
+  ['test_37',['test',['../namespacemath__cpp_1_1test.html',1,'math_cpp']]]
 ];

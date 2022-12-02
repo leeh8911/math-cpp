@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['baseclassmap_912',['BaseClassMap',['../namespacedesign__pattern_1_1etc_1_1apollo.html#acf59876b05d1614920b9e4e189351041',1,'design_pattern::etc::apollo']]],
-  ['boxobjectptr_913',['BoxObjectPtr',['../namespacedesign__pattern_1_1etc_1_1object.html#aa7a105d531ae367c1be87659f971c23c',1,'design_pattern::etc::object']]]
+  ['shape_111',['Shape',['../classmath__cpp_1_1matrix_1_1Matrix.html#a957d3cc813b86fa15fbfb694647db5cf',1,'math_cpp::matrix::Matrix']]]
 ];

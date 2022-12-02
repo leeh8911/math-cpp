@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['factorya_137',['FactoryA',['../classdesign__pattern_1_1creational_1_1abstract__factory_1_1FactoryA.html',1,'design_pattern::creational::abstract_factory']]],
-  ['factoryb_138',['FactoryB',['../classdesign__pattern_1_1creational_1_1abstract__factory_1_1FactoryB.html',1,'design_pattern::creational::abstract_factory']]],
-  ['factorymap_139',['FactoryMap',['../namespacedesign__pattern_1_1etc_1_1apollo.html#a32bd196b031cdc94c105e5bd63779cfe',1,'design_pattern::etc::apollo']]],
-  ['find_140',['Find',['../classdesign__pattern_1_1behavior_1_1observer_1_1ObstacleRepository.html#a971695b0588cfa9fa2ef13c1daba3a61',1,'design_pattern::behavior::observer::ObstacleRepository']]],
-  ['fit_141',['Fit',['../classdesign__pattern_1_1behavior_1_1strategy_1_1Cluster.html#a238af9cf3916ae4047d00b2645df2fb4',1,'design_pattern::behavior::strategy::Cluster::Fit()'],['../classdesign__pattern_1_1behavior_1_1strategy_1_1IClusterImpl.html#ac8723e100d0431ac3dc3b64f1b4f1b4f',1,'design_pattern::behavior::strategy::IClusterImpl::Fit()'],['../classdesign__pattern_1_1behavior_1_1strategy_1_1BasicCluster.html#a1a907c0a71aeed637e50a7924633661d',1,'design_pattern::behavior::strategy::BasicCluster::Fit()'],['../classdesign__pattern_1_1behavior_1_1strategy_1_1DBSCAN.html#a1a907c0a71aeed637e50a7924633661d',1,'design_pattern::behavior::strategy::DBSCAN::Fit()']]],
-  ['from_142',['From',['../structdesign__pattern_1_1etc_1_1interval_1_1Interval.html#adb0057759c56dd51255b7d214e4cfb32',1,'design_pattern::etc::interval::Interval::From()'],['../classdesign__pattern_1_1etc_1_1interval_1_1NumberInterval.html#a20de019195c186a371eca281b5b1cc8a',1,'design_pattern::etc::interval::NumberInterval::From()']]],
-  ['from_5f_143',['from_',['../classdesign__pattern_1_1etc_1_1interval_1_1NumberInterval.html#a4075d96ab3f56ed3cfdc430d084a3f22',1,'design_pattern::etc::interval::NumberInterval']]]
+  ['identity_17',['Identity',['../classmath__cpp_1_1matrix_1_1Matrix.html#af9c63a0b309776e329df182aa6b10573',1,'math_cpp::matrix::Matrix']]],
+  ['info_5farch_18',['info_arch',['../CMakeCCompilerId_8c.html#a59647e99d304ed33b15cb284c27ed391',1,'info_arch():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a59647e99d304ed33b15cb284c27ed391',1,'info_arch():&#160;CMakeCXXCompilerId.cpp']]],
+  ['info_5fcompiler_19',['info_compiler',['../CMakeCCompilerId_8c.html#a4b0efeb7a5d59313986b3a0390f050f6',1,'info_compiler():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a4b0efeb7a5d59313986b3a0390f050f6',1,'info_compiler():&#160;CMakeCXXCompilerId.cpp']]],
+  ['info_5flanguage_5fextensions_5fdefault_20',['info_language_extensions_default',['../CMakeCCompilerId_8c.html#a0f46a8a39e09d9b803c4766904fd7e99',1,'info_language_extensions_default():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a0f46a8a39e09d9b803c4766904fd7e99',1,'info_language_extensions_default():&#160;CMakeCXXCompilerId.cpp']]],
+  ['info_5flanguage_5fstandard_5fdefault_21',['info_language_standard_default',['../CMakeCCompilerId_8c.html#a4607cccf070750927b458473ca82c090',1,'info_language_standard_default():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a4607cccf070750927b458473ca82c090',1,'info_language_standard_default():&#160;CMakeCXXCompilerId.cpp']]],
+  ['info_5fplatform_22',['info_platform',['../CMakeCCompilerId_8c.html#a2321403dee54ee23f0c2fa849c60f7d4',1,'info_platform():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a2321403dee54ee23f0c2fa849c60f7d4',1,'info_platform():&#160;CMakeCXXCompilerId.cpp']]],
+  ['inverse_23',['Inverse',['../classmath__cpp_1_1matrix_1_1Matrix.html#a63e64419c1df090a8f8151c062aa1365',1,'math_cpp::matrix::Matrix']]],
+  ['isboundedcol_24',['IsBoundedCol',['../classmath__cpp_1_1matrix_1_1Matrix.html#a06ff5396f6ec8b834890d9620a00b2bf',1,'math_cpp::matrix::Matrix']]],
+  ['isboundedrow_25',['IsBoundedRow',['../classmath__cpp_1_1matrix_1_1Matrix.html#a56b37b33cf8124db9639d54651d14b41',1,'math_cpp::matrix::Matrix']]],
+  ['isboundedsize_26',['IsBoundedSize',['../classmath__cpp_1_1matrix_1_1Matrix.html#a58189a79202a4b5b41a9b0f82a75f03d',1,'math_cpp::matrix::Matrix']]],
+  ['issamesize_27',['IsSameSize',['../classmath__cpp_1_1matrix_1_1Matrix.html#a05f16579b86c28db667377ba9de7f1a9',1,'math_cpp::matrix::Matrix']]]
 ];

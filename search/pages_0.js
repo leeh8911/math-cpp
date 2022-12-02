@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['c_2b_2b_20design_20pattern_952',['C++ Design Pattern',['../md_readme.html',1,'']]]
+  ['math_20c_2b_2b_124',['Math C++',['../md_readme.html',1,'']]]
 ];
