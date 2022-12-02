@@ -145,7 +145,7 @@ bool Matrix::operator==(const Matrix& other) const {
 
 bool Matrix::operator!=(const Matrix& other) const { return !(*this == other); }
 
-Matrix Matrix::Inverse() {
+Matrix Matrix::Inverse() const {
     if (row_ != col_) {
         throw std::invalid_argument("matrix should be square");
     }
@@ -180,7 +180,7 @@ Matrix Matrix::Inverse() {
     return result;
 }
 
-Matrix Matrix::Transpose() {
+Matrix Matrix::Transpose() const {
     Matrix result(col_, row_);
     for (std::size_t row = 0; row < row_; ++row) {
         for (std::size_t col = 0; col < col_; ++col) {
@@ -189,6 +189,8 @@ Matrix Matrix::Transpose() {
     }
     return result;
 }
+
+double Matrix::Determinant() const { return 0.0; }
 
 Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     if (idx >= row_) {

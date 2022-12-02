@@ -124,5 +124,13 @@ TEST(MatrixTest, InverseMatrixProperty3x3Case) {
     EXPECT_EQ(Matrix::Identity(3), (invA * A));
 }
 
+TEST(MatrixTest, Determinant2x2Case) {
+    Matrix A{{1.0, 0.0}, {0.0, 2.0}};
+
+    double det = A.Determinant();
+
+    EXPECT_EQ(2.0, det);
+}
+
 }  // namespace test
 }  // namespace math_cpp

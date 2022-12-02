@@ -45,8 +45,10 @@ class Matrix {
     bool operator==(const Matrix& other) const;
     bool operator!=(const Matrix& other) const;
 
-    Matrix Inverse();
-    Matrix Transpose();
+    Matrix Inverse() const;
+    Matrix Transpose() const;
+
+    double Determinant() const;
 
     Matrix& RowMult(std::size_t idx, double scalar);
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
