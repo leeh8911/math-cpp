@@ -9,6 +9,7 @@
 
 #include "src/matrix/matrix.h"
 
+#include <algorithm>
 #include <limits>
 #include <stdexcept>
 #include <string>
@@ -21,6 +22,7 @@ namespace matrix {
 // using std::string_literals::operator""s;
 
 Matrix::Matrix(std::size_t row, std::size_t col) : row_(row), col_(col), data_(std::vector<double>(row * col, 0.0)) {}
+Matrix::Matrix(const Shape& shape) : Matrix(shape.first, shape.second) {}
 
 Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : row_{}, col_{}, data_{} {
     for (auto row : l) {
@@ -58,28 +60,18 @@ Matrix Matrix::operator+(const Matrix& other) const {
 }
 
 double& Matrix::operator()(std::size_t row, std::size_t col) {
-    if (!IsBoundedRow(row)) {
+    if (!IsBoundedSize(row, col)) {
         std::string throw_msg =
-            "row must be greater or equal than 0 and less or equal than " + std::to_string(row_) + "!";
-        throw std::invalid_argument(throw_msg);
-    }
-    if (!IsBoundedCol(col)) {
-        std::string throw_msg =
-            "col must be greater or equal than 0 and less or equal than " + std::to_string(col_) + "!";
+            "shape should be less or equal to <" + std::to_string(row_) + ", " + std::to_string(col_) + ">!";
         throw std::invalid_argument(throw_msg);
     }
     return data_[row * col_ + col];
 }
 
 double Matrix::operator()(std::size_t row, std::size_t col) const {
-    if (!IsBoundedRow(row)) {
+    if (!IsBoundedSize(row, col)) {
         std::string throw_msg =
-            "row must be greater or equal than 0 and less or equal than " + std::to_string(row_) + "!";
-        throw std::invalid_argument(throw_msg);
-    }
-    if (!IsBoundedCol(col)) {
-        std::string throw_msg =
-            "col must be greater or equal than 0 and less or equal than " + std::to_string(col_) + "!";
+            "shape should be less or equal to <" + std::to_string(row_) + ", " + std::to_string(col_) + ">!";
         throw std::invalid_argument(throw_msg);
     }
     return data_[row * col_ + col];
@@ -115,7 +107,7 @@ Matrix& Matrix::operator-() {
     return *this;
 }
 
-Matrix Matrix::operator*(Matrix& other) {
+Matrix Matrix::operator*(const Matrix& other) {
     if (!CanMultiply(other)) {
         throw std::invalid_argument("cannot matrix multiply, check size!");
     }
@@ -202,11 +194,10 @@ Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     if (idx >= row_) {
         throw std::invalid_argument("check row index");
     }
-    auto start = std::next(std::begin(data_), idx * col_);
-    auto finish = std::next(start, col_);
-    for (; start != finish; ++start) {
-        *start = (*start) * scalar;
-    }
+    auto start = std::next(std::begin(data_), static_cast<std::ptrdiff_t>(idx * col_));
+    auto finish = std::next(start, static_cast<std::ptrdiff_t>(col_));
+
+    std::transform(start, finish, start, [scalar](double elm) { return elm * scalar; });
 
     return *this;
 }
@@ -218,12 +209,11 @@ Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
     if (idx >= row_) {
         throw std::invalid_argument("check row index");
     }
-    auto start = std::next(std::begin(data_), idx * col_);
-    auto finish = std::next(start, col_);
+    auto start = std::next(std::begin(data_), static_cast<std::ptrdiff_t>(idx * col_));
+    auto finish = std::next(start, static_cast<std::ptrdiff_t>(col_));
     auto row_start = std::cbegin(row.data_);
-    for (; start != finish; ++start, ++row_start) {
-        *start = (*start) + (*row_start);
-    }
+
+    std::transform(start, finish, start, [&row_start](double elm) { return elm + (*(row_start++)); });
 
     return *this;
 }
@@ -235,12 +225,10 @@ Matrix Matrix::GetRow(std::size_t idx) {
 
     Matrix row_matrix(1, col_);
 
-    auto start = std::next(std::begin(data_), idx * col_);
-    auto finish = std::next(start, col_);
+    auto start = std::next(std::begin(data_), static_cast<std::ptrdiff_t>(idx * col_));
+    auto finish = std::next(start, static_cast<std::ptrdiff_t>(col_));
     auto row_start = std::begin(row_matrix.data_);
-    for (; start != finish; ++start, ++row_start) {
-        *row_start = *start;
-    }
+    std::copy(start, finish, row_start);
 
     return row_matrix;
 }
@@ -268,10 +256,10 @@ Matrix Matrix::operator*(double scalar) const {
 }
 
 Matrix& Matrix::operator*=(double scalar) {
-    auto this_it = data_.begin();
-    for (; this_it != data_.end(); ++this_it) {
-        *this_it *= scalar;
-    }
+    auto start = std::begin(data_);
+    auto finish = std::end(data_);
+    std::transform(start, finish, start, [&scalar](double& elm) { return elm * scalar; });
+
     return *this;
 }
 
@@ -279,7 +267,7 @@ bool Matrix::IsSameSize(const Matrix& other) const { return (row_ == other.row_)
 
 bool Matrix::CanMultiply(const Matrix& other) const { return (col_ == other.row_); }
 
-Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, Matrix& other) {
+Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, const Matrix& other) {
     for (std::size_t r = 0; r < other.row_; ++r) {
         for (std::size_t c = 0; c < other.col_; ++c) {
             (*this)(r + start_row, c + start_col) = other(r, c);
@@ -289,7 +277,7 @@ Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, Matrix& other
     return *this;
 }
 
-Matrix Matrix::Concatenate(Matrix& lhs, Matrix& rhs, std::size_t axis) {
+Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis) {
     Matrix result{};
 
     if (axis == 0) {
@@ -329,6 +317,8 @@ Matrix Matrix::Identity(std::size_t size) {
 bool Matrix::IsBoundedRow(std::size_t row) const { return (row <= row_); }
 
 bool Matrix::IsBoundedCol(std::size_t col) const { return (col <= col_); }
+
+bool Matrix::IsBoundedSize(std::size_t row, std::size_t col) const { return IsBoundedRow(row) && IsBoundedCol(col); }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
     os << "[\n";
