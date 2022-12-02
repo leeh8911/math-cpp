@@ -12,6 +12,7 @@
 
 #include <gtest/gtest.h>
 
+#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <stdexcept>
 
@@ -26,6 +27,20 @@ using math_cpp::matrix::Matrix;
 
 namespace math_cpp {
 namespace test {
+
+Eigen::MatrixXd MakeEigen(Matrix mat) {
+    Eigen::MatrixXd result(mat.Row(), mat.Col());
+    for (std::size_t r = 0; r < mat.Row(); ++r) {
+        for (std::size_t c = 0; c < mat.Col(); ++c) {
+            result(r, c) = mat(r, c);
+        }
+    }
+    return result;
+}
+Eigen::MatrixXd MakeRandomEigen(std::size_t row, std::size_t col) {
+    Eigen::MatrixXd result = Eigen::MatrixXd::Random(row, col);
+    return result;
+}
 
 TEST(MatrixTest, SuperPositionCase) {
     Matrix A{{1.0, 2.0}, {3.0, 4.0}};
