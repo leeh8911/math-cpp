@@ -190,7 +190,12 @@ Matrix Matrix::Transpose() const {
     return result;
 }
 
-double Matrix::Determinant() const { return 0.0; }
+double Matrix::Determinant() const {
+    if ((row_ == 2) && (col_ == 2)) {
+        return (*this)(0, 0) * (*this)(1, 1) - (*this)(1, 0) * (*this)(0, 1);
+    }
+    return 0.0;
+}
 
 Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     if (idx >= row_) {
