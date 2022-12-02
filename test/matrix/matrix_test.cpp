@@ -209,8 +209,8 @@ TEST(MatrixTest, PowerIteration) {
     Matrix v{{1.0, 0.0, 0.0}};
     Matrix prev(1, 3);
 
-    auto dist = [](const Matrix& lhs, const Matrix& rhs) { Matrix diff = lhs - rhs; } while ()
-}
+    auto dist = [](const Matrix& lhs, const Matrix& rhs) { Matrix diff = lhs - rhs; };
+    while () }
 
 }  // namespace test
 }  // namespace math_cpp
