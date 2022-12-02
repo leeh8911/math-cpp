@@ -127,9 +127,53 @@ TEST(MatrixTest, InverseMatrixProperty3x3Case) {
 TEST(MatrixTest, Determinant2x2Case) {
     Matrix A{{1.0, 0.0}, {0.0, 2.0}};
 
-    double det = A.Determinant();
+    double det = Matrix::Determinant(A);
 
     EXPECT_EQ(2.0, det);
+}
+
+TEST(MatrixTest, Determinant3x3Case) {
+    Matrix A{{1.0, 0.0, 0.0}, {0.0, 2.0, 0.0}, {0.0, 0.0, 3.0}};
+
+    double det = Matrix::Determinant(A);
+
+    EXPECT_EQ(6.0, det);
+}
+
+TEST(MatrixTest, EraseRowColMatrixCase11) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 1, 1);
+
+    EXPECT_EQ(Matrix({{1.0, 3.0}, {7.0, 9.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase01) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 0, 1);
+
+    EXPECT_EQ(Matrix({{4.0, 6.0}, {7.0, 9.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase21) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 2, 1);
+
+    EXPECT_EQ(Matrix({{1.0, 3.0}, {4.0, 6.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase10) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 1, 0);
+
+    EXPECT_EQ(Matrix({{2.0, 3.0}, {8.0, 9.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase12) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 1, 2);
+
+    EXPECT_EQ(Matrix({{1.0, 2.0}, {7.0, 8.0}}), result);
 }
 
 }  // namespace test

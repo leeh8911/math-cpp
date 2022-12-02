@@ -190,11 +190,40 @@ Matrix Matrix::Transpose() const {
     return result;
 }
 
-double Matrix::Determinant() const {
-    if ((row_ == 2) && (col_ == 2)) {
-        return (*this)(0, 0) * (*this)(1, 1) - (*this)(1, 0) * (*this)(0, 1);
+double Matrix::Determinant(const Matrix& mat) {
+    if (mat.row_ != mat.col_) {
+        throw std::invalid_argument("determinant should be defined square matrix");
     }
-    return 0.0;
+    if ((mat.row_ == 2) && (mat.col_ == 2)) {
+        return mat(0, 0) * mat(1, 1) - mat(1, 0) * mat(0, 1);
+    }
+
+    std::size_t r = 0, c = 0;
+    int8_t sign = 1;
+    double det = 0.0;
+    for (c = 0; c < mat.col_; ++c) {
+        double sub_det = sign * mat(r, c) * Determinant(EraseRowCol(mat, r, c));
+        sign *= -1;
+
+        det += sub_det;
+    }
+
+    return det;
+}
+
+Matrix Matrix::EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col) {
+    Matrix result(mat.row_ - 1, mat.col_ - 1);
+    std::size_t rr = 0, cc = 0;
+    for (std::size_t r = 0; r < mat.row_; ++r) {
+        cc = 0;
+        for (std::size_t c = 0; c < mat.col_; ++c) {
+            if ((r != row) && (c != col)) {
+                result(rr, cc++) = mat(r, c);
+            }
+        }
+        if (r != row) rr++;
+    }
+    return result;
 }
 
 Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
