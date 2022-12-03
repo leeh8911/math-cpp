@@ -12,6 +12,7 @@
 
 #include <gtest/gtest.h>
 
+#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <stdexcept>
 
@@ -26,6 +27,20 @@ using math_cpp::matrix::Matrix;
 
 namespace math_cpp {
 namespace test {
+
+Eigen::MatrixXd MakeEigen(Matrix mat) {
+    Eigen::MatrixXd result(mat.Row(), mat.Col());
+    for (std::size_t r = 0; r < mat.Row(); ++r) {
+        for (std::size_t c = 0; c < mat.Col(); ++c) {
+            result(r, c) = mat(r, c);
+        }
+    }
+    return result;
+}
+Eigen::MatrixXd MakeRandomEigen(std::size_t row, std::size_t col) {
+    Eigen::MatrixXd result = Eigen::MatrixXd::Random(row, col);
+    return result;
+}
 
 TEST(MatrixTest, SuperPositionCase) {
     Matrix A{{1.0, 2.0}, {3.0, 4.0}};
@@ -122,6 +137,69 @@ TEST(MatrixTest, InverseMatrixProperty3x3Case) {
 
     EXPECT_EQ(Matrix::Identity(3), (A * invA));
     EXPECT_EQ(Matrix::Identity(3), (invA * A));
+}
+
+TEST(MatrixTest, Determinant2x2Case) {
+    Matrix A{{1.0, 0.0}, {0.0, 2.0}};
+
+    double det = Matrix::Determinant(A);
+
+    EXPECT_EQ(2.0, det);
+}
+
+TEST(MatrixTest, Determinant3x3Case) {
+    Matrix A{{1.0, 0.0, 0.0}, {0.0, 2.0, 0.0}, {0.0, 0.0, 3.0}};
+
+    double det = Matrix::Determinant(A);
+
+    EXPECT_EQ(6.0, det);
+}
+
+TEST(MatrixTest, EraseRowColMatrixCase11) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 1, 1);
+
+    EXPECT_EQ(Matrix({{1.0, 3.0}, {7.0, 9.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase01) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 0, 1);
+
+    EXPECT_EQ(Matrix({{4.0, 6.0}, {7.0, 9.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase21) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 2, 1);
+
+    EXPECT_EQ(Matrix({{1.0, 3.0}, {4.0, 6.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase10) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 1, 0);
+
+    EXPECT_EQ(Matrix({{2.0, 3.0}, {8.0, 9.0}}), result);
+}
+TEST(MatrixTest, EraseRowColMatrixCase12) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    Matrix result = Matrix::EraseRowCol(A, 1, 2);
+
+    EXPECT_EQ(Matrix({{1.0, 2.0}, {7.0, 8.0}}), result);
+}
+TEST(MatrixTest, PowerIteration) {
+    Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, 3}};
+
+    // auto eigen_result = A.Eigen();
+
+    Matrix expect_eigen_value{{1, 2, 3}};
+    Matrix expect_eigen_vector{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+
+    // EXPECT_EQ(expect_eigen_value, eigen_result.first);
+    // EXPECT_EQ(expect_eigen_vector, eigen_result.second);
 }
 
 }  // namespace test

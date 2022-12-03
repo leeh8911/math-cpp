@@ -10,6 +10,7 @@
 #include "src/matrix/matrix.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <limits>
 #include <stdexcept>
 #include <string>
@@ -21,10 +22,10 @@ namespace matrix {
 
 // using std::string_literals::operator""s;
 
-Matrix::Matrix(std::size_t row, std::size_t col) : row_(row), col_(col), data_(std::vector<double>(row * col, 0.0)) {}
+Matrix::Matrix(std::size_t row, std::size_t col) : data_(std::vector<double>(row * col, 0.0)), row_(row), col_(col) {}
 Matrix::Matrix(const Shape& shape) : Matrix(shape.first, shape.second) {}
 
-Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : row_{}, col_{}, data_{} {
+Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : data_{}, row_{}, col_{} {
     for (auto row : l) {
         ++row_;
         data_.insert(data_.end(), row.begin(), row.end());
@@ -145,7 +146,7 @@ bool Matrix::operator==(const Matrix& other) const {
 
 bool Matrix::operator!=(const Matrix& other) const { return !(*this == other); }
 
-Matrix Matrix::Inverse() {
+Matrix Matrix::Inverse() const {
     if (row_ != col_) {
         throw std::invalid_argument("matrix should be square");
     }
@@ -180,12 +181,61 @@ Matrix Matrix::Inverse() {
     return result;
 }
 
-Matrix Matrix::Transpose() {
+Matrix Matrix::Transpose() const {
     Matrix result(col_, row_);
     for (std::size_t row = 0; row < row_; ++row) {
         for (std::size_t col = 0; col < col_; ++col) {
             result(col, row) = (*this)(row, col);
         }
+    }
+    return result;
+}
+
+std::pair<Matrix, Matrix> Matrix::Eigen() const {
+    // TODO(sangwon) : to be update
+    // Matrix dominant_eigen_vector{{1, 0, 0}};
+    // Matrix prev = dominant_eigen_vector;
+    // double eps = 1e-4;
+
+    // for (std::size_t i = 0; i < 10; ++i) {
+    //     prev = dominant_eigen_vector;
+    //     dominant_eigen_vector = (*this);
+    // }
+    return std::make_pair(Matrix{{0}}, Matrix{{0}});
+}
+
+double Matrix::Determinant(const Matrix& mat) {
+    if (mat.row_ != mat.col_) {
+        throw std::invalid_argument("determinant should be defined square matrix");
+    }
+    if ((mat.row_ == 2) && (mat.col_ == 2)) {
+        return mat(0, 0) * mat(1, 1) - mat(1, 0) * mat(0, 1);
+    }
+
+    std::size_t r = 0, c = 0;
+    int8_t sign = 1;
+    double det = 0.0;
+    for (c = 0; c < mat.col_; ++c) {
+        double sub_det = sign * mat(r, c) * Determinant(EraseRowCol(mat, r, c));
+        sign *= -1;
+
+        det += sub_det;
+    }
+
+    return det;
+}
+
+Matrix Matrix::EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col) {
+    Matrix result(mat.row_ - 1, mat.col_ - 1);
+    std::size_t rr = 0, cc = 0;
+    for (std::size_t r = 0; r < mat.row_; ++r) {
+        cc = 0;
+        for (std::size_t c = 0; c < mat.col_; ++c) {
+            if ((r != row) && (c != col)) {
+                result(rr, cc++) = mat(r, c);
+            }
+        }
+        if (r != row) rr++;
     }
     return result;
 }
