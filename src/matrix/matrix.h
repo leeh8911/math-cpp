@@ -47,6 +47,7 @@ class Matrix {
 
     Matrix Inverse() const;
     Matrix Transpose() const;
+    std::pair<Matrix, Matrix> Eigen() const;
 
     Matrix& RowMult(std::size_t idx, double scalar);
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
@@ -67,6 +68,7 @@ class Matrix {
 
     static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
     static Matrix Identity(std::size_t size);
+    //  static Matrix Random(std::size_t row, std::size_t col);
     static double Determinant(const Matrix& mat);
     static Matrix EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col);
 
@@ -74,9 +76,9 @@ class Matrix {
     bool IsBoundedRow(std::size_t row) const;
     bool IsBoundedCol(std::size_t col) const;
     bool IsBoundedSize(std::size_t row, std::size_t col) const;
+    std::vector<double> data_{};
     std::size_t row_{};
     std::size_t col_{};
-    std::vector<double> data_{};
 };
 }  // namespace matrix
 

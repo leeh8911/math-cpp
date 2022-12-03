@@ -10,6 +10,7 @@
 #include "src/matrix/matrix.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <limits>
 #include <stdexcept>
 #include <string>
@@ -21,10 +22,10 @@ namespace matrix {
 
 // using std::string_literals::operator""s;
 
-Matrix::Matrix(std::size_t row, std::size_t col) : row_(row), col_(col), data_(std::vector<double>(row * col, 0.0)) {}
+Matrix::Matrix(std::size_t row, std::size_t col) : data_(std::vector<double>(row * col, 0.0)), row_(row), col_(col) {}
 Matrix::Matrix(const Shape& shape) : Matrix(shape.first, shape.second) {}
 
-Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : row_{}, col_{}, data_{} {
+Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : data_{}, row_{}, col_{} {
     for (auto row : l) {
         ++row_;
         data_.insert(data_.end(), row.begin(), row.end());
@@ -188,6 +189,19 @@ Matrix Matrix::Transpose() const {
         }
     }
     return result;
+}
+
+std::pair<Matrix, Matrix> Matrix::Eigen() const {
+    // TODO(sangwon) : to be update
+    // Matrix dominant_eigen_vector{{1, 0, 0}};
+    // Matrix prev = dominant_eigen_vector;
+    // double eps = 1e-4;
+
+    // for (std::size_t i = 0; i < 10; ++i) {
+    //     prev = dominant_eigen_vector;
+    //     dominant_eigen_vector = (*this);
+    // }
+    return std::make_pair(Matrix{{0}}, Matrix{{0}});
 }
 
 double Matrix::Determinant(const Matrix& mat) {
