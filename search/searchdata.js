@@ -1,11 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "_acdghimoprst",
-  1: "m",
+  0: "_acdeghimoprstuv",
+  1: "mr",
   2: "m",
   3: "cmr",
-  4: "cgimort",
-  5: "cdir",
+  4: "cdegimorstuv",
+  5: "cdgir",
   6: "s",
   7: "o",
   8: "_acdhps",

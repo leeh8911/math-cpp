@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getrow_14',['GetRow',['../classmath__cpp_1_1matrix_1_1Matrix.html#a11d9064b595a3bb9903119d5f563a220',1,'math_cpp::matrix::Matrix']]],
-  ['getsubmatrix_15',['GetSubMatrix',['../classmath__cpp_1_1matrix_1_1Matrix.html#aaa225952719ad4739690bcae3cfed799',1,'math_cpp::matrix::Matrix']]]
+  ['eigen_15',['Eigen',['../classmath__cpp_1_1matrix_1_1Matrix.html#a8c18d05ee803ea5980ece95b04ce7493',1,'math_cpp::matrix::Matrix']]],
+  ['eraserowcol_16',['EraseRowCol',['../classmath__cpp_1_1matrix_1_1Matrix.html#a620ddf89c6fe261b9b4e037481a59f7a',1,'math_cpp::matrix::Matrix']]]
 ];
