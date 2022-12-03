@@ -3,6 +3,8 @@
 
 ## Badges
 
+[![CodeFactor](https://www.codefactor.io/repository/github/leeh8911/math-cpp/badge)](https://www.codefactor.io/repository/github/leeh8911/math-cpp)
+
 ## Introduction
 
 ## Docker
