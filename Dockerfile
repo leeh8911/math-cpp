@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -qq -y -f --no-install-recommends \
     # install linux dependencies
     ## Base dependencies
     ca-certificates libgoogle-glog-dev \
-    libgtest-dev automake wget curl unzip autoconf libtool g++ gcc make \
+    libgtest-dev automake wget curl unzip autoconf libtool g++ gcc make gdb \
     cmake git vim \
     ## Security
     openssh-client \
