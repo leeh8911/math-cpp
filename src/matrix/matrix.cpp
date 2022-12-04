@@ -205,15 +205,23 @@ std::pair<Matrix, Matrix> Matrix::Eigen() const {
     Matrix eigen_vector(row_, 1);
     Matrix prev(row_, 1);
     double eps = 1e-4;
-
+    std::size_t count = 0;
     Matrix A = (*this);
     for (std::size_t i = 0; i < row_; ++i) {
         eigen_vector = Random(row_, 1);
         while ((Norm2(eigen_vector - prev) > eps)) {
             prev = eigen_vector;
-            eigen_vector = A * eigen_vector;
+
+            // Prevent negative eigen value effect(?)
+            // If there is negative eigen value, then eigen vector flip direction all iterate, and cannot converge.
+            // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
+            eigen_vector = A * A * eigen_vector;
 
             eigen_vector /= Norm2(eigen_vector);
+
+            if (count++ > 10) {
+                break;
+            }
         }
 
         Matrix eigen_vector_T = eigen_vector.Transpose();
@@ -226,6 +234,12 @@ std::pair<Matrix, Matrix> Matrix::Eigen() const {
     }
 
     return std::make_pair(result_values, result_vectors);
+}
+
+Matrix& Matrix::Absolute() {
+    std::transform(std::begin(data_), std::end(data_), std::begin(data_), [](double& elm) { return std::abs(elm); });
+
+    return *this;
 }
 
 double Matrix::Determinant(const Matrix& mat) {

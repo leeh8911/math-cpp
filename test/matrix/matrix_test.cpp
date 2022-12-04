@@ -195,7 +195,7 @@ TEST(MatrixTest, PowerIteration) {
 
     auto eigen_result = A.Eigen();
 
-    Matrix expect_eigen_value{{3}, {2}, {1}};
+    Matrix expect_eigen_value{{-3}, {2}, {1}};
     Matrix expect_eigen_vector{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
 
     EXPECT_EQ(expect_eigen_value, eigen_result.first);

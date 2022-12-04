@@ -49,6 +49,8 @@ class Matrix {
     Matrix Transpose() const;
     std::pair<Matrix, Matrix> Eigen() const;
 
+    Matrix& Absolute();
+
     Matrix& RowMult(std::size_t idx, double scalar);
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
     Matrix GetRow(std::size_t idx) const;
