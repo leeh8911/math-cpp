@@ -191,15 +191,15 @@ TEST(MatrixTest, EraseRowColMatrixCase12) {
     EXPECT_EQ(Matrix({{1.0, 2.0}, {7.0, 8.0}}), result);
 }
 TEST(MatrixTest, PowerIteration) {
-    Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, 3}};
+    Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
 
-    // auto eigen_result = A.Eigen();
+    auto eigen_result = A.Eigen();
 
-    Matrix expect_eigen_value{{1, 2, 3}};
-    Matrix expect_eigen_vector{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+    Matrix expect_eigen_value{{3}, {2}, {1}};
+    Matrix expect_eigen_vector{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
 
-    // EXPECT_EQ(expect_eigen_value, eigen_result.first);
-    // EXPECT_EQ(expect_eigen_vector, eigen_result.second);
+    EXPECT_EQ(expect_eigen_value, eigen_result.first);
+    EXPECT_EQ(expect_eigen_vector, eigen_result.second);
 }
 
 }  // namespace test

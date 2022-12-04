@@ -17,6 +17,8 @@
 #include <utility>
 #include <vector>
 
+#include "src/random/random.h"
+
 namespace math_cpp {
 namespace matrix {
 
@@ -108,7 +110,7 @@ Matrix& Matrix::operator-() {
     return *this;
 }
 
-Matrix Matrix::operator*(const Matrix& other) {
+Matrix Matrix::operator*(const Matrix& other) const {
     if (!CanMultiply(other)) {
         throw std::invalid_argument("cannot matrix multiply, check size!");
     }
@@ -135,7 +137,7 @@ bool Matrix::operator==(const Matrix& other) const {
         for (; this_it != data_.end(); ++this_it, ++other_it) {
             // TODO(sangwon) : How to compare to floating point values.. (there is so many errors..)
             // below code is just assigned magic number (1e-8). not designed value.
-            if (std::abs(*this_it - *other_it) > 1e-8) {
+            if (std::abs(*this_it - *other_it) > 1e-4) {
                 equal = false;
                 break;
             }
@@ -193,15 +195,37 @@ Matrix Matrix::Transpose() const {
 
 std::pair<Matrix, Matrix> Matrix::Eigen() const {
     // TODO(sangwon) : to be update
-    // Matrix dominant_eigen_vector{{1, 0, 0}};
-    // Matrix prev = dominant_eigen_vector;
-    // double eps = 1e-4;
+    if (row_ != col_) {
+        throw std::invalid_argument("Eigen should be square matrix");
+    }
 
-    // for (std::size_t i = 0; i < 10; ++i) {
-    //     prev = dominant_eigen_vector;
-    //     dominant_eigen_vector = (*this);
-    // }
-    return std::make_pair(Matrix{{0}}, Matrix{{0}});
+    Matrix result_values(row_, 1);
+    Matrix result_vectors(row_, col_);
+
+    Matrix eigen_vector(row_, 1);
+    Matrix prev(row_, 1);
+    double eps = 1e-4;
+
+    Matrix A = (*this);
+    for (std::size_t i = 0; i < row_; ++i) {
+        eigen_vector = Random(row_, 1);
+        while ((Norm2(eigen_vector - prev) > eps)) {
+            prev = eigen_vector;
+            eigen_vector = A * eigen_vector;
+
+            eigen_vector /= Norm2(eigen_vector);
+        }
+
+        Matrix eigen_vector_T = eigen_vector.Transpose();
+        double eigen_value = eigen_vector_T * (A * eigen_vector) / (eigen_vector_T * eigen_vector);
+
+        result_values(i, 0) = eigen_value;
+        result_vectors.SetRow(i, eigen_vector);
+
+        A -= eigen_vector * eigen_value * eigen_vector_T;
+    }
+
+    return std::make_pair(result_values, result_vectors);
 }
 
 double Matrix::Determinant(const Matrix& mat) {
@@ -240,6 +264,14 @@ Matrix Matrix::EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col) 
     return result;
 }
 
+Matrix::operator double() {
+    if ((row_ != 1) || (col_ != 1)) {
+        throw std::invalid_argument("Matrix to double type casting should be 1 x 1 size matrix");
+    }
+
+    return (*this)(0, 0);
+}
+
 Matrix& Matrix::RowMult(std::size_t idx, double scalar) {
     if (idx >= row_) {
         throw std::invalid_argument("check row index");
@@ -268,7 +300,7 @@ Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
     return *this;
 }
 
-Matrix Matrix::GetRow(std::size_t idx) {
+Matrix Matrix::GetRow(std::size_t idx) const {
     if (idx >= row_) {
         throw std::invalid_argument("check row index");
     }
@@ -281,6 +313,23 @@ Matrix Matrix::GetRow(std::size_t idx) {
     std::copy(start, finish, row_start);
 
     return row_matrix;
+}
+
+Matrix& Matrix::SetRow(std::size_t idx, const Matrix& src) {
+    if (src.col_ != 1) {
+        throw std::invalid_argument("Set row method can accept row vector");
+    }
+    if (row_ != src.row_) {
+        throw std::invalid_argument("Set row method should be same row");
+    }
+
+    Matrix transposed_this = (*this).Transpose();
+    auto start = std::begin(transposed_this.data_);
+
+    std::copy(std::begin(src.data_), std::end(src.data_), std::next(start, static_cast<std::ptrdiff_t>(idx * col_)));
+
+    *this = transposed_this.Transpose();
+    return *this;
 }
 
 Matrix Matrix::GetSubMatrix(std::size_t start_row, std::size_t start_col) {
@@ -362,6 +411,25 @@ Matrix Matrix::Identity(std::size_t size) {
     }
 
     return result;
+}
+
+Matrix Matrix::Random(std::size_t row, std::size_t col) {
+    Matrix result(row, col);
+
+    random::Random instance = random::Random::GetInstance();
+    for (auto& elm : result.data_) {
+        elm = instance.Gaussian();
+    }
+
+    return result;
+}
+
+double Matrix::Norm2(const Matrix& mat) {
+    double result = 0.0;
+    for (auto elm : mat.data_) {
+        result += elm * elm;
+    }
+    return std::sqrt(result);
 }
 
 bool Matrix::IsBoundedRow(std::size_t row) const { return (row <= row_); }
