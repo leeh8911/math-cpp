@@ -137,7 +137,7 @@ bool Matrix::operator==(const Matrix& other) const {
         for (; this_it != data_.end(); ++this_it, ++other_it) {
             // TODO(sangwon) : How to compare to floating point values.. (there is so many errors..)
             // below code is just assigned magic number (1e-8). not designed value.
-            if (std::abs(*this_it - *other_it) > 1e-4) {
+            if (std::abs(*this_it - *other_it) > 1e-3) {
                 equal = false;
                 break;
             }
@@ -205,7 +205,6 @@ std::pair<Matrix, Matrix> Matrix::Eigen() const {
     Matrix eigen_vector(row_, 1);
     Matrix prev(row_, 1);
     double eps = 1e-4;
-    std::size_t count = 0;
     Matrix A = (*this);
     for (std::size_t i = 0; i < row_; ++i) {
         eigen_vector = Random(row_, 1);
@@ -218,10 +217,6 @@ std::pair<Matrix, Matrix> Matrix::Eigen() const {
             eigen_vector = A * A * eigen_vector;
 
             eigen_vector /= Norm2(eigen_vector);
-
-            if (count++ > 10) {
-                break;
-            }
         }
 
         Matrix eigen_vector_T = eigen_vector.Transpose();

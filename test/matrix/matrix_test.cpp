@@ -202,5 +202,14 @@ TEST(MatrixTest, PowerIteration) {
     EXPECT_EQ(expect_eigen_vector, eigen_result.second);
 }
 
+TEST(MatrixTest, EigenLibEigenCase) {
+    Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
+    Eigen::MatrixXd mat = MakeEigen(A);
+
+    Eigen::EigenSolver<decltype(mat)> solver(mat);
+    std::cout << solver.eigenvalues() << "\n";
+    std::cout << solver.eigenvectors() << "\n";
+}
+
 }  // namespace test
 }  // namespace math_cpp
