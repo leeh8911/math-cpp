@@ -20,7 +20,10 @@
 
 namespace math_cpp {
 namespace test {
-Eigen::MatrixXd MakeEigen(math_cpp::matrix::Matrix mat) {
+
+using math_cpp::matrix::Matrix;
+
+Eigen::MatrixXd MakeEigen(Matrix mat) {
     Eigen::MatrixXd result(mat.Row(), mat.Col());
     for (std::size_t r = 0; r < mat.Row(); ++r) {
         for (std::size_t c = 0; c < mat.Col(); ++c) {
@@ -33,5 +36,24 @@ Eigen::MatrixXd MakeRandomEigen(std::size_t row, std::size_t col) {
     Eigen::MatrixXd result = Eigen::MatrixXd::Random(row, col);
     return result;
 }
+
+bool operator==(const Matrix& lhs, const Eigen::MatrixXd& rhs) {
+    if (lhs.Row() != rhs.rows()) return false;
+    if (lhs.Col() != rhs.cols()) return false;
+
+    for (std::size_t r = 0; r < lhs.Row(); ++r) {
+        for (std::size_t c = 0; c < lhs.Col(); ++c) {
+            if (std::abs(lhs(r, c) - rhs(r, c)) > 1e-4) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool operator==(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs) { return rhs == lhs; }
+bool operator!=(const math_cpp::matrix::Matrix& lhs, const Eigen::MatrixXd& rhs) { return !(lhs == rhs); }
+bool operator!=(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs) { return !(rhs == lhs); }
 }  // namespace test
 }  // namespace math_cpp

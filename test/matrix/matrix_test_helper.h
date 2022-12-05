@@ -25,6 +25,10 @@ namespace test {
 Eigen::MatrixXd MakeEigen(math_cpp::matrix::Matrix mat);
 Eigen::MatrixXd MakeRandomEigen(std::size_t row, std::size_t col);
 
+bool operator==(const math_cpp::matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
+bool operator==(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs);
+bool operator!=(const math_cpp::matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
+bool operator!=(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs);
 }  // namespace test
 }  // namespace math_cpp
 

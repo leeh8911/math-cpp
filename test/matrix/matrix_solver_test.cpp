@@ -40,6 +40,14 @@ TEST(MatrixSolverTest, EigenLibEigenCase) {
     Eigen::MatrixXd mat = MakeEigen(A);
 
     Eigen::EigenSolver<decltype(mat)> solver(mat);
+
+    auto eigenvalues = solver.eigenvalues().cast<double>();
+    std::vector<std::pair<std::size_t, double>> v{};
+    std::size_t i = 0;
+    std::cout << eigenvalues.rows() << ", " << eigenvalues.cols() << "\n";
+    // std::transform(eigenvalues.reshaped().begin(), eigenvalues.reshaped().end(), std::back_inserter(v),
+    //                [&i](double e) { return std::make_pair(i++, e); });
+
     std::cout << solver.eigenvalues() << "\n";
     std::cout << solver.eigenvectors() << "\n";
 }
