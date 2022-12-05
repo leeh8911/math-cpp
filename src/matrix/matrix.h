@@ -20,11 +20,15 @@ namespace matrix {
 class Matrix {
  public:
     using Shape = std::pair<std::size_t, std::size_t>;
-    Matrix() = default;
     explicit Matrix(const Shape& shape);
     explicit Matrix(std::size_t row, std::size_t col);
     Matrix(const std::initializer_list<std::initializer_list<double>>& l);
+
+    Matrix() = default;
     Matrix(const Matrix& other) = default;
+    Matrix(Matrix&& other) = default;
+    Matrix& operator=(const Matrix& other) = default;
+    Matrix& operator=(Matrix&& other) = default;
 
     std::size_t Row() const;
     std::size_t Col() const;
@@ -47,7 +51,6 @@ class Matrix {
 
     Matrix Inverse() const;
     Matrix Transpose() const;
-    std::pair<Matrix, Matrix> Eigen() const;
 
     Matrix& Absolute();
 

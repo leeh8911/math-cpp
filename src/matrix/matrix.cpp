@@ -193,44 +193,6 @@ Matrix Matrix::Transpose() const {
     return result;
 }
 
-std::pair<Matrix, Matrix> Matrix::Eigen() const {
-    // TODO(sangwon) : to be update
-    if (row_ != col_) {
-        throw std::invalid_argument("Eigen should be square matrix");
-    }
-
-    Matrix result_values(row_, 1);
-    Matrix result_vectors(row_, col_);
-
-    Matrix eigen_vector(row_, 1);
-    Matrix prev(row_, 1);
-    double eps = 1e-4;
-    Matrix A = (*this);
-    for (std::size_t i = 0; i < row_; ++i) {
-        eigen_vector = Random(row_, 1);
-        while ((Norm2(eigen_vector - prev) > eps)) {
-            prev = eigen_vector;
-
-            // Prevent negative eigen value effect(?)
-            // If there is negative eigen value, then eigen vector flip direction all iterate, and cannot converge.
-            // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
-            eigen_vector = A * A * eigen_vector;
-
-            eigen_vector /= Norm2(eigen_vector);
-        }
-
-        Matrix eigen_vector_T = eigen_vector.Transpose();
-        double eigen_value = eigen_vector_T * (A * eigen_vector) / (eigen_vector_T * eigen_vector);
-
-        result_values(i, 0) = eigen_value;
-        result_vectors.SetRow(i, eigen_vector);
-
-        A -= eigen_vector * eigen_value * eigen_vector_T;
-    }
-
-    return std::make_pair(result_values, result_vectors);
-}
-
 Matrix& Matrix::Absolute() {
     std::transform(std::begin(data_), std::end(data_), std::begin(data_), [](double& elm) { return std::abs(elm); });
 
@@ -448,6 +410,9 @@ bool Matrix::IsBoundedCol(std::size_t col) const { return (col <= col_); }
 bool Matrix::IsBoundedSize(std::size_t row, std::size_t col) const { return IsBoundedRow(row) && IsBoundedCol(col); }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
+    os << std::fixed;
+    os.precision(4);
+
     os << "[\n";
     for (std::size_t r = 0; r < mat.row_; ++r) {
         os << "[";
@@ -457,7 +422,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
         os << "]\n";
     }
     os << "]";
-
+    os.unsetf(std::ios::fixed);
     return os;
 }
 }  // namespace matrix
