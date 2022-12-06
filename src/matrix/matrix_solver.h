@@ -11,13 +11,16 @@
 #ifndef SRC_MATRIX_MATRIX_SOLVER_H_
 #define SRC_MATRIX_MATRIX_SOLVER_H_
 
+#include <utility>
+
 #include "src/matrix/matrix.h"
 
 namespace math_cpp {
 namespace matrix {
+
 class EigenSolver {
  public:
-    EigenSolver(const Matrix& mat);
+    explicit EigenSolver(const Matrix& mat);
 
     Matrix Eigenvalues() const;
     Matrix Eigenvectors() const;
@@ -27,6 +30,7 @@ class EigenSolver {
     Matrix eigenvalues_{};
     Matrix eigenvectors_{};
 };
+
 }  // namespace matrix
 }  // namespace math_cpp
 #endif  // SRC_MATRIX_MATRIX_SOLVER_H_

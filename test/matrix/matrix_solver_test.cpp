@@ -28,11 +28,23 @@ TEST(MatrixSolverTest, PowerIteration) {
 
     EigenSolver solver(A);
 
-    Matrix expect_eigen_value{{-3}, {2}, {1}};
-    Matrix expect_eigen_vector{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
+    // Matrix expect_eigen_value{{-3}, {2}, {1}};
+    // Matrix expect_eigen_vector{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
 
-    EXPECT_EQ(expect_eigen_value, solver.Eigenvalues());
-    EXPECT_EQ(expect_eigen_vector, solver.Eigenvectors());
+    Matrix eigen_vectors_t = solver.Eigenvectors().Transpose();
+    Matrix eigen_values = solver.Eigenvalues();
+    Matrix restore_A = Matrix::Zeros(A);
+
+    for (std::size_t index = 0; index < eigen_vectors_t.Row(); ++index) {
+        Matrix eigen_vector_t = eigen_vectors_t.GetRow(index);
+
+        restore_A += eigen_values(index, 0) * eigen_vector_t.Transpose() * eigen_vector_t;
+    }
+
+    EXPECT_EQ(A, restore_A);
+
+    std::cout << A << "\n";
+    std::cout << restore_A << "\n";
 }
 
 TEST(MatrixSolverTest, EigenLibEigenCase) {

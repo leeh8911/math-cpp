@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <initializer_list>
 #include <limits>
 #include <stdexcept>
 #include <string>
@@ -27,13 +28,11 @@ namespace matrix {
 Matrix::Matrix(std::size_t row, std::size_t col) : data_(std::vector<double>(row * col, 0.0)), row_(row), col_(col) {}
 Matrix::Matrix(const Shape& shape) : Matrix(shape.first, shape.second) {}
 
-Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : data_{}, row_{}, col_{} {
+Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : data_{}, row_{l.size()}, col_{1} {
     for (auto row : l) {
         ++row_;
         data_.insert(data_.end(), row.begin(), row.end());
     }
-
-    col_ = data_.size() / row_;
 }
 
 std::size_t Matrix::Row() const { return row_; }
@@ -136,7 +135,7 @@ bool Matrix::operator==(const Matrix& other) const {
         auto other_it = other.data_.begin();
         for (; this_it != data_.end(); ++this_it, ++other_it) {
             // TODO(sangwon) : How to compare to floating point values.. (there is so many errors..)
-            // below code is just assigned magic number (1e-8). not designed value.
+            // below code is just assigned magic number (1e-3). not designed value.
             if (std::abs(*this_it - *other_it) > 1e-3) {
                 equal = false;
                 break;
@@ -234,6 +233,8 @@ Matrix Matrix::EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col) 
     }
     return result;
 }
+
+Matrix Matrix::Zeros(const Matrix& mat) { return Matrix(mat.Row(), mat.Col()); }
 
 Matrix::operator double() {
     if ((row_ != 1) || (col_ != 1)) {

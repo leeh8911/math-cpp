@@ -80,6 +80,8 @@ class Matrix {
     static double Determinant(const Matrix& mat);
     static Matrix EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col);
 
+    static Matrix Zeros(const Matrix& mat);
+
     operator double();
 
  private:
