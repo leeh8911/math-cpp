@@ -51,6 +51,7 @@ TEST(MatrixSolverTest, EigenLibEigenCase) {
     Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
     Eigen::MatrixXd mat = MakeEigen(A);
 
+    std::cout << mat.rows() << ", " << mat.cols() << "\n";
     Eigen::EigenSolver<decltype(mat)> solver(mat);
 
     auto eigenvalues = solver.eigenvalues().cast<double>();

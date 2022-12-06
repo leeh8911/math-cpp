@@ -28,9 +28,9 @@ namespace matrix {
 Matrix::Matrix(std::size_t row, std::size_t col) : data_(std::vector<double>(row * col, 0.0)), row_(row), col_(col) {}
 Matrix::Matrix(const Shape& shape) : Matrix(shape.first, shape.second) {}
 
-Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l) : data_{}, row_{l.size()}, col_{1} {
+Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l)
+    : data_{}, row_{l.size()}, col_{l.begin()->size()} {
     for (auto row : l) {
-        ++row_;
         data_.insert(data_.end(), row.begin(), row.end());
     }
 }
