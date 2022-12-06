@@ -20,18 +20,22 @@ namespace matrix {
 class Matrix {
  public:
     using Shape = std::pair<std::size_t, std::size_t>;
-    Matrix() = default;
     explicit Matrix(const Shape& shape);
     explicit Matrix(std::size_t row, std::size_t col);
     Matrix(const std::initializer_list<std::initializer_list<double>>& l);
+
+    Matrix() = default;
     Matrix(const Matrix& other) = default;
+    Matrix(Matrix&& other) = default;
+    Matrix& operator=(const Matrix& other) = default;
+    Matrix& operator=(Matrix&& other) = default;
 
     std::size_t Row() const;
     std::size_t Col() const;
 
     Matrix operator+(const Matrix& other) const;
     Matrix operator-(const Matrix& other) const;
-    Matrix operator*(const Matrix& other);
+    Matrix operator*(const Matrix& other) const;
     Matrix operator*(double scalar) const;
     Matrix operator/(double scalar) const;
 
@@ -47,11 +51,13 @@ class Matrix {
 
     Matrix Inverse() const;
     Matrix Transpose() const;
-    std::pair<Matrix, Matrix> Eigen() const;
+
+    Matrix& Absolute();
 
     Matrix& RowMult(std::size_t idx, double scalar);
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
-    Matrix GetRow(std::size_t idx);
+    Matrix GetRow(std::size_t idx) const;
+    Matrix& SetRow(std::size_t idx, const Matrix& src);
     Matrix GetSubMatrix(std::size_t start_row, std::size_t start_col);
 
     friend Matrix operator*(double scalar, const Matrix& other);
@@ -68,9 +74,13 @@ class Matrix {
 
     static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
     static Matrix Identity(std::size_t size);
-    //  static Matrix Random(std::size_t row, std::size_t col);
+    static Matrix Random(std::size_t row, std::size_t col);
+
+    static double Norm2(const Matrix& mat);
     static double Determinant(const Matrix& mat);
     static Matrix EraseRowCol(const Matrix& mat, std::size_t row, std::size_t col);
+
+    operator double();
 
  private:
     bool IsBoundedRow(std::size_t row) const;
