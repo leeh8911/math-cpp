@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['random_79',['Random',['../classmath__cpp_1_1random_1_1Random.html',1,'math_cpp::random']]]
+  ['matrix_94',['Matrix',['../classmath__cpp_1_1matrix_1_1Matrix.html',1,'math_cpp::matrix']]]
 ];

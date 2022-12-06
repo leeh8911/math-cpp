@@ -1,4 +1,6 @@
 <map id="EraseRowCol" name="EraseRowCol">
-<area shape="rect" id="node1" title=" " alt="" coords="157,5,264,32"/>
-<area shape="rect" id="node2" href="$classmath__cpp_1_1matrix_1_1Matrix.html#a2cb7b6a2ae9737649e7272ccf3bd9f44" title=" " alt="" coords="5,5,109,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="419,31,525,57"/>
+<area shape="rect" id="node2" href="$classmath__cpp_1_1matrix_1_1Matrix.html#a2cb7b6a2ae9737649e7272ccf3bd9f44" title=" " alt="" coords="239,5,343,32"/>
+<area shape="rect" id="node4" href="$namespacemath__cpp_1_1test.html#a23b073b2c04695cb3a338c4fa55024b1" title=" " alt="" coords="212,56,371,83"/>
+<area shape="rect" id="node3" href="$namespacemath__cpp_1_1test.html#a59efe9745cad4fa96d82db5912fdadda" title=" " alt="" coords="5,5,164,32"/>
 </map>

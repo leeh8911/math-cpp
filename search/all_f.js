@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['variance_77',['Variance',['../namespacemath__cpp_1_1test.html#a34e02e539cc41e591bcf14b06d998a78',1,'math_cpp::test']]]
+  ['uniform_91',['Uniform',['../classmath__cpp_1_1random_1_1Random.html#ad07d47940dee8bf4ccd4d078d4eeffa6',1,'math_cpp::random::Random']]]
 ];

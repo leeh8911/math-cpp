@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['identity_105',['Identity',['../classmath__cpp_1_1matrix_1_1Matrix.html#af9c63a0b309776e329df182aa6b10573',1,'math_cpp::matrix::Matrix']]],
-  ['inverse_106',['Inverse',['../classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677',1,'math_cpp::matrix::Matrix']]],
-  ['isboundedcol_107',['IsBoundedCol',['../classmath__cpp_1_1matrix_1_1Matrix.html#a06ff5396f6ec8b834890d9620a00b2bf',1,'math_cpp::matrix::Matrix']]],
-  ['isboundedrow_108',['IsBoundedRow',['../classmath__cpp_1_1matrix_1_1Matrix.html#a56b37b33cf8124db9639d54651d14b41',1,'math_cpp::matrix::Matrix']]],
-  ['isboundedsize_109',['IsBoundedSize',['../classmath__cpp_1_1matrix_1_1Matrix.html#a58189a79202a4b5b41a9b0f82a75f03d',1,'math_cpp::matrix::Matrix']]],
-  ['issamesize_110',['IsSameSize',['../classmath__cpp_1_1matrix_1_1Matrix.html#a05f16579b86c28db667377ba9de7f1a9',1,'math_cpp::matrix::Matrix']]]
+  ['gaussian_125',['Gaussian',['../classmath__cpp_1_1random_1_1Random.html#a21bb567b51c78e0a67e0904ec5319968',1,'math_cpp::random::Random']]],
+  ['getinstance_126',['GetInstance',['../classmath__cpp_1_1random_1_1Random.html#a245667f1cff23e75d11b361cf18785e8',1,'math_cpp::random::Random']]],
+  ['getrow_127',['GetRow',['../classmath__cpp_1_1matrix_1_1Matrix.html#a7923833e967f8b91ee1628e2320b2708',1,'math_cpp::matrix::Matrix']]],
+  ['getsubmatrix_128',['GetSubMatrix',['../classmath__cpp_1_1matrix_1_1Matrix.html#aaa225952719ad4739690bcae3cfed799',1,'math_cpp::matrix::Matrix']]]
 ];

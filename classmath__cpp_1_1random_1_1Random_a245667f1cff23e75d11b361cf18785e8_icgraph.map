@@ -1,4 +1,7 @@
 <map id="GetInstance" name="GetInstance">
-<area shape="rect" id="node1" title=" " alt="" coords="212,5,312,32"/>
-<area shape="rect" id="node2" href="$namespacemath__cpp_1_1test.html#ab0547acf4b6e88cd0bc07d7b5a1e199e" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="972,31,1072,57"/>
+<area shape="rect" id="node2" href="$classmath__cpp_1_1matrix_1_1Matrix.html#af0567936ba4cf6f33e72bf810dad9e35" title=" " alt="" coords="675,5,924,32"/>
+<area shape="rect" id="node5" href="$namespacemath__cpp_1_1test.html#ab0547acf4b6e88cd0bc07d7b5a1e199e" title=" " alt="" coords="720,56,879,83"/>
+<area shape="rect" id="node3" href="$classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="360,5,627,32"/>
+<area shape="rect" id="node4" href="$classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="5,5,312,32"/>
 </map>
