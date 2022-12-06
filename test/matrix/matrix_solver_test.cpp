@@ -62,7 +62,7 @@ TEST(MatrixSolverTest, EigenLibEigenCase) {
     }
 
     std::sort(std::begin(v), std::end(v), [](std::pair<std::size_t, double> &a, std::pair<std::size_t, double> &b) {
-        return std::abs(a.second) < std::abs(b.second);
+        return std::abs(a.second) > std::abs(b.second);
     });
 
     Eigen::MatrixXd temp_eigenvalues = eigenvalues;
