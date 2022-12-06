@@ -51,18 +51,29 @@ TEST(MatrixSolverTest, EigenLibEigenCase) {
     Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
     Eigen::MatrixXd mat = MakeEigen(A);
 
-    std::cout << mat.rows() << ", " << mat.cols() << "\n";
     Eigen::EigenSolver<decltype(mat)> solver(mat);
 
-    auto eigenvalues = solver.eigenvalues().cast<double>();
-    std::vector<std::pair<std::size_t, double>> v{};
-    std::size_t i = 0;
-    std::cout << eigenvalues.rows() << ", " << eigenvalues.cols() << "\n";
-    // std::transform(eigenvalues.reshaped().begin(), eigenvalues.reshaped().end(), std::back_inserter(v),
-    //                [&i](double e) { return std::make_pair(i++, e); });
+    Eigen::MatrixXd eigenvalues = solver.eigenvalues().real();
+    Eigen::MatrixXd eigenvectors = solver.eigenvectors().real();
 
-    std::cout << solver.eigenvalues() << "\n";
-    std::cout << solver.eigenvectors() << "\n";
+    std::vector<std::pair<std::size_t, double>> v{};
+    for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
+        v.emplace_back(i, eigenvalues(i, 0));
+    }
+
+    std::sort(std::begin(v), std::end(v), [](std::pair<std::size_t, double> &a, std::pair<std::size_t, double> &b) {
+        return std::abs(a.second) < std::abs(b.second);
+    });
+
+    Eigen::MatrixXd temp_eigenvalues = eigenvalues;
+    Eigen::MatrixXd temp_eigenvectors = eigenvectors;
+    for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
+        temp_eigenvalues(i, 0) = v[i].second;
+        temp_eigenvectors.col(i) = eigenvectors.col(v[i].first);
+    }
+
+    std::cout << temp_eigenvalues << "\n";
+    std::cout << temp_eigenvectors << "\n";
 }
 }  // namespace test
 }  // namespace math_cpp
