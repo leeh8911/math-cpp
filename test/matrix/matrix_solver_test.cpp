@@ -44,6 +44,8 @@ TEST(MatrixSolverTest, PowerIteration) {
     EXPECT_EQ(A, restore_A);
 }
 
+// Eigenvector의 경우 방향이 반대로 나오는 케이스가 발생함. 따라서 Equality 확인을 위해서는 Cosine Similarity 를 사용
+// 하는 것은?
 TEST(MatrixSolverTest, EigenLibEigenCase) {
     Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
 

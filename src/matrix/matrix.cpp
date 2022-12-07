@@ -398,9 +398,10 @@ Matrix Matrix::Random(std::size_t row, std::size_t col) {
 
 double Matrix::Norm2(const Matrix& mat) {
     double result = 0.0;
-    for (auto elm : mat.data_) {
-        result += elm * elm;
-    }
+
+    result = std::accumulate(std::begin(mat.data_), std::end(mat.data_), 0.0,
+                             [](double a, double b) { return a + (b * b); });
+
     return std::sqrt(result);
 }
 

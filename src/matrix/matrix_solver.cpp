@@ -53,6 +53,7 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
             // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
             eigen_vector = A * A * eigen_vector;
 
+            std::cout << Matrix::Norm2(eigen_vector) << "\n";
             eigen_vector /= Matrix::Norm2(eigen_vector);
         }
 
