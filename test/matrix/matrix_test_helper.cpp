@@ -12,9 +12,12 @@
 
 #include <gtest/gtest.h>
 
+#include <algorithm>
 #include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <stdexcept>
+#include <utility>
+#include <vector>
 
 #include "src/matrix/matrix.h"
 
@@ -23,7 +26,7 @@ namespace test {
 
 using math_cpp::matrix::Matrix;
 
-Eigen::MatrixXd MakeEigen(Matrix mat) {
+Eigen::MatrixXd MakeEigenMatrix(const Matrix& mat) {
     Eigen::MatrixXd result(mat.Row(), mat.Col());
     for (std::size_t r = 0; r < mat.Row(); ++r) {
         for (std::size_t c = 0; c < mat.Col(); ++c) {
@@ -32,7 +35,35 @@ Eigen::MatrixXd MakeEigen(Matrix mat) {
     }
     return result;
 }
-Eigen::MatrixXd MakeRandomEigen(std::size_t row, std::size_t col) {
+
+std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const Matrix& mat) {
+    Eigen::MatrixXd eigen_mat = MakeEigenMatrix(mat);
+
+    Eigen::EigenSolver<decltype(eigen_mat)> solver(eigen_mat);
+
+    Eigen::MatrixXd eigenvalues = solver.eigenvalues().real();
+    Eigen::MatrixXd eigenvectors = solver.eigenvectors().real();
+
+    std::vector<std::pair<std::size_t, double>> v{};
+    for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
+        v.emplace_back(i, eigenvalues(i, 0));
+    }
+
+    std::sort(std::begin(v), std::end(v), [](std::pair<std::size_t, double>& a, std::pair<std::size_t, double>& b) {
+        return std::abs(a.second) > std::abs(b.second);
+    });
+
+    Eigen::MatrixXd temp_eigenvalues = eigenvalues;
+    Eigen::MatrixXd temp_eigenvectors = eigenvectors;
+    for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
+        temp_eigenvalues(i, 0) = v[i].second;
+        temp_eigenvectors.col(i) = eigenvectors.col(v[i].first);
+    }
+
+    return std::make_pair(temp_eigenvalues, temp_eigenvectors);
+}
+
+Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col) {
     Eigen::MatrixXd result = Eigen::MatrixXd::Random(row, col);
     return result;
 }

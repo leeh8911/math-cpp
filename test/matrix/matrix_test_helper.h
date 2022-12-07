@@ -16,14 +16,16 @@
 #include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <stdexcept>
+#include <utility>
 
 #include "src/matrix/matrix.h"
 
 namespace math_cpp {
 namespace test {
 
-Eigen::MatrixXd MakeEigen(math_cpp::matrix::Matrix mat);
-Eigen::MatrixXd MakeRandomEigen(std::size_t row, std::size_t col);
+Eigen::MatrixXd MakeEigenMatrix(const math_cpp::matrix::Matrix& mat);
+std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const math_cpp::matrix::Matrix& mat);
+Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col);
 
 bool operator==(const math_cpp::matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
 bool operator==(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs);

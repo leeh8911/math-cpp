@@ -42,38 +42,22 @@ TEST(MatrixSolverTest, PowerIteration) {
     }
 
     EXPECT_EQ(A, restore_A);
-
-    std::cout << A << "\n";
-    std::cout << restore_A << "\n";
 }
 
 TEST(MatrixSolverTest, EigenLibEigenCase) {
     Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
-    Eigen::MatrixXd mat = MakeEigen(A);
 
-    Eigen::EigenSolver<decltype(mat)> solver(mat);
+    Eigen::MatrixXd e_eigen_values{}, e_eigen_vectors{};
+    std::tie(e_eigen_values, e_eigen_vectors) = CalculateEigen(A);
 
-    Eigen::MatrixXd eigenvalues = solver.eigenvalues().real();
-    Eigen::MatrixXd eigenvectors = solver.eigenvectors().real();
+    EigenSolver solver(A);
 
-    std::vector<std::pair<std::size_t, double>> v{};
-    for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
-        v.emplace_back(i, eigenvalues(i, 0));
-    }
-
-    std::sort(std::begin(v), std::end(v), [](std::pair<std::size_t, double> &a, std::pair<std::size_t, double> &b) {
-        return std::abs(a.second) > std::abs(b.second);
-    });
-
-    Eigen::MatrixXd temp_eigenvalues = eigenvalues;
-    Eigen::MatrixXd temp_eigenvectors = eigenvectors;
-    for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
-        temp_eigenvalues(i, 0) = v[i].second;
-        temp_eigenvectors.col(i) = eigenvectors.col(v[i].first);
-    }
-
-    std::cout << temp_eigenvalues << "\n";
-    std::cout << temp_eigenvectors << "\n";
+    EXPECT_TRUE(e_eigen_values == solver.Eigenvalues()) << "Eigen result\n"
+                                                        << e_eigen_values << "\nMathLib result\n"
+                                                        << solver.Eigenvalues();
+    EXPECT_TRUE(e_eigen_vectors == solver.Eigenvectors()) << "Eigen result\n"
+                                                          << e_eigen_vectors << "\nMathLib result\n"
+                                                          << solver.Eigenvectors();
 }
 }  // namespace test
 }  // namespace math_cpp
