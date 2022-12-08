@@ -58,7 +58,7 @@ debug:
 .PHONY: static-test
 static-test:
 	mkdir -p build/static-test
-	cppcheck --cppcheck-build-dir=build/static-tesst src
+	cppcheck --cppcheck-build-dir=build/static-test src
 
 .PHONY: clean
 clean:

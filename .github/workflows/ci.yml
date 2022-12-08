@@ -25,3 +25,9 @@ jobs:
 
     - name: build, test, and reporting
       run: make test-all-report
+
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: unit-test-result
+        path: build/test_result.xml

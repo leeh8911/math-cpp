@@ -30,8 +30,6 @@ target_include_directories(${TEST_NAME} PUBLIC
 include(GoogleTest)
 gtest_discover_tests(${TEST_NAME})
 
-
-
 # get_target_property(TEST_INCLUDE_DIRS ${TEST_NAME} INCLUDE_DIRECTORIES)
 # foreach(dir ${TEST_INCLUDE_DIRS} )
 #     message(STATUS ${dir})
