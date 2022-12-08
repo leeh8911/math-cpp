@@ -20,6 +20,7 @@
 
 using math_cpp::matrix::EigenSolver;
 using math_cpp::matrix::Matrix;
+using math_cpp::matrix::MatrixUtil;
 
 namespace math_cpp {
 namespace test {
@@ -57,9 +58,14 @@ TEST(MatrixSolverTest, EigenLibEigenCase) {
     EXPECT_TRUE(e_eigen_values == solver.Eigenvalues()) << "Eigen result\n"
                                                         << e_eigen_values << "\nMathLib result\n"
                                                         << solver.Eigenvalues();
-    EXPECT_TRUE(e_eigen_vectors == solver.Eigenvectors()) << "Eigen result\n"
-                                                          << e_eigen_vectors << "\nMathLib result\n"
-                                                          << solver.Eigenvectors();
+
+    Matrix eigen_vectors = solver.Eigenvectors();
+    for (std::size_t col = 0; col < eigen_vectors.Col(); ++col) {
+        Matrix ev = eigen_vectors.GetCol(col);
+        Matrix e_ev = MakeMatrixFromEigen(e_eigen_vectors.col(col));
+
+        EXPECT_NEAR(1, std::abs(MatrixUtil::CosineSimilarity(ev, e_ev)), 1e-4);
+    }
 }
 }  // namespace test
 }  // namespace math_cpp

@@ -23,14 +23,15 @@
 namespace math_cpp {
 namespace test {
 
-Eigen::MatrixXd MakeEigenMatrix(const math_cpp::matrix::Matrix& mat);
-std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const math_cpp::matrix::Matrix& mat);
+Eigen::MatrixXd MakeEigenMatrix(const matrix::Matrix& mat);
+matrix::Matrix MakeMatrixFromEigen(const Eigen::MatrixXd& mat);
+std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const matrix::Matrix& mat);
 Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col);
 
-bool operator==(const math_cpp::matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
-bool operator==(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs);
-bool operator!=(const math_cpp::matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
-bool operator!=(const Eigen::MatrixXd& lhs, const math_cpp::matrix::Matrix& rhs);
+bool operator==(const matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
+bool operator==(const Eigen::MatrixXd& lhs, const matrix::Matrix& rhs);
+bool operator!=(const matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
+bool operator!=(const Eigen::MatrixXd& lhs, const matrix::Matrix& rhs);
 }  // namespace test
 }  // namespace math_cpp
 
