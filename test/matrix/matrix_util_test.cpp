@@ -19,24 +19,23 @@ namespace math_cpp {
 namespace test {
 
 using matrix::Matrix;
-using matrix::Util;
 
 TEST(MatrixUtilTest, CosineSimilarityTrivialCase) {
     Matrix a{{1, 2, 3}};
 
-    EXPECT_EQ(1., MatrixUtil::CosineSimilarity(a, a));
+    EXPECT_EQ(1., matrix::Util::CosineSimilarity(a, a));
 }
 TEST(MatrixUtilTest, CosineSimilarityOrthogonalCase) {
     Matrix a{{1, 0, 0}};
     Matrix b{{0, 1, 0}};
 
-    EXPECT_EQ(0., MatrixUtil::CosineSimilarity(a, b));
+    EXPECT_EQ(0., matrix::Util::CosineSimilarity(a, b));
 }
 TEST(MatrixUtilTest, CosineSimilarityOppositeCase) {
     Matrix a{{1, 0, 0}};
     Matrix b{{-1, 0, 0}};
 
-    EXPECT_EQ(-1., MatrixUtil::CosineSimilarity(a, b));
+    EXPECT_EQ(-1., matrix::Util::CosineSimilarity(a, b));
 }
 }  // namespace test
 }  // namespace math_cpp

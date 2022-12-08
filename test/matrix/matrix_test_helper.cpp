@@ -12,8 +12,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Eigen/Dense>
 #include <algorithm>
-#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <stdexcept>
 #include <utility>
