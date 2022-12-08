@@ -19,7 +19,7 @@ namespace math_cpp {
 namespace test {
 
 using matrix::Matrix;
-using matrix::MatrixUtil;
+using matrix::Util;
 
 TEST(MatrixUtilTest, CosineSimilarityTrivialCase) {
     Matrix a{{1, 2, 3}};

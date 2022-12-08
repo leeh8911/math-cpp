@@ -20,7 +20,7 @@
 
 using math_cpp::matrix::EigenSolver;
 using math_cpp::matrix::Matrix;
-using math_cpp::matrix::MatrixUtil;
+using math_cpp::matrix::Util;
 
 namespace math_cpp {
 namespace test {

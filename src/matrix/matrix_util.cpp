@@ -16,7 +16,7 @@
 
 namespace math_cpp {
 namespace matrix {
-double MatrixUtil::CosineSimilarity(const Matrix& lhs, const Matrix& rhs) {
+double Util::CosineSimilarity(const Matrix& lhs, const Matrix& rhs) {
     if ((lhs.Row() != 1) && (lhs.Col() != 1)) {
         throw std::invalid_argument("lhs should row/col vector");
     }

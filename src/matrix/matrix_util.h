@@ -14,7 +14,7 @@
 
 namespace math_cpp {
 namespace matrix {
-class MatrixUtil {
+class Util {
  public:
     static double CosineSimilarity(const Matrix& lhs, const Matrix& rhs);
 };
