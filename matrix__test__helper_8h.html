@@ -84,20 +84,21 @@ $(function() {
 <code>#include &lt;eigen3/Eigen/Dense&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &quot;<a class="el" href="matrix_8h_source.html">src/matrix/matrix.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for matrix_test_helper.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="matrix__test__helper_8h__incl.png" border="0" usemap="#atest_2matrix_2matrix__test__helper_8h" alt=""/></div>
 <map name="atest_2matrix_2matrix__test__helper_8h" id="atest_2matrix_2matrix__test__helper_8h">
-<area shape="rect" title=" " alt="" coords="207,5,439,32"/>
+<area shape="rect" title=" " alt="" coords="247,5,479,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,109,107"/>
 <area shape="rect" title=" " alt="" coords="134,80,285,107"/>
 <area shape="rect" title=" " alt="" coords="347,155,427,181"/>
 <area shape="rect" title=" " alt="" coords="361,80,447,107"/>
+<area shape="rect" title=" " alt="" coords="613,155,673,181"/>
 <area shape="rect" href="matrix_8h.html" title=" " alt="" coords="472,80,619,107"/>
-<area shape="rect" title=" " alt="" coords="473,155,533,181"/>
-<area shape="rect" title=" " alt="" coords="557,155,619,181"/>
+<area shape="rect" title=" " alt="" coords="514,155,577,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -123,10 +124,12 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0309d2974cd7614cf07d9b87f27f01cc"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#a0309d2974cd7614cf07d9b87f27f01cc">MakeEigen</a> (Matrix mat)</td></tr>
-<tr class="separator:a0309d2974cd7614cf07d9b87f27f01cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a618177f391a8cad41893033221a30967"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#a618177f391a8cad41893033221a30967">MakeRandomEigen</a> (std::size_t row, std::size_t col)</td></tr>
-<tr class="separator:a618177f391a8cad41893033221a30967"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e059ea1aaa5694160ea0508f6aeb35"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#a22e059ea1aaa5694160ea0508f6aeb35">MakeEigenMatrix</a> (const Matrix &amp;mat)</td></tr>
+<tr class="separator:a22e059ea1aaa5694160ea0508f6aeb35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad010b5c0a73126632f5a8dd45db7465a"><td class="memItemLeft" align="right" valign="top">std::pair&lt; Eigen::MatrixXd, Eigen::MatrixXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#ad010b5c0a73126632f5a8dd45db7465a">CalculateEigen</a> (const Matrix &amp;mat)</td></tr>
+<tr class="separator:ad010b5c0a73126632f5a8dd45db7465a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a220f0b3ef411ca3c8b454f3de0e2b89f"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#a220f0b3ef411ca3c8b454f3de0e2b89f">MakeRandomEigenMatrix</a> (std::size_t row, std::size_t col)</td></tr>
+<tr class="separator:a220f0b3ef411ca3c8b454f3de0e2b89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a256de9070512863825b51bda605a67ff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff">operator==</a> (const Matrix &amp;lhs, const Eigen::MatrixXd &amp;rhs)</td></tr>
 <tr class="separator:a256de9070512863825b51bda605a67ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad09b9bb553b8a8ac581724c225b369f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemath__cpp_1_1test.html#ad09b9bb553b8a8ac581724c225b369f3">operator==</a> (const Eigen::MatrixXd &amp;lhs, const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">math_cpp::matrix::Matrix</a> &amp;rhs)</td></tr>

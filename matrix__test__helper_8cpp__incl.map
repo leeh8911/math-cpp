@@ -1,11 +1,12 @@
 <map id="test/matrix/matrix_test_helper.cpp" name="test/matrix/matrix_test_helper.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="126,5,373,32"/>
-<area shape="rect" id="node2" href="$matrix__test__helper_8h.html" title=" " alt="" coords="211,80,443,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="31,155,135,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="159,155,310,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="308,229,388,256"/>
-<area shape="rect" id="node6" title=" " alt="" coords="557,155,643,181"/>
-<area shape="rect" id="node7" href="$matrix_8h.html" title=" " alt="" coords="385,155,532,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="421,229,481,256"/>
-<area shape="rect" id="node9" title=" " alt="" coords="505,229,567,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="418,5,665,32"/>
+<area shape="rect" id="node2" href="$matrix__test__helper_8h.html" title=" " alt="" coords="272,80,504,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="23,155,127,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="151,155,302,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="300,229,380,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="599,155,686,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="471,229,531,256"/>
+<area shape="rect" id="node8" href="$matrix_8h.html" title=" " alt="" coords="428,155,575,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="649,229,711,256"/>
+<area shape="rect" id="node10" title=" " alt="" coords="812,80,897,107"/>
 </map>

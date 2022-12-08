@@ -1,8 +1,13 @@
 <map id="Col" name="Col">
-<area shape="rect" id="node1" title=" " alt="" coords="675,56,717,83"/>
-<area shape="rect" id="node2" href="$namespacemath__cpp_1_1test.html#a0309d2974cd7614cf07d9b87f27f01cc" title=" " alt="" coords="394,5,593,32"/>
-<area shape="rect" id="node4" href="$namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff" title=" " alt="" coords="391,56,595,83"/>
-<area shape="rect" id="node5" href="$classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="360,107,627,133"/>
-<area shape="rect" id="node3" href="$namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="79,5,238,32"/>
-<area shape="rect" id="node6" href="$classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="5,107,312,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="940,107,983,133"/>
+<area shape="rect" id="node2" href="$classmath__cpp_1_1matrix_1_1MatrixUtil.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="567,5,892,32"/>
+<area shape="rect" id="node4" href="$namespacemath__cpp_1_1test.html#a22e059ea1aaa5694160ea0508f6aeb35" title=" " alt="" coords="609,56,849,83"/>
+<area shape="rect" id="node7" href="$namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff" title=" " alt="" coords="627,107,831,133"/>
+<area shape="rect" id="node8" href="$classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="596,157,863,184"/>
+<area shape="rect" id="node10" href="$classmath__cpp_1_1matrix_1_1Matrix.html#af6cf51e1e02f608746481bc09f68792c" title=" " alt="" coords="700,208,759,235"/>
+<area shape="rect" id="node3" href="$namespacemath__cpp_1_1test.html#a5b35b324ceca7964323fe148da3031b8" title=" " alt="" coords="286,5,445,32"/>
+<area shape="rect" id="node5" href="$namespacemath__cpp_1_1test.html#ad010b5c0a73126632f5a8dd45db7465a" title=" " alt="" coords="253,56,477,83"/>
+<area shape="rect" id="node6" href="$namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="5,56,164,83"/>
+<area shape="rect" id="node9" href="$classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="212,157,519,184"/>
+<area shape="rect" id="node11" href="$namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="286,208,445,235"/>
 </map>
