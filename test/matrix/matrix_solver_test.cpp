@@ -28,28 +28,38 @@ TEST(MatrixSolverTest, PowerIteration) {
 
     EigenSolver solver(A);
 
-    Matrix expect_eigen_value{{-3}, {2}, {1}};
-    Matrix expect_eigen_vector{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
+    // Matrix expect_eigen_value{{-3}, {2}, {1}};
+    // Matrix expect_eigen_vector{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
 
-    EXPECT_EQ(expect_eigen_value, solver.Eigenvalues());
-    EXPECT_EQ(expect_eigen_vector, solver.Eigenvectors());
+    Matrix eigen_vectors_t = solver.Eigenvectors().Transpose();
+    Matrix eigen_values = solver.Eigenvalues();
+    Matrix restore_A = Matrix::Zeros(A);
+
+    for (std::size_t index = 0; index < eigen_vectors_t.Row(); ++index) {
+        Matrix eigen_vector_t = eigen_vectors_t.GetRow(index);
+
+        restore_A += eigen_values(index, 0) * eigen_vector_t.Transpose() * eigen_vector_t;
+    }
+
+    EXPECT_EQ(A, restore_A);
 }
 
+// Eigenvector의 경우 방향이 반대로 나오는 케이스가 발생함. 따라서 Equality 확인을 위해서는 Cosine Similarity 를 사용
+// 하는 것은?
 TEST(MatrixSolverTest, EigenLibEigenCase) {
     Matrix A{{1, 0, 0}, {0, 2, 0}, {0, 0, -3}};
-    Eigen::MatrixXd mat = MakeEigen(A);
 
-    Eigen::EigenSolver<decltype(mat)> solver(mat);
+    Eigen::MatrixXd e_eigen_values{}, e_eigen_vectors{};
+    std::tie(e_eigen_values, e_eigen_vectors) = CalculateEigen(A);
 
-    auto eigenvalues = solver.eigenvalues().cast<double>();
-    std::vector<std::pair<std::size_t, double>> v{};
-    std::size_t i = 0;
-    std::cout << eigenvalues.rows() << ", " << eigenvalues.cols() << "\n";
-    // std::transform(eigenvalues.reshaped().begin(), eigenvalues.reshaped().end(), std::back_inserter(v),
-    //                [&i](double e) { return std::make_pair(i++, e); });
+    EigenSolver solver(A);
 
-    std::cout << solver.eigenvalues() << "\n";
-    std::cout << solver.eigenvectors() << "\n";
+    EXPECT_TRUE(e_eigen_values == solver.Eigenvalues()) << "Eigen result\n"
+                                                        << e_eigen_values << "\nMathLib result\n"
+                                                        << solver.Eigenvalues();
+    EXPECT_TRUE(e_eigen_vectors == solver.Eigenvectors()) << "Eigen result\n"
+                                                          << e_eigen_vectors << "\nMathLib result\n"
+                                                          << solver.Eigenvectors();
 }
 }  // namespace test
 }  // namespace math_cpp

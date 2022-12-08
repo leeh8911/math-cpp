@@ -25,6 +25,11 @@ Matrix EigenSolver::Eigenvalues() const { return eigenvalues_; }
 
 Matrix EigenSolver::Eigenvectors() const { return eigenvectors_; }
 
+/// @brief
+/// @param mat
+/// @return Pair of eigen values and eigen vectors. first is 1D matrix made by eigen values. second is 2D matrix made by
+/// eigen vectors. Eigen vectors are column vectors, V = [v1, v2, v3 ...]; Eigen values are 1D row vector, E = [e1, e2,
+/// e2 ...];
 std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
     // TODO(sangwon) : to be update
     if (mat.Row() != mat.Col()) {
@@ -36,7 +41,7 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
 
     Matrix eigen_vector(mat.Row(), 1);
     Matrix prev(mat.Row(), 1);
-    double eps = 1e-4;
+    double eps = 1e-5;
     Matrix A = mat;
     for (std::size_t i = 0; i < mat.Row(); ++i) {
         eigen_vector = Matrix::Random(mat.Row(), 1);
@@ -48,6 +53,7 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
             // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
             eigen_vector = A * A * eigen_vector;
 
+            std::cout << Matrix::Norm2(eigen_vector) << "\n";
             eigen_vector /= Matrix::Norm2(eigen_vector);
         }
 
