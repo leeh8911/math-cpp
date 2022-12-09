@@ -16,6 +16,8 @@ target_link_libraries(
     Eigen3::Eigen
 )
 
+message(STATUS ${EIGEN3_INCLUDE_DIR})
+
 target_include_directories(${TEST_NAME} PUBLIC
     "${CMAKE_SOURCE_DIR}/includes"
     "${CMAKE_SOURCE_DIR}/src"
@@ -27,8 +29,6 @@ target_include_directories(${TEST_NAME} PUBLIC
 
 include(GoogleTest)
 gtest_discover_tests(${TEST_NAME})
-
-
 
 # get_target_property(TEST_INCLUDE_DIRS ${TEST_NAME} INCLUDE_DIRECTORIES)
 # foreach(dir ${TEST_INCLUDE_DIRS} )

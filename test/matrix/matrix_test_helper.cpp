@@ -12,8 +12,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Eigen/Dense>
 #include <algorithm>
-#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <stdexcept>
 #include <utility>
@@ -45,6 +45,7 @@ std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const Matrix& mat) {
     Eigen::MatrixXd eigenvectors = solver.eigenvectors().real();
 
     std::vector<std::pair<std::size_t, double>> v{};
+
     for (std::size_t i = 0; i < eigenvalues.rows(); ++i) {
         v.emplace_back(i, eigenvalues(i, 0));
     }
@@ -61,6 +62,18 @@ std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const Matrix& mat) {
     }
 
     return std::make_pair(temp_eigenvalues, temp_eigenvectors);
+}
+
+matrix::Matrix MakeMatrixFromEigen(const Eigen::MatrixXd& mat) {
+    matrix::Matrix result(mat.rows(), mat.cols());
+
+    for (size_t r = 0; r < result.Row(); ++r) {
+        for (size_t c = 0; c < result.Col(); ++c) {
+            result(r, c) = mat(r, c);
+        }
+    }
+
+    return result;
 }
 
 Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col) {

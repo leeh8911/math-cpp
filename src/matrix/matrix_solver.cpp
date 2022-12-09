@@ -12,6 +12,7 @@
 
 #include <utility>
 
+#include "src/matrix/matrix.h"
 namespace math_cpp {
 namespace matrix {
 EigenSolver::EigenSolver(const Matrix& mat) {
@@ -53,12 +54,11 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
             // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
             eigen_vector = A * A * eigen_vector;
 
-            std::cout << Matrix::Norm2(eigen_vector) << "\n";
             eigen_vector /= Matrix::Norm2(eigen_vector);
         }
 
         Matrix eigen_vector_T = eigen_vector.Transpose();
-        double eigen_value = eigen_vector_T * (A * eigen_vector) / (eigen_vector_T * eigen_vector);
+        double eigen_value = static_cast<double>(eigen_vector_T * (A * eigen_vector) / (eigen_vector_T * eigen_vector));
 
         result_values(i, 0) = eigen_value;
         result_vectors.SetRow(i, eigen_vector);

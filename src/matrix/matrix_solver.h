@@ -13,7 +13,7 @@
 
 #include <utility>
 
-#include "src/matrix/matrix.h"
+#include "src/matrix/matrix_core.h"
 
 namespace math_cpp {
 namespace matrix {

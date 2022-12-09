@@ -16,7 +16,7 @@
 
 namespace math_cpp {
 namespace matrix {
-double MatrixUtil::CosineSimilarity(const Matrix& lhs, const Matrix& rhs) {
+double Util::CosineSimilarity(const Matrix& lhs, const Matrix& rhs) {
     if ((lhs.Row() != 1) && (lhs.Col() != 1)) {
         throw std::invalid_argument("lhs should row/col vector");
     }
@@ -33,7 +33,7 @@ double MatrixUtil::CosineSimilarity(const Matrix& lhs, const Matrix& rhs) {
         rhs_ = rhs.Transpose();
     }
 
-    double result = lhs_ * rhs_;
+    double result = static_cast<double>(lhs_ * rhs_);
     result /= Matrix::Norm2(lhs_) * Matrix::Norm2(rhs_);
     return result;
 }

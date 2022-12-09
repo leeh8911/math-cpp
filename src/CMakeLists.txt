@@ -1,11 +1,7 @@
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
-find_package(Eigen3 3.3 REQUIRED NO_MODULE)
-
 add_library(${LIB_NAME} STATIC
     ${SRC_FILES})
-
-target_link_libraries(${LIB_NAME} Eigen3::Eigen)
 
 find_package(Python3 REQUIRED)
 

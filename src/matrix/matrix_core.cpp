@@ -1,4 +1,4 @@
-/// @file matrix.cpp
+/// @file matrix_core.cpp
 /// @author sangwon (leeh8911@gmail.com)
 /// @brief
 /// @version 0.1
@@ -7,7 +7,7 @@
 /// @copyright Copyright (c) 2022
 ///
 
-#include "src/matrix/matrix.h"
+#include "src/matrix/matrix_core.h"
 
 #include <algorithm>
 #include <cstdlib>
@@ -18,6 +18,7 @@
 #include <utility>
 #include <vector>
 
+#include "src/matrix/matrix_operation.h"
 #include "src/random/random.h"
 
 namespace math_cpp {
@@ -25,7 +26,11 @@ namespace matrix {
 
 // using std::string_literals::operator""s;
 
-Matrix::Matrix(std::size_t row, std::size_t col) : data_(std::vector<double>(row * col, 0.0)), row_(row), col_(col) {}
+Matrix::Matrix(std::size_t row, std::size_t col, double value)
+    : data_(std::vector<double>(row * col, value)), row_(row), col_(col) {}
+
+Matrix::Matrix(std::size_t row, std::size_t col) : Matrix(row, col, 0.0) {}
+
 Matrix::Matrix(const Shape& shape) : Matrix(shape.first, shape.second) {}
 
 Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l)
@@ -37,29 +42,6 @@ Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l)
 
 std::size_t Matrix::Row() const { return row_; }
 std::size_t Matrix::Col() const { return col_; }
-
-Matrix& Matrix::operator+=(const Matrix& other) {
-    if (!IsSameSize(other)) {
-        std::string throw_msg =
-            "other matrix must be same size [*this] (" + std::to_string(row_) + ", " + std::to_string(col_) + ")!";
-        throw std::invalid_argument(throw_msg);
-    }
-
-    auto this_it = data_.begin();
-    auto other_it = other.data_.begin();
-    for (; this_it != data_.end(); ++this_it, ++other_it) {
-        *this_it += *other_it;
-    }
-
-    return *this;
-}
-
-Matrix Matrix::operator+(const Matrix& other) const {
-    Matrix add = *this;
-
-    add += other;
-    return add;
-}
 
 double& Matrix::operator()(std::size_t row, std::size_t col) {
     if (!IsBoundedSize(row, col)) {
@@ -79,10 +61,20 @@ double Matrix::operator()(std::size_t row, std::size_t col) const {
     return data_[row * col_ + col];
 }
 
-Matrix Matrix::operator/(double scalar) const {
-    Matrix result = *this;
-    result /= scalar;
-    return result;
+Matrix& Matrix::operator+=(const Matrix& other) {
+    if (!IsSameSize(other)) {
+        std::string throw_msg =
+            "other matrix must be same size [*this] (" + std::to_string(row_) + ", " + std::to_string(col_) + ")!";
+        throw std::invalid_argument(throw_msg);
+    }
+
+    auto this_it = data_.begin();
+    auto other_it = other.data_.begin();
+    for (; this_it != data_.end(); ++this_it, ++other_it) {
+        *this_it += *other_it;
+    }
+
+    return *this;
 }
 
 Matrix& Matrix::operator-=(const Matrix& other) {
@@ -98,32 +90,9 @@ Matrix& Matrix::operator/=(double scalar) {
     return *this;
 }
 
-Matrix Matrix::operator-(const Matrix& other) const {
-    Matrix result = *this;
-    result -= other;
-    return result;
-}
-
 Matrix& Matrix::operator-() {
     *this *= -1.0;
     return *this;
-}
-
-Matrix Matrix::operator*(const Matrix& other) const {
-    if (!CanMultiply(other)) {
-        throw std::invalid_argument("cannot matrix multiply, check size!");
-    }
-
-    Matrix result(row_, other.col_);
-
-    for (std::size_t r = 0; r < row_; ++r) {
-        for (std::size_t c = 0; c < other.col_; ++c) {
-            for (std::size_t m = 0; m < col_; ++m) {
-                result(r, c) += (*this)(r, m) * other(m, c);
-            }
-        }
-    }
-    return result;
 }
 
 bool Matrix::operator==(const Matrix& other) const {
@@ -272,6 +241,23 @@ Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
     return *this;
 }
 
+Matrix Matrix::GetCol(std::size_t idx) const {
+    if (idx >= col_) {
+        throw std::invalid_argument("check col index");
+    }
+
+    Matrix result(row_, 1);
+
+    Matrix transposed = (*this).Transpose();
+
+    auto start = std::next(std::begin(transposed.data_), static_cast<std::ptrdiff_t>(idx * row_));
+    auto finish = std::next(start, static_cast<std::ptrdiff_t>(row_));
+    auto col_start = std::begin(result.data_);
+    std::copy(start, finish, col_start);
+
+    return result;
+}
+
 Matrix Matrix::GetRow(std::size_t idx) const {
     if (idx >= row_) {
         throw std::invalid_argument("check row index");
@@ -315,15 +301,6 @@ Matrix Matrix::GetSubMatrix(std::size_t start_row, std::size_t start_col) {
         }
     }
     return result;
-}
-
-Matrix operator*(double scalar, const Matrix& other) { return other * scalar; }
-
-Matrix Matrix::operator*(double scalar) const {
-    Matrix scalar_mult = *this;
-    scalar_mult *= scalar;
-
-    return scalar_mult;
 }
 
 Matrix& Matrix::operator*=(double scalar) {
