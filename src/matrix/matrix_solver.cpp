@@ -26,7 +26,7 @@ Matrix EigenSolver::Eigenvalues() const { return eigenvalues_; }
 
 Matrix EigenSolver::Eigenvectors() const { return eigenvectors_; }
 
-/// @brief
+/// @brief Solve eigen problem of input argument matrix.
 /// @param mat
 /// @return Pair of eigen values and eigen vectors. first is 1D matrix made by eigen values. second is 2D matrix made by
 /// eigen vectors. Eigen vectors are column vectors, V = [v1, v2, v3 ...]; Eigen values are 1D row vector, E = [e1, e2,

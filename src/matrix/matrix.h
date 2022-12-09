@@ -1,6 +1,6 @@
 /// @file matrix.h
 /// @author sangwon (leeh8911@gmail.com)
-/// @brief
+/// @brief All about matrix namespace
 /// @version 0.1
 /// @date 2022-12-08
 ///

@@ -20,10 +20,6 @@
 
 using math_cpp::matrix::Matrix;
 
-// TODO(sangwon): 행렬의 기본적인 요소들만 생각하며 구성해보자!
-// TODO(sangwon): 기본적인 행렬의 사칙연산 구현해보기
-// TODO(sangwon): Determinant
-// TODO(sangwon): Eigen value, eigen vector
 // TODO(sangwon): Singular value
 // TODO(sangwon): Fixed double을 구현하는 것이 좋지 않을까?
 

@@ -25,8 +25,6 @@
 namespace math_cpp {
 namespace matrix {
 
-// using std::string_literals::operator""s;
-
 Matrix::Matrix(std::size_t row, std::size_t col, double value)
     : data_(std::vector<double>(row * col, value)), row_(row), col_(col) {}
 
