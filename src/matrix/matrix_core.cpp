@@ -118,6 +118,9 @@ bool Matrix::operator==(const Matrix& other) const {
 bool Matrix::operator!=(const Matrix& other) const { return !(*this == other); }
 
 Matrix Matrix::Inverse() const {
+    if (Determinant(*this) == 0.0) {
+        throw std::invalid_argument("*this matrix is not invertible matrix");
+    }
     if (row_ != col_) {
         throw std::invalid_argument("matrix should be square");
     }
@@ -195,6 +198,9 @@ Matrix& Matrix::Absolute() {
 double Matrix::Determinant(const Matrix& mat) {
     if (mat.row_ != mat.col_) {
         throw std::invalid_argument("determinant should be defined square matrix");
+    }
+    if ((mat.row_ == 1) && (mat.col_ == 1)) {
+        return mat(0, 0);
     }
     if ((mat.row_ == 2) && (mat.col_ == 2)) {
         return mat(0, 0) * mat(1, 1) - mat(1, 0) * mat(0, 1);
