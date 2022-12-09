@@ -129,10 +129,8 @@ TEST(MatrixTest, InverseMatrixProperty3x3Case) {
 
 TEST(MatrixTest, InverseMatrixNotInvertible3x3Case) {
     Matrix A{{2.0, 1.0, 3.0}, {0.0, 0.0, 0.0}, {8.0, 0.0, 2.0}};
-    Matrix invA = A.Inverse();
 
-    EXPECT_EQ(Matrix::Identity(3), (A * invA));
-    EXPECT_EQ(Matrix::Identity(3), (invA * A));
+    EXPECT_ANY_THROW(A.Inverse());
 }
 
 TEST(MatrixTest, Determinant2x2Case) {
