@@ -10,6 +10,6 @@ var searchData=
   ['compiler_5fid_10',['COMPILER_ID',['../CMakeCCompilerId_8c.html#a81dee0709ded976b2e0319239f72d174',1,'COMPILER_ID():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a81dee0709ded976b2e0319239f72d174',1,'COMPILER_ID():&#160;CMakeCXXCompilerId.cpp']]],
   ['concatenate_11',['Concatenate',['../classmath__cpp_1_1matrix_1_1Matrix.html#a97632e68e4dab7efcef9d7aa633850f7',1,'math_cpp::matrix::Matrix']]],
   ['copy_12',['Copy',['../classmath__cpp_1_1matrix_1_1Matrix.html#abe365592e5bffe05630c507ba35b16fb',1,'math_cpp::matrix::Matrix']]],
-  ['cosinesimilarity_13',['CosineSimilarity',['../classmath__cpp_1_1matrix_1_1MatrixUtil.html#a6a5f09c83d3175d57efb0a16ead57692',1,'math_cpp::matrix::MatrixUtil']]],
+  ['cosinesimilarity_13',['CosineSimilarity',['../classmath__cpp_1_1matrix_1_1Util.html#a6a5f09c83d3175d57efb0a16ead57692',1,'math_cpp::matrix::Util']]],
   ['cxx_5fstd_14',['CXX_STD',['../CMakeCXXCompilerId_8cpp.html#a34cc889e576a1ae6c84ae9e0a851ba21',1,'CMakeCXXCompilerId.cpp']]]
 ];

@@ -86,13 +86,13 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="matrix_8h_source.html">matrix.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="matrix__core_8h_source.html">matrix_core.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Matrix:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix__coll__graph.png" border="0" usemap="#aMatrix_coll__map" alt="Collaboration graph"/></div>
 <map name="aMatrix_coll__map" id="aMatrix_coll__map">
-<area shape="rect" title=" " alt="" coords="5,440,452,1236"/>
+<area shape="rect" title=" " alt="" coords="5,440,452,1192"/>
 <area shape="rect" title=" " alt="" coords="152,285,212,363"/>
 <area shape="rect" title=" " alt="" coords="236,285,373,363"/>
 <area shape="rect" title=" " alt="" coords="217,145,283,223"/>
@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6418afed968196fb8e8b46433b97155f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4ebb135997c4dea12f782760503995f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#ad4ebb135997c4dea12f782760503995f">Matrix</a> (std::size_t row, std::size_t col)</td></tr>
 <tr class="separator:ad4ebb135997c4dea12f782760503995f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac391340d0ae8d53d8ba1e50b56d65a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a6ac391340d0ae8d53d8ba1e50b56d65a">Matrix</a> (std::size_t row, std::size_t col, double value)</td></tr>
+<tr class="separator:a6ac391340d0ae8d53d8ba1e50b56d65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ce32fac1e35f3554d82643f8e012481"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a2ce32fac1e35f3554d82643f8e012481">Matrix</a> (const std::initializer_list&lt; std::initializer_list&lt; double &gt;&gt; &amp;l)</td></tr>
 <tr class="separator:a2ce32fac1e35f3554d82643f8e012481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a022fb22fe3aad154e6db6009c611ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a9a022fb22fe3aad154e6db6009c611ee">Matrix</a> ()=default</td></tr>
@@ -128,16 +130,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a652847fe30058dff16c44d991167c6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad501c62fcf9a20d794e10699e0266a"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a6ad501c62fcf9a20d794e10699e0266a">Col</a> () const</td></tr>
 <tr class="separator:a6ad501c62fcf9a20d794e10699e0266a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3604e9d616769e9e44d159c5137b32e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a3604e9d616769e9e44d159c5137b32e4">operator+</a> (const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;other) const</td></tr>
-<tr class="separator:a3604e9d616769e9e44d159c5137b32e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d50369a407f1a0fa2098220d272d8ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a7d50369a407f1a0fa2098220d272d8ea">operator-</a> (const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;other) const</td></tr>
-<tr class="separator:a7d50369a407f1a0fa2098220d272d8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47841ecbfeeb9035363ff8be83102735"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a47841ecbfeeb9035363ff8be83102735">operator*</a> (const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;other) const</td></tr>
-<tr class="separator:a47841ecbfeeb9035363ff8be83102735"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc37c967adf32ecd9750e9e6d9dda7be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#adc37c967adf32ecd9750e9e6d9dda7be">operator*</a> (double scalar) const</td></tr>
-<tr class="separator:adc37c967adf32ecd9750e9e6d9dda7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1605dcc1e5fe9b7820f2fe13fbed9cbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a1605dcc1e5fe9b7820f2fe13fbed9cbf">operator/</a> (double scalar) const</td></tr>
-<tr class="separator:a1605dcc1e5fe9b7820f2fe13fbed9cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbf537cdcc0d688148552f6fa260c4ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#acbf537cdcc0d688148552f6fa260c4ba">operator+=</a> (const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;other)</td></tr>
 <tr class="separator:acbf537cdcc0d688148552f6fa260c4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bad2536595b03a974c16f6bb0097e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#af2bad2536595b03a974c16f6bb0097e4">operator-=</a> (const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;other)</td></tr>
@@ -162,6 +154,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a249f120f5a1a958a8b9635a5f6ea49f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a5231675285053bff00809e4a581baf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a0a5231675285053bff00809e4a581baf">RowAdd</a> (std::size_t idx, const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;row)</td></tr>
 <tr class="separator:a0a5231675285053bff00809e4a581baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2069f997843c7500d3122e958a679453"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a2069f997843c7500d3122e958a679453">GetCol</a> (std::size_t idx) const</td></tr>
+<tr class="separator:a2069f997843c7500d3122e958a679453"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7923833e967f8b91ee1628e2320b2708"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a7923833e967f8b91ee1628e2320b2708">GetRow</a> (std::size_t idx) const</td></tr>
 <tr class="separator:a7923833e967f8b91ee1628e2320b2708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bed9aec64efe92e6237ee590ecac4ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a6bed9aec64efe92e6237ee590ecac4ba">SetRow</a> (std::size_t idx, const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;src)</td></tr>
@@ -218,8 +212,6 @@ Private Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a4f920920dd45b2ea4ff48b506c059fb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a4f920920dd45b2ea4ff48b506c059fb8">operator*</a> (double scalar, const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;other)</td></tr>
-<tr class="separator:a4f920920dd45b2ea4ff48b506c059fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c0087f550d6b94e3b9d6d7bf0e846a6"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html#a6c0087f550d6b94e3b9d6d7bf0e846a6">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;mat)</td></tr>
 <tr class="separator:a6c0087f550d6b94e3b9d6d7bf0e846a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -240,7 +232,7 @@ Friends</h2></td></tr>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6418afed968196fb8e8b46433b97155f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6418afed968196fb8e8b46433b97155f">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6418afed968196fb8e8b46433b97155f">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +258,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="ad4ebb135997c4dea12f782760503995f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4ebb135997c4dea12f782760503995f">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4ebb135997c4dea12f782760503995f">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,8 +293,50 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a6ac391340d0ae8d53d8ba1e50b56d65a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac391340d0ae8d53d8ba1e50b56d65a">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2ce32fac1e35f3554d82643f8e012481"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ce32fac1e35f3554d82643f8e012481">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ce32fac1e35f3554d82643f8e012481">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,7 +354,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a9a022fb22fe3aad154e6db6009c611ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a022fb22fe3aad154e6db6009c611ee">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a022fb22fe3aad154e6db6009c611ee">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -356,7 +390,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a10704f28356d8ddc33e01bfb9beef4ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10704f28356d8ddc33e01bfb9beef4ad">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a10704f28356d8ddc33e01bfb9beef4ad">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -382,7 +416,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a2f4926f421974ae3970240d0b3e0f796"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f4926f421974ae3970240d0b3e0f796">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f4926f421974ae3970240d0b3e0f796">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -479,17 +513,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a652847fe30058dff16c44d991167c6ee_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a652847fe30058dff16c44d991167c6ee_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a652847fe30058dff16c44d991167c6ee_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a652847fe30058dff16c44d991167c6ee_icgraph">
-<area shape="rect" title=" " alt="" coords="940,132,991,159"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1MatrixUtil.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="567,5,892,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a22e059ea1aaa5694160ea0508f6aeb35" title=" " alt="" coords="609,56,849,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff" title=" " alt="" coords="627,107,831,133"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="596,157,863,184"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="286,233,445,260"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#af6cf51e1e02f608746481bc09f68792c" title=" " alt="" coords="700,259,759,285"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a5b35b324ceca7964323fe148da3031b8" title=" " alt="" coords="286,5,445,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#ad010b5c0a73126632f5a8dd45db7465a" title=" " alt="" coords="253,56,477,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="5,56,164,83"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="212,157,519,184"/>
+<area shape="rect" title=" " alt="" coords="881,257,932,284"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Util.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="224,29,507,56"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a22e059ea1aaa5694160ea0508f6aeb35" title=" " alt="" coords="580,80,820,107"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#acb5d72ae268bc916aa86b4f995ded9b5" title=" " alt="" coords="229,131,502,157"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a87f74b5ff0c1b3e1d525eca651cfa347" title=" " alt="" coords="597,181,803,208"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a7962304a5f40f82f876eeec392f4cec2" title=" " alt="" coords="595,232,805,259"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#ae7e50bd600d0d365bbd361e1698eacc9" title=" " alt="" coords="597,283,803,309"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff" title=" " alt="" coords="598,333,802,360"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="567,384,833,411"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="286,460,445,487"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#af6cf51e1e02f608746481bc09f68792c" title=" " alt="" coords="671,485,729,512"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="5,80,164,107"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#ad010b5c0a73126632f5a8dd45db7465a" title=" " alt="" coords="253,80,477,107"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="212,384,519,411"/>
 </map>
 </div>
 
@@ -514,118 +551,22 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a6ad501c62fcf9a20d794e10699e0266a_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a6ad501c62fcf9a20d794e10699e0266a_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a6ad501c62fcf9a20d794e10699e0266a_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a6ad501c62fcf9a20d794e10699e0266a_icgraph">
-<area shape="rect" title=" " alt="" coords="940,107,983,133"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1MatrixUtil.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="567,5,892,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a22e059ea1aaa5694160ea0508f6aeb35" title=" " alt="" coords="609,56,849,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff" title=" " alt="" coords="627,107,831,133"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="596,157,863,184"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#af6cf51e1e02f608746481bc09f68792c" title=" " alt="" coords="700,208,759,235"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a5b35b324ceca7964323fe148da3031b8" title=" " alt="" coords="286,5,445,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#ad010b5c0a73126632f5a8dd45db7465a" title=" " alt="" coords="253,56,477,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="5,56,164,83"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="212,157,519,184"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="286,208,445,235"/>
+<area shape="rect" title=" " alt="" coords="881,254,924,281"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Util.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="224,26,507,53"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="5,102,164,129"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a22e059ea1aaa5694160ea0508f6aeb35" title=" " alt="" coords="580,127,820,154"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#acb5d72ae268bc916aa86b4f995ded9b5" title=" " alt="" coords="229,178,502,205"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a87f74b5ff0c1b3e1d525eca651cfa347" title=" " alt="" coords="597,229,803,255"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a7962304a5f40f82f876eeec392f4cec2" title=" " alt="" coords="595,279,805,306"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#ae7e50bd600d0d365bbd361e1698eacc9" title=" " alt="" coords="597,330,803,357"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a256de9070512863825b51bda605a67ff" title=" " alt="" coords="598,381,802,407"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="567,431,833,458"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#af6cf51e1e02f608746481bc09f68792c" title=" " alt="" coords="671,482,729,509"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#ad010b5c0a73126632f5a8dd45db7465a" title=" " alt="" coords="253,127,477,154"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="212,431,519,458"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="286,482,445,509"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="a3604e9d616769e9e44d159c5137b32e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3604e9d616769e9e44d159c5137b32e4">&#9670;&nbsp;</a></span>operator+()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> operator+ </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7d50369a407f1a0fa2098220d272d8ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d50369a407f1a0fa2098220d272d8ea">&#9670;&nbsp;</a></span>operator-() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> operator- </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a47841ecbfeeb9035363ff8be83102735"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47841ecbfeeb9035363ff8be83102735">&#9670;&nbsp;</a></span>operator*() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> operator* </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a47841ecbfeeb9035363ff8be83102735_cgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a47841ecbfeeb9035363ff8be83102735_cgraph" alt=""/></div>
-<map name="aclassmath__cpp_1_1matrix_1_1Matrix_a47841ecbfeeb9035363ff8be83102735_cgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a47841ecbfeeb9035363ff8be83102735_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,89,32"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a9a74cc428730aa5f67116c6e1ddea54d" title=" " alt="" coords="137,5,237,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="adc37c967adf32ecd9750e9e6d9dda7be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc37c967adf32ecd9750e9e6d9dda7be">&#9670;&nbsp;</a></span>operator*() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> operator* </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>scalar</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1605dcc1e5fe9b7820f2fe13fbed9cbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1605dcc1e5fe9b7820f2fe13fbed9cbf">&#9670;&nbsp;</a></span>operator/()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> operator/ </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>scalar</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -720,7 +661,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="aaf6e62a4b1b31233e018928d64df428d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf6e62a4b1b31233e018928d64df428d">&#9670;&nbsp;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf6e62a4b1b31233e018928d64df428d">&#9670;&nbsp;</a></span>operator-()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -815,8 +756,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a481e9194a91f7ab132158c4da633f677_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a481e9194a91f7ab132158c4da633f677_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a481e9194a91f7ab132158c4da633f677_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a481e9194a91f7ab132158c4da633f677_icgraph">
-<area shape="rect" title=" " alt="" coords="212,5,283,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="257,31,328,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -841,13 +783,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_ada11290ae7810df3f90734047053700b_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_ada11290ae7810df3f90734047053700b_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_ada11290ae7810df3f90734047053700b_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_ada11290ae7810df3f90734047053700b_icgraph">
-<area shape="rect" title=" " alt="" coords="1048,81,1135,108"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1MatrixUtil.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="675,5,1000,32"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a6bed9aec64efe92e6237ee590ecac4ba" title=" " alt="" coords="802,56,873,83"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="360,81,627,108"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="758,157,917,184"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a5b35b324ceca7964323fe148da3031b8" title=" " alt="" coords="414,5,573,32"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="5,81,312,108"/>
+<area shape="rect" title=" " alt="" coords="1005,107,1092,133"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Util.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="675,5,957,32"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a2069f997843c7500d3122e958a679453" title=" " alt="" coords="783,56,849,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a6bed9aec64efe92e6237ee590ecac4ba" title=" " alt="" coords="781,107,851,133"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="360,120,627,147"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="737,208,895,235"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="414,44,573,71"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="5,120,312,147"/>
 </map>
 </div>
 
@@ -900,10 +843,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a249f120f5a1a958a8b9635a5f6ea49f2_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a249f120f5a1a958a8b9635a5f6ea49f2_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a249f120f5a1a958a8b9635a5f6ea49f2_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a249f120f5a1a958a8b9635a5f6ea49f2_icgraph">
-<area shape="rect" title=" " alt="" coords="419,31,497,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="256,5,327,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a46dc1a2588e5491f51af2cf756b64a72" title=" " alt="" coords="212,56,371,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="464,56,543,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="301,31,372,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a46dc1a2588e5491f51af2cf756b64a72" title=" " alt="" coords="257,81,416,108"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -939,10 +883,47 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a0a5231675285053bff00809e4a581baf_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a0a5231675285053bff00809e4a581baf_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a0a5231675285053bff00809e4a581baf_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a0a5231675285053bff00809e4a581baf_icgraph">
-<area shape="rect" title=" " alt="" coords="419,31,493,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="256,5,327,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#aacb425a33e8f0a156108d4baf2bb9cd4" title=" " alt="" coords="212,56,371,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="464,56,539,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="301,31,372,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#aacb425a33e8f0a156108d4baf2bb9cd4" title=" " alt="" coords="257,81,416,108"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2069f997843c7500d3122e958a679453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2069f997843c7500d3122e958a679453">&#9670;&nbsp;</a></span>GetCol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> GetCol </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>idx</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_cgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_cgraph" alt=""/></div>
+<map name="aclassmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_cgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,72,32"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#ada11290ae7810df3f90734047053700b" title=" " alt="" coords="120,5,207,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_icgraph" alt=""/></div>
+<map name="aclassmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a2069f997843c7500d3122e958a679453_icgraph">
+<area shape="rect" title=" " alt="" coords="212,5,279,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="5,5,164,32"/>
 </map>
 </div>
 
@@ -968,10 +949,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a7923833e967f8b91ee1628e2320b2708_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a7923833e967f8b91ee1628e2320b2708_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a7923833e967f8b91ee1628e2320b2708_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a7923833e967f8b91ee1628e2320b2708_icgraph">
-<area shape="rect" title=" " alt="" coords="419,31,492,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="256,5,327,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="212,56,371,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="464,56,537,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="301,31,372,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#ad2f50d9f0ba470b10730c4a94378adc6" title=" " alt="" coords="257,81,416,108"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -1054,9 +1036,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_aaa225952719ad4739690bcae3cfed799_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_aaa225952719ad4739690bcae3cfed799_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_aaa225952719ad4739690bcae3cfed799_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_aaa225952719ad4739690bcae3cfed799_icgraph">
-<area shape="rect" title=" " alt="" coords="331,5,441,32"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="212,5,283,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="376,31,487,57"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="257,31,328,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -1188,8 +1171,8 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a9a74cc428730aa5f67116c6e1ddea54d_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a9a74cc428730aa5f67116c6e1ddea54d_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a9a74cc428730aa5f67116c6e1ddea54d_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a9a74cc428730aa5f67116c6e1ddea54d_icgraph">
-<area shape="rect" title=" " alt="" coords="137,5,237,32"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a47841ecbfeeb9035363ff8be83102735" title=" " alt="" coords="5,5,89,32"/>
+<area shape="rect" title=" " alt="" coords="260,5,360,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a87f74b5ff0c1b3e1d525eca651cfa347" title=" " alt="" coords="5,5,212,32"/>
 </map>
 </div>
 
@@ -1231,11 +1214,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_abe365592e5bffe05630c507ba35b16fb_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_abe365592e5bffe05630c507ba35b16fb_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_abe365592e5bffe05630c507ba35b16fb_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_abe365592e5bffe05630c507ba35b16fb_icgraph">
-<area shape="rect" title=" " alt="" coords="571,31,625,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a97632e68e4dab7efcef9d7aa633850f7" title=" " alt="" coords="419,31,523,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="256,5,327,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a4e7e9bf8c7acb294d076e7cb56dbe811" title=" " alt="" coords="212,56,371,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="616,56,671,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a97632e68e4dab7efcef9d7aa633850f7" title=" " alt="" coords="464,56,568,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="301,31,372,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a4e7e9bf8c7acb294d076e7cb56dbe811" title=" " alt="" coords="257,81,416,108"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -1294,10 +1278,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a97632e68e4dab7efcef9d7aa633850f7_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a97632e68e4dab7efcef9d7aa633850f7_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a97632e68e4dab7efcef9d7aa633850f7_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a97632e68e4dab7efcef9d7aa633850f7_icgraph">
-<area shape="rect" title=" " alt="" coords="419,31,523,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="256,5,327,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a4e7e9bf8c7acb294d076e7cb56dbe811" title=" " alt="" coords="212,56,371,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="464,56,568,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="301,31,372,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a4e7e9bf8c7acb294d076e7cb56dbe811" title=" " alt="" coords="257,81,416,108"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -1331,10 +1316,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_af9c63a0b309776e329df182aa6b10573_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_af9c63a0b309776e329df182aa6b10573_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_af9c63a0b309776e329df182aa6b10573_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_af9c63a0b309776e329df182aa6b10573_icgraph">
-<area shape="rect" title=" " alt="" coords="419,31,491,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="256,5,327,32"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a8d45972190e88dad7511bec2cc49e0b5" title=" " alt="" coords="212,56,371,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="464,56,536,83"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Matrix.html#a481e9194a91f7ab132158c4da633f677" title=" " alt="" coords="301,31,372,57"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a8d45972190e88dad7511bec2cc49e0b5" title=" " alt="" coords="257,81,416,108"/>
+<area shape="rect" href="namespacemath__cpp_1_1matrix.html#a3b42c5b02f93e2fc8665e8b2ca5c63c2" title=" " alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a02212543f3748ba95676af8057d27545" title=" " alt="" coords="28,56,187,83"/>
 </map>
 </div>
 
@@ -1424,10 +1410,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmath__cpp_1_1matrix_1_1Matrix_a7c6159e4316e965af642b0966ee33597_icgraph.png" border="0" usemap="#aclassmath__cpp_1_1matrix_1_1Matrix_a7c6159e4316e965af642b0966ee33597_icgraph" alt=""/></div>
 <map name="aclassmath__cpp_1_1matrix_1_1Matrix_a7c6159e4316e965af642b0966ee33597_icgraph" id="aclassmath__cpp_1_1matrix_1_1Matrix_a7c6159e4316e965af642b0966ee33597_icgraph">
-<area shape="rect" title=" " alt="" coords="733,31,800,57"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1MatrixUtil.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="360,5,685,32"/>
-<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="389,56,656,83"/>
-<area shape="rect" href="namespacemath__cpp_1_1test.html#a5b35b324ceca7964323fe148da3031b8" title=" " alt="" coords="79,5,238,32"/>
+<area shape="rect" title=" " alt="" coords="691,31,757,57"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1Util.html#a6a5f09c83d3175d57efb0a16ead57692" title=" " alt="" coords="360,5,643,32"/>
+<area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#a0e14963abd4490ef37f3ab7701149911" title=" " alt="" coords="368,56,635,83"/>
+<area shape="rect" href="namespacemath__cpp_1_1test.html#a8b8f27db58c4bcb8df6decb1bcfae01f" title=" " alt="" coords="79,5,238,32"/>
 <area shape="rect" href="classmath__cpp_1_1matrix_1_1EigenSolver.html#ad30935e4f55ee8aa26f70de9b234581d" title=" " alt="" coords="5,56,312,83"/>
 </map>
 </div>
@@ -1582,6 +1568,9 @@ Here is the caller graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">operator double </td>
@@ -1590,6 +1579,11 @@ Here is the caller graph for this function:</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -1722,42 +1716,6 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a4f920920dd45b2ea4ff48b506c059fb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f920920dd45b2ea4ff48b506c059fb8">&#9670;&nbsp;</a></span>operator*</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> operator* </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>scalar</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classmath__cpp_1_1matrix_1_1Matrix.html">Matrix</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a6c0087f550d6b94e3b9d6d7bf0e846a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6c0087f550d6b94e3b9d6d7bf0e846a6">&#9670;&nbsp;</a></span>operator&lt;&lt;</h2>
 
@@ -1862,8 +1820,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/matrix/<a class="el" href="matrix_8h_source.html">matrix.h</a></li>
-<li>src/matrix/<a class="el" href="matrix_8cpp.html">matrix.cpp</a></li>
+<li>src/matrix/<a class="el" href="matrix__core_8h_source.html">matrix_core.h</a></li>
+<li>src/matrix/<a class="el" href="matrix__core_8cpp.html">matrix_core.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
