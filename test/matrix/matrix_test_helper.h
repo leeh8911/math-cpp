@@ -25,7 +25,7 @@ namespace test {
 
 Eigen::MatrixXd MakeEigenMatrix(const matrix::Matrix& mat);
 matrix::Matrix MakeMatrixFromEigen(const Eigen::MatrixXd& mat);
-std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const matrix::Matrix& mat);
+std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigenUsingEigenLib(const matrix::Matrix& mat);
 Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col);
 
 bool operator==(const matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);

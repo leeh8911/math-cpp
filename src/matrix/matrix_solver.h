@@ -20,7 +20,7 @@ namespace matrix {
 
 class EigenSolver {
  public:
-    explicit EigenSolver(const Matrix& mat);
+    explicit EigenSolver(const Matrix& mat, double epsilon = 1e-5);
 
     Matrix Eigenvalues() const;
     Matrix Eigenvectors() const;
@@ -29,6 +29,8 @@ class EigenSolver {
     std::pair<Matrix, Matrix> Solve(const Matrix& mat);
     Matrix eigenvalues_{};
     Matrix eigenvectors_{};
+
+    double epsilon_{};
 };
 
 }  // namespace matrix

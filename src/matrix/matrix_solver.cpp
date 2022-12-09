@@ -15,7 +15,7 @@
 #include "src/matrix/matrix.h"
 namespace math_cpp {
 namespace matrix {
-EigenSolver::EigenSolver(const Matrix& mat) {
+EigenSolver::EigenSolver(const Matrix& mat, double epsilon) : epsilon_(epsilon) {
     auto eigen = Solve(mat);
 
     eigenvalues_ = eigen.first;
@@ -32,7 +32,6 @@ Matrix EigenSolver::Eigenvectors() const { return eigenvectors_; }
 /// eigen vectors. Eigen vectors are column vectors, V = [v1, v2, v3 ...]; Eigen values are 1D row vector, E = [e1, e2,
 /// e2 ...];
 std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
-    // TODO(sangwon) : to be update
     if (mat.Row() != mat.Col()) {
         throw std::invalid_argument("Eigen should be square matrix");
     }
@@ -42,11 +41,11 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
 
     Matrix eigen_vector(mat.Row(), 1);
     Matrix prev(mat.Row(), 1);
-    double eps = 1e-5;
+
     Matrix A = mat;
     for (std::size_t i = 0; i < mat.Row(); ++i) {
         eigen_vector = Matrix::Random(mat.Row(), 1);
-        while ((Matrix::Norm2(eigen_vector - prev) > eps)) {
+        while ((Matrix::Norm2(eigen_vector - prev) > epsilon_)) {
             prev = eigen_vector;
 
             // Prevent negative eigen value effect(?)

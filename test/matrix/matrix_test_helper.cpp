@@ -36,7 +36,7 @@ Eigen::MatrixXd MakeEigenMatrix(const Matrix& mat) {
     return result;
 }
 
-std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const Matrix& mat) {
+std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigenUsingEigenLib(const Matrix& mat) {
     Eigen::MatrixXd eigen_mat = MakeEigenMatrix(mat);
 
     Eigen::EigenSolver<decltype(eigen_mat)> solver(eigen_mat);
