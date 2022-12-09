@@ -45,13 +45,14 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
     Matrix A = mat;
     for (std::size_t i = 0; i < mat.Row(); ++i) {
         eigen_vector = Matrix::Random(mat.Row(), 1);
+        Matrix A_square = A * A;
         while ((Matrix::Norm2(eigen_vector - prev) > epsilon_)) {
             prev = eigen_vector;
 
             // Prevent negative eigen value effect(?)
             // If there is negative eigen value, then eigen vector flip direction all iterate, and cannot converge.
             // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
-            eigen_vector = A * A * eigen_vector;
+            eigen_vector = A_square * eigen_vector;
 
             eigen_vector /= Matrix::Norm2(eigen_vector);
         }

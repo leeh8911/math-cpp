@@ -29,7 +29,7 @@ class Matrix {
     Matrix(const Matrix& other) = default;
     Matrix(Matrix&& other) = default;
     Matrix& operator=(const Matrix& other) = default;
-    Matrix& operator=(Matrix&& other) = default;
+    Matrix& operator=(Matrix&& other);
 
     std::size_t Row() const;
     std::size_t Col() const;
@@ -78,6 +78,7 @@ class Matrix {
 
     static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
     static Matrix Identity(std::size_t size);
+    static Matrix Diag(const Matrix& vec);
     static Matrix Random(std::size_t row, std::size_t col);
 
     static double Norm2(const Matrix& mat);

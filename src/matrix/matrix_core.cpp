@@ -39,6 +39,14 @@ Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l)
     }
 }
 
+Matrix& Matrix::operator=(Matrix&& other) {
+    if (this != &other) {
+        (*this).Swap(other);
+    }
+
+    return *this;
+}
+
 std::size_t Matrix::Row() const { return row_; }
 std::size_t Matrix::Col() const { return col_; }
 
@@ -408,6 +416,22 @@ Matrix Matrix::Identity(std::size_t size) {
     Matrix result(size, size);
     for (std::size_t index = 0; index < size; ++index) {
         result(index, index) = 1.0;
+    }
+
+    return result;
+}
+
+Matrix Matrix::Diag(const Matrix& vec) {
+    if (vec.row_ != 1 || vec.col_ != 1) {
+        throw std::invalid_argument("vec should be vector (row or column size should be 1");
+    }
+    if (vec.col_ == 1) {
+        vec.Transpose();
+    }
+
+    Matrix result(vec.col_, vec.col_);
+    for (std::size_t index = 0; index < vec.row_; ++index) {
+        result(index, index) = vec(0, index);
     }
 
     return result;
