@@ -74,6 +74,8 @@ class Matrix {
 
     Matrix& Copy(std::size_t start_row, std::size_t start_col, const Matrix& other);
 
+    void Swap(Matrix& other);
+
     static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
     static Matrix Identity(std::size_t size);
     static Matrix Random(std::size_t row, std::size_t col);

@@ -347,6 +347,22 @@ bool Matrix::IsSameSize(const Matrix& other) const { return (row_ == other.row_)
 bool Matrix::CanMultiply(const Matrix& other) const { return (col_ == other.row_); }
 
 Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, const Matrix& other) {
+    if (!IsBoundedSize(start_row, start_col)) {
+        throw std::invalid_argument("start row and col should be in this matrix size");
+    }
+    std::size_t temp_row = row_;
+    std::size_t temp_col = col_;
+
+    temp_row = std::max(temp_row, start_row + other.row_);
+    temp_col = std::max(temp_col, start_col + other.col_);
+
+    if ((temp_row != row_) || (temp_col != col_)) {
+        Matrix temp(temp_row, temp_col);
+        temp.Copy(0, 0, *this);
+
+        (*this).Swap(temp);
+    }
+
     for (std::size_t r = 0; r < other.row_; ++r) {
         for (std::size_t c = 0; c < other.col_; ++c) {
             (*this)(r + start_row, c + start_col) = other(r, c);
@@ -354,6 +370,12 @@ Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, const Matrix&
     }
 
     return *this;
+}
+
+void Matrix::Swap(Matrix& other) {
+    std::swap(row_, other.row_);
+    std::swap(col_, other.col_);
+    std::swap(data_, other.data_);
 }
 
 Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis) {
@@ -413,9 +435,9 @@ double Matrix::Norm2(const Matrix& mat) {
     return std::sqrt(result);
 }
 
-bool Matrix::IsBoundedRow(std::size_t row) const { return (row <= row_); }
+bool Matrix::IsBoundedRow(std::size_t row) const { return (row < row_); }
 
-bool Matrix::IsBoundedCol(std::size_t col) const { return (col <= col_); }
+bool Matrix::IsBoundedCol(std::size_t col) const { return (col < col_); }
 
 bool Matrix::IsBoundedSize(std::size_t row, std::size_t col) const { return IsBoundedRow(row) && IsBoundedCol(col); }
 

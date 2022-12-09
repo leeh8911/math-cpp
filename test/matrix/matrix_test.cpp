@@ -209,5 +209,35 @@ TEST(MatrixTest, MatrixMeanCase) {
     EXPECT_EQ(5., A.Mean());
 }
 
+TEST(MatrixTest, MatrixCopyMatchedSizeCase) {
+    Matrix A = {{1, 1}, {1, 1}};
+    Matrix B = {{2, 2}, {2, 2}};
+
+    A.Copy(0, 0, B);
+
+    EXPECT_EQ(B, A);
+    EXPECT_EQ(2, A.Row());
+    EXPECT_EQ(2, A.Col());
+}
+
+TEST(MatrixTest, MatrixCopyNotMatchedSizeCase) {
+    Matrix A = {{1, 1}, {1, 1}};
+    Matrix B = {{2, 2}, {2, 2}};
+    Matrix expect{{1, 1, 0}, {1, 2, 2}, {0, 2, 2}};
+
+    A.Copy(1, 1, B);
+
+    EXPECT_EQ(3, A.Row());
+    EXPECT_EQ(3, A.Col());
+    EXPECT_EQ(expect, A);
+}
+
+TEST(MatrixTest, MatrixCopyFailCase) {
+    Matrix A = {{1, 1}, {1, 1}};
+    Matrix B = {{2, 2}, {2, 2}};
+
+    EXPECT_ANY_THROW(A.Copy(2, 2, B));
+}
+
 }  // namespace test
 }  // namespace math_cpp
