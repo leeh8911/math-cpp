@@ -46,6 +46,14 @@ class Matrix {
 
     Matrix Inverse() const;
     Matrix Transpose() const;
+    Matrix Diagonal() const;
+
+    double Sum() const;
+    double Prod() const;
+    double Mean() const;
+    double MinCoeff() const;
+    double MaxCoeff() const;
+    double Trace() const;
 
     Matrix& Absolute();
 

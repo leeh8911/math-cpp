@@ -179,5 +179,29 @@ TEST(MatrixTest, EraseRowColMatrixCase12) {
     EXPECT_EQ(Matrix({{1.0, 2.0}, {7.0, 8.0}}), result);
 }
 
+TEST(MatrixTest, MatrixMinCoeffCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(1., A.MinCoeff());
+}
+
+TEST(MatrixTest, MatrixMaxCoeffCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(9., A.MaxCoeff());
+}
+
+TEST(MatrixTest, MatrixTraceCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(15., A.Trace());
+}
+
+TEST(MatrixTest, MatrixMeanCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(5., A.Mean());
+}
+
 }  // namespace test
 }  // namespace math_cpp

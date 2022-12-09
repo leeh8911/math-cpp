@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <initializer_list>
 #include <limits>
+#include <numeric>
 #include <stdexcept>
 #include <string>
 #include <utility>
@@ -160,6 +161,30 @@ Matrix Matrix::Transpose() const {
     }
     return result;
 }
+
+Matrix Matrix::Diagonal() const {
+    std::size_t size = std::min({row_, col_});
+    Matrix result(size, 1);
+
+    for (std::size_t idx = 0; idx < size; ++idx) {
+        result(idx, 0) = (*this)(idx, idx);
+    }
+    return result;
+}
+
+double Matrix::Sum() const { return std::accumulate(std::begin(data_), std::end(data_), 0.0); }
+
+double Matrix::Prod() const {
+    return std::accumulate(std::begin(data_), std::end(data_), 1.0,
+                           [](double prev, double value) { return prev * value; });
+}
+
+double Matrix::Mean() const { return Sum() / static_cast<double>(data_.size()); }
+
+double Matrix::MinCoeff() const { return *std::min_element(std::begin(data_), std::end(data_)); }
+double Matrix::MaxCoeff() const { return *std::max_element(std::begin(data_), std::end(data_)); }
+
+double Matrix::Trace() const { return Diagonal().Sum(); }
 
 Matrix& Matrix::Absolute() {
     std::transform(std::begin(data_), std::end(data_), std::begin(data_), [](double& elm) { return std::abs(elm); });
