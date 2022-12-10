@@ -132,7 +132,7 @@ Matrix Matrix::Inverse() const {
     }
 
     Matrix eye = Identity(row_);
-    Matrix cat = Concatenate(*this, eye, 1);
+    Matrix cat = Concatenate(*this, eye, MatrixDir::kCol);
 
     // Gauss Elimination
     for (std::size_t i = 0; i < row_ - 1; ++i) {
@@ -391,10 +391,10 @@ void Matrix::Swap(Matrix&& other) {
     std::swap(data_, other.data_);
 }
 
-Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis) {
+Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, MatrixDir axis) {
     Matrix result{};
 
-    if (axis == 0) {
+    if (axis == MatrixDir::kRow) {
         if (lhs.col_ != rhs.col_) {
             throw std::invalid_argument("check matrix size!");
         }
@@ -404,7 +404,7 @@ Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axi
         row_concat.Copy(lhs.row_, 0, rhs);
 
         result = row_concat;
-    } else if (axis == 1) {
+    } else if (axis == MatrixDir::kCol) {
         if (lhs.row_ != rhs.row_) {
             throw std::invalid_argument("check matrix size!");
         }
@@ -429,16 +429,17 @@ Matrix Matrix::Identity(std::size_t size) {
 }
 
 Matrix Matrix::Diag(const Matrix& vec) {
-    if (vec.row_ != 1 || vec.col_ != 1) {
+    if (vec.row_ != 1 && vec.col_ != 1) {
         throw std::invalid_argument("vec should be vector (row or column size should be 1");
     }
-    if (vec.col_ == 1) {
-        vec.Transpose();
+    Matrix vec_ = vec;
+    if (vec.row_ == 1) {
+        vec_ = vec_.Transpose();
     }
 
-    Matrix result(vec.col_, vec.col_);
-    for (std::size_t index = 0; index < vec.row_; ++index) {
-        result(index, index) = vec(0, index);
+    Matrix result(vec_.row_, vec_.row_);
+    for (std::size_t index = 0; index < vec_.row_; ++index) {
+        result(index, index) = vec_(index, 0);
     }
 
     return result;

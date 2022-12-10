@@ -17,6 +17,8 @@
 
 namespace math_cpp {
 namespace matrix {
+
+enum MatrixDir { kRow, kCol };
 class Matrix {
  public:
     using Shape = std::pair<std::size_t, std::size_t>;
@@ -78,7 +80,7 @@ class Matrix {
     void Swap(Matrix& other);
     void Swap(Matrix&& other);
 
-    static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
+    static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, MatrixDir axis = MatrixDir::kRow);
     static Matrix Identity(std::size_t size);
     static Matrix Diag(const Matrix& vec);
     static Matrix Random(std::size_t row, std::size_t col);
