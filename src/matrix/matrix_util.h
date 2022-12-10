@@ -17,6 +17,8 @@ namespace matrix {
 class Util {
  public:
     static double CosineSimilarity(const Matrix& lhs, const Matrix& rhs);
+    static Matrix Project(const Matrix& target, const Matrix& base);
+    static Matrix FlipLR(const Matrix& mat);
 };
 }  // namespace matrix
 }  // namespace math_cpp
