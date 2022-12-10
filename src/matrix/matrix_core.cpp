@@ -279,24 +279,17 @@ Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
 }
 
 Matrix Matrix::GetCol(std::size_t idx) const {
-    if (idx >= col_) {
+    if (!IsBoundedCol(idx)) {
         throw std::invalid_argument("check col index");
     }
 
-    Matrix result(row_, 1);
-
-    Matrix transposed = (*this).Transpose();
-
-    auto start = std::next(std::begin(transposed.data_), static_cast<std::ptrdiff_t>(idx * row_));
-    auto finish = std::next(start, static_cast<std::ptrdiff_t>(row_));
-    auto col_start = std::begin(result.data_);
-    std::copy(start, finish, col_start);
+    Matrix result = (*this).Transpose().GetRow(idx);
 
     return result;
 }
 
 Matrix Matrix::GetRow(std::size_t idx) const {
-    if (idx >= row_) {
+    if (!IsBoundedRow(idx)) {
         throw std::invalid_argument("check row index");
     }
 
@@ -310,20 +303,28 @@ Matrix Matrix::GetRow(std::size_t idx) const {
     return row_matrix;
 }
 
-Matrix& Matrix::SetRow(std::size_t idx, const Matrix& src) {
-    if (src.col_ != 1) {
+Matrix& Matrix::SetCol(std::size_t idx, const Matrix& src) {
+    if (src.row_ != 1) {
         throw std::invalid_argument("Set row method can accept row vector");
     }
-    if (row_ != src.row_) {
+    if (col_ != src.col_) {
         throw std::invalid_argument("Set row method should be same row");
     }
 
-    Matrix transposed_this = (*this).Transpose();
-    auto start = std::begin(transposed_this.data_);
+    auto start = std::begin(data_);
 
     std::copy(std::begin(src.data_), std::end(src.data_), std::next(start, static_cast<std::ptrdiff_t>(idx * col_)));
 
-    *this = transposed_this.Transpose();
+    return *this;
+}
+
+Matrix& Matrix::SetRow(std::size_t idx, const Matrix& src) {
+    Matrix this_transposed = (*this).Transpose();
+    Matrix src_transpose = src.Transpose();
+
+    this_transposed.SetCol(idx, src_transpose);
+    (*this).Swap(this_transposed.Transpose());
+
     return *this;
 }
 
@@ -379,6 +380,12 @@ Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, const Matrix&
 }
 
 void Matrix::Swap(Matrix& other) {
+    std::swap(row_, other.row_);
+    std::swap(col_, other.col_);
+    std::swap(data_, other.data_);
+}
+
+void Matrix::Swap(Matrix&& other) {
     std::swap(row_, other.row_);
     std::swap(col_, other.col_);
     std::swap(data_, other.data_);
