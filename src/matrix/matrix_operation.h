@@ -28,6 +28,8 @@ Matrix operator+(const Matrix& lhs, double scalar);
 Matrix operator-(const Matrix& lhs, double scalar);
 Matrix operator*(const Matrix& lhs, double scalar);
 Matrix operator/(const Matrix& lhs, double scalar);
+
+Matrix Sqrt(const Matrix& src);
 }  // namespace matrix
 }  // namespace math_cpp
 
