@@ -19,6 +19,7 @@
 #include "test/matrix/matrix_test_helper.h"
 
 using math_cpp::matrix::Matrix;
+using math_cpp::matrix::MatrixDir;
 
 // TODO(sangwon): Singular value
 // TODO(sangwon): Fixed double을 구현하는 것이 좋지 않을까?
@@ -62,7 +63,7 @@ TEST(MatrixTest, MatrixRowConcatenate) {
     Matrix A{{1.0, 0.0}, {0.0, 1.0}};
     Matrix B{{1.0, 0.0}, {0.0, 1.0}};
 
-    Matrix result = Matrix::Concatenate(A, B, 0);
+    Matrix result = Matrix::Concatenate(A, B, MatrixDir::kRow);
     Matrix expect{{1.0, 0.0}, {0.0, 1.0}, {1.0, 0.0}, {0.0, 1.0}};
 
     EXPECT_EQ(expect, result);
@@ -72,7 +73,7 @@ TEST(MatrixTest, MatrixColConcatenate) {
     Matrix A{{1.0, 0.0}, {0.0, 1.0}};
     Matrix B{{1.0, 0.0}, {0.0, 1.0}};
 
-    Matrix result = Matrix::Concatenate(A, B, 1);
+    Matrix result = Matrix::Concatenate(A, B, MatrixDir::kCol);
     Matrix expect{{1.0, 0.0, 1.0, 0.0}, {0.0, 1.0, 0.0, 1.0}};
 
     EXPECT_EQ(expect, result);
