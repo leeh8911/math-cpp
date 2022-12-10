@@ -91,6 +91,22 @@ Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col) {
     return result;
 }
 
+bool IsSimilarUsingColumnWiseCosineSimilarity(const Eigen::MatrixXd eigen, const matrix::Matrix& mathcpp) {
+    if ((eigen.rows() != mathcpp.Row()) && (eigen.cols() != mathcpp.Col())) {
+        return false;
+    }
+
+    for (std::size_t c = 0; c < mathcpp.Col(); ++c) {
+        matrix::Matrix e_col = MakeMatrixFromEigen(eigen.col(c));
+        matrix::Matrix c_col = mathcpp.GetCol(c);
+
+        if (std::abs(std::abs(matrix::Util::CosineSimilarity(e_col, c_col)) - 1) > 1e-4) {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool operator==(const Matrix& lhs, const Eigen::MatrixXd& rhs) {
     if (lhs.Row() != rhs.rows()) return false;
     if (lhs.Col() != rhs.cols()) return false;

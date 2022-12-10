@@ -30,6 +30,8 @@ std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigenUsingEigenLib(const ma
 std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> CalculateSVDUsingEigenLib(const matrix::Matrix& mat);
 Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col);
 
+bool IsSimilarUsingColumnWiseCosineSimilarity(const Eigen::MatrixXd eigen, const matrix::Matrix& mathcpp);
+
 bool operator==(const matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);
 bool operator==(const Eigen::MatrixXd& lhs, const matrix::Matrix& rhs);
 bool operator!=(const matrix::Matrix& lhs, const Eigen::MatrixXd& rhs);

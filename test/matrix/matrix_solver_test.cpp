@@ -106,7 +106,9 @@ TEST(MatrixSolverTest, SVDTrivialCase) {
     EXPECT_EQ(2, solver.S().Col());
     EXPECT_EQ(2, solver.V().Col());
 
-    EXPECT_EQ(A, solver.U() * solver.S() * solver.V().Transpose());
+    EXPECT_EQ(A, solver.U() * solver.S() * solver.V().Transpose())
+        << "Expect: " << A << "\n"
+        << "Result: " << solver.U() * solver.S() * solver.V().Transpose();
 }
 
 TEST(MatrixSolverTest, SVDCompareEigenCase) {
@@ -122,9 +124,17 @@ TEST(MatrixSolverTest, SVDCompareEigenCase) {
 
     EXPECT_EQ(A, solver.U() * solver.S() * solver.V().Transpose());
 
-    std::cout << "U\n" << std::get<0>(eigen_result) << "\n";
-    std::cout << "D\n" << std::get<1>(eigen_result) << "\n";
-    std::cout << "V\n" << std::get<2>(eigen_result) << "\n";
+    EXPECT_TRUE(IsSimilarUsingColumnWiseCosineSimilarity(std::get<0>(eigen_result), solver.U()))
+        << "Eigen result: \n"
+        << std::get<0>(eigen_result) << "\n\nMathCpp result : \n"
+        << solver.U();
+    EXPECT_TRUE(std::get<1>(eigen_result) == solver.D()) << "Eigen result: \n"
+                                                         << std::get<1>(eigen_result) << "\n\nMathCpp result : \n"
+                                                         << solver.D();
+    EXPECT_TRUE(IsSimilarUsingColumnWiseCosineSimilarity(std::get<2>(eigen_result), solver.V()))
+        << "Eigen result: \n"
+        << std::get<2>(eigen_result) << "\n\nMathCpp result : \n"
+        << solver.V();
 }
 
 }  // namespace test
