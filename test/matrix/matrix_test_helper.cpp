@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -62,6 +63,15 @@ std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigenUsingEigenLib(const Ma
     }
 
     return std::make_pair(temp_eigenvalues, temp_eigenvectors);
+}
+
+std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> CalculateSVDUsingEigenLib(const Matrix& mat) {
+    Eigen::MatrixXd eigen_mat = MakeEigenMatrix(mat);
+
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd;
+    svd.compute(eigen_mat, Eigen::ComputeFullU | Eigen::ComputeFullV);
+
+    return std::make_tuple(svd.matrixU(), svd.singularValues(), svd.matrixV());
 }
 
 matrix::Matrix MakeMatrixFromEigen(const Eigen::MatrixXd& mat) {

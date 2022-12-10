@@ -10,6 +10,9 @@
 
 #include "src/matrix/matrix_solver.h"
 
+#include <algorithm>
+#include <cmath>
+#include <stdexcept>
 #include <utility>
 
 #include "src/matrix/matrix.h"
@@ -70,34 +73,33 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
 }
 
 SVDSolver::SVDSolver(const Matrix& mat, double epsilon) : epsilon_(epsilon) {
-    auto USVT = Solve(mat);
+    auto USV = Solve(mat);
 
-    U_ = std::get<0>(USVT);
-    S_ = std::get<1>(USVT);
-    V_ = std::get<2>(USVT).Transpose();
+    U_ = std::get<0>(USV);
+    S_ = std::get<1>(USV);
+    V_ = std::get<2>(USV);
 }
 
 Matrix SVDSolver::U() const { return U_; }
 Matrix SVDSolver::V() const { return V_; }
 Matrix SVDSolver::S() const { return S_; }
 
-Matrix GramSchmidt(const Matrix& A) {
-    std::size_t n = A.Row();
-    std::size_t m = A.Col();
-
-    Matrix Q1(n, m);
-    Q1.SetCol(0, A.GetCol(0));
-
-    return Q1;
-}
-
-std::tuple<Matrix, Matrix, Matrix> SVDSolver::Solve(const Matrix& mat) {
+std::tuple<Matrix, Matrix, Matrix> SVDSolver::Solve(const Matrix& A) {
     std::tuple<Matrix, Matrix, Matrix> result{};
-    Matrix U_(mat.Row(), mat.Row());
-    Matrix S_(mat.Row(), mat.Col());
-    Matrix V_(mat.Col(), mat.Col());
 
-    return result;
+    EigenSolver es_AAT(A * A.Transpose(), epsilon_);
+    EigenSolver es_ATA(A.Transpose() * A, epsilon_);
+
+    Matrix U = es_AAT.Eigenvectors();
+    Matrix V = es_ATA.Eigenvectors();
+
+    Matrix D(A.Row(), A.Col());
+    if (A.Row() < A.Col()) {
+        D.Copy(0, 0, Matrix::Diag(Sqrt(es_AAT.Eigenvalues())));
+    } else {
+        D.Copy(0, 0, Matrix::Diag(Sqrt(es_ATA.Eigenvalues())));
+    }
+    return std::make_tuple(U, D, V);
 }
 }  // namespace matrix
 }  // namespace math_cpp
