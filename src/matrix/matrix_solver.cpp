@@ -73,33 +73,36 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
 }
 
 SVDSolver::SVDSolver(const Matrix& mat, double epsilon) : epsilon_(epsilon) {
-    auto USV = Solve(mat);
+    auto USVD = Solve(mat);
 
-    U_ = std::get<0>(USV);
-    S_ = std::get<1>(USV);
-    V_ = std::get<2>(USV);
+    U_ = std::get<0>(USVD);
+    S_ = std::get<1>(USVD);
+    V_ = std::get<2>(USVD);
+    D_ = std::get<3>(USVD);
 }
 
 Matrix SVDSolver::U() const { return U_; }
 Matrix SVDSolver::V() const { return V_; }
 Matrix SVDSolver::S() const { return S_; }
+Matrix SVDSolver::D() const { return D_; }
 
-std::tuple<Matrix, Matrix, Matrix> SVDSolver::Solve(const Matrix& A) {
-    std::tuple<Matrix, Matrix, Matrix> result{};
-
+std::tuple<Matrix, Matrix, Matrix, Matrix> SVDSolver::Solve(const Matrix& A) {
     EigenSolver es_AAT(A * A.Transpose(), epsilon_);
     EigenSolver es_ATA(A.Transpose() * A, epsilon_);
 
     Matrix U = es_AAT.Eigenvectors();
     Matrix V = es_ATA.Eigenvectors();
 
-    Matrix D(A.Row(), A.Col());
+    Matrix S(A.Row(), A.Col());
+    Matrix D;
     if (A.Row() < A.Col()) {
-        D.Copy(0, 0, Matrix::Diag(Sqrt(es_AAT.Eigenvalues())));
+        D = Sqrt(es_AAT.Eigenvalues());
+        S.Copy(0, 0, Matrix::Diag(D));
     } else {
-        D.Copy(0, 0, Matrix::Diag(Sqrt(es_ATA.Eigenvalues())));
+        D = Sqrt(es_ATA.Eigenvalues());
+        S.Copy(0, 0, Matrix::Diag(D));
     }
-    return std::make_tuple(U, D, V);
+    return std::make_tuple(U, S, V, D);
 }
 }  // namespace matrix
 }  // namespace math_cpp

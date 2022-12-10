@@ -37,7 +37,9 @@ class EigenSolver {
 /// @brief
 /// https://pages.mtu.edu/~struther/Courses/OLD/Other/Sp2012/5627/SVD/Report/Singular%20Value%20Decomposition%20and%20its%20numerical%20computations.pdf
 ///
+/// [U, S, V] = svd(A) -> A = U * S * V'
 ///
+/// D is row vector of eigen values
 class SVDSolver {
  public:
     explicit SVDSolver(const Matrix& mat, double epsilon = 1e-5);
@@ -45,13 +47,15 @@ class SVDSolver {
     Matrix U() const;
     Matrix V() const;
     Matrix S() const;
+    Matrix D() const;
 
  private:
-    std::tuple<Matrix, Matrix, Matrix> Solve(const Matrix& A);
+    std::tuple<Matrix, Matrix, Matrix, Matrix> Solve(const Matrix& A);
     std::tuple<Matrix, Matrix, Matrix> EigenSolverBaseSolve(const Matrix& A);
     Matrix U_{};
     Matrix V_{};
     Matrix S_{};
+    Matrix D_{};
 
     double epsilon_{};
 };
