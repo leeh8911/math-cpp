@@ -19,11 +19,8 @@
 #include "test/matrix/matrix_test_helper.h"
 
 using math_cpp::matrix::Matrix;
+using math_cpp::matrix::MatrixDir;
 
-// TODO(sangwon): 행렬의 기본적인 요소들만 생각하며 구성해보자!
-// TODO(sangwon): 기본적인 행렬의 사칙연산 구현해보기
-// TODO(sangwon): Determinant
-// TODO(sangwon): Eigen value, eigen vector
 // TODO(sangwon): Singular value
 // TODO(sangwon): Fixed double을 구현하는 것이 좋지 않을까?
 
@@ -66,7 +63,7 @@ TEST(MatrixTest, MatrixRowConcatenate) {
     Matrix A{{1.0, 0.0}, {0.0, 1.0}};
     Matrix B{{1.0, 0.0}, {0.0, 1.0}};
 
-    Matrix result = Matrix::Concatenate(A, B, 0);
+    Matrix result = Matrix::Concatenate(A, B, MatrixDir::kRow);
     Matrix expect{{1.0, 0.0}, {0.0, 1.0}, {1.0, 0.0}, {0.0, 1.0}};
 
     EXPECT_EQ(expect, result);
@@ -76,7 +73,7 @@ TEST(MatrixTest, MatrixColConcatenate) {
     Matrix A{{1.0, 0.0}, {0.0, 1.0}};
     Matrix B{{1.0, 0.0}, {0.0, 1.0}};
 
-    Matrix result = Matrix::Concatenate(A, B, 1);
+    Matrix result = Matrix::Concatenate(A, B, MatrixDir::kCol);
     Matrix expect{{1.0, 0.0, 1.0, 0.0}, {0.0, 1.0, 0.0, 1.0}};
 
     EXPECT_EQ(expect, result);
@@ -125,6 +122,12 @@ TEST(MatrixTest, InverseMatrixProperty3x3Case) {
 
     EXPECT_EQ(Matrix::Identity(3), (A * invA));
     EXPECT_EQ(Matrix::Identity(3), (invA * A));
+}
+
+TEST(MatrixTest, InverseMatrixNotInvertible3x3Case) {
+    Matrix A{{2.0, 1.0, 3.0}, {0.0, 0.0, 0.0}, {8.0, 0.0, 2.0}};
+
+    EXPECT_ANY_THROW(A.Inverse());
 }
 
 TEST(MatrixTest, Determinant2x2Case) {
@@ -177,6 +180,60 @@ TEST(MatrixTest, EraseRowColMatrixCase12) {
     Matrix result = Matrix::EraseRowCol(A, 1, 2);
 
     EXPECT_EQ(Matrix({{1.0, 2.0}, {7.0, 8.0}}), result);
+}
+
+TEST(MatrixTest, MatrixMinCoeffCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(1., A.MinCoeff());
+}
+
+TEST(MatrixTest, MatrixMaxCoeffCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(9., A.MaxCoeff());
+}
+
+TEST(MatrixTest, MatrixTraceCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(15., A.Trace());
+}
+
+TEST(MatrixTest, MatrixMeanCase) {
+    Matrix A{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    EXPECT_EQ(5., A.Mean());
+}
+
+TEST(MatrixTest, MatrixCopyMatchedSizeCase) {
+    Matrix A = {{1, 1}, {1, 1}};
+    Matrix B = {{2, 2}, {2, 2}};
+
+    A.Copy(0, 0, B);
+
+    EXPECT_EQ(B, A);
+    EXPECT_EQ(2, A.Row());
+    EXPECT_EQ(2, A.Col());
+}
+
+TEST(MatrixTest, MatrixCopyNotMatchedSizeCase) {
+    Matrix A = {{1, 1}, {1, 1}};
+    Matrix B = {{2, 2}, {2, 2}};
+    Matrix expect{{1, 1, 0}, {1, 2, 2}, {0, 2, 2}};
+
+    A.Copy(1, 1, B);
+
+    EXPECT_EQ(3, A.Row());
+    EXPECT_EQ(3, A.Col());
+    EXPECT_EQ(expect, A);
+}
+
+TEST(MatrixTest, MatrixCopyFailCase) {
+    Matrix A = {{1, 1}, {1, 1}};
+    Matrix B = {{2, 2}, {2, 2}};
+
+    EXPECT_ANY_THROW(A.Copy(2, 2, B));
 }
 
 }  // namespace test

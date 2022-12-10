@@ -38,5 +38,26 @@ double Util::CosineSimilarity(const Matrix& lhs, const Matrix& rhs) {
     return result;
 }
 
+Matrix Util::Project(const Matrix& target, const Matrix& base) {
+    if (!target.IsSameSize(base)) {
+        throw std::invalid_argument("target and base should be same size");
+    }
+
+    Matrix projected = static_cast<double>(target.Transpose() * base) * base;
+    double norm = Matrix::Norm2(base);
+
+    return projected / (norm * norm);
+}
+
+Matrix Util::FlipLR(const Matrix& mat) {
+    Matrix result(mat.Row(), mat.Col());
+    for (std::size_t i = 0; i < mat.Row(); ++i) {
+        for (std::size_t j = 0; j < mat.Col(); ++j) {
+            result(i, j) = mat(i, mat.Col() - j - 1);
+        }
+    }
+    return result;
+}
+
 }  // namespace matrix
 }  // namespace math_cpp

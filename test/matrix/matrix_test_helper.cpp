@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -36,7 +37,7 @@ Eigen::MatrixXd MakeEigenMatrix(const Matrix& mat) {
     return result;
 }
 
-std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const Matrix& mat) {
+std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigenUsingEigenLib(const Matrix& mat) {
     Eigen::MatrixXd eigen_mat = MakeEigenMatrix(mat);
 
     Eigen::EigenSolver<decltype(eigen_mat)> solver(eigen_mat);
@@ -64,6 +65,15 @@ std::pair<Eigen::MatrixXd, Eigen::MatrixXd> CalculateEigen(const Matrix& mat) {
     return std::make_pair(temp_eigenvalues, temp_eigenvectors);
 }
 
+std::tuple<Eigen::MatrixXd, Eigen::MatrixXd, Eigen::MatrixXd> CalculateSVDUsingEigenLib(const Matrix& mat) {
+    Eigen::MatrixXd eigen_mat = MakeEigenMatrix(mat);
+
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd;
+    svd.compute(eigen_mat, Eigen::ComputeFullU | Eigen::ComputeFullV);
+
+    return std::make_tuple(svd.matrixU(), svd.singularValues(), svd.matrixV());
+}
+
 matrix::Matrix MakeMatrixFromEigen(const Eigen::MatrixXd& mat) {
     matrix::Matrix result(mat.rows(), mat.cols());
 
@@ -79,6 +89,22 @@ matrix::Matrix MakeMatrixFromEigen(const Eigen::MatrixXd& mat) {
 Eigen::MatrixXd MakeRandomEigenMatrix(std::size_t row, std::size_t col) {
     Eigen::MatrixXd result = Eigen::MatrixXd::Random(row, col);
     return result;
+}
+
+bool IsSimilarUsingColumnWiseCosineSimilarity(const Eigen::MatrixXd eigen, const matrix::Matrix& mathcpp) {
+    if ((eigen.rows() != mathcpp.Row()) && (eigen.cols() != mathcpp.Col())) {
+        return false;
+    }
+
+    for (std::size_t c = 0; c < mathcpp.Col(); ++c) {
+        matrix::Matrix e_col = MakeMatrixFromEigen(eigen.col(c));
+        matrix::Matrix c_col = mathcpp.GetCol(c);
+
+        if (std::abs(std::abs(matrix::Util::CosineSimilarity(e_col, c_col)) - 1) > 1e-4) {
+            return false;
+        }
+    }
+    return true;
 }
 
 bool operator==(const Matrix& lhs, const Eigen::MatrixXd& rhs) {

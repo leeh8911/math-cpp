@@ -31,6 +31,9 @@ test:
 	cmake -DOPTION_BUILD_DOCS=OFF -DOPTION_TEST_ALL=OFF ..&& \
 	make &&\
 	test/MATH_CPP_TEST
+.PHONY: test-run
+test-run:
+	build/test/MATH_CPP_TEST
 
 .PHONY: test-all
 test-all:

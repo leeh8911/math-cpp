@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <initializer_list>
 #include <limits>
+#include <numeric>
 #include <stdexcept>
 #include <string>
 #include <utility>
@@ -23,8 +24,6 @@
 
 namespace math_cpp {
 namespace matrix {
-
-// using std::string_literals::operator""s;
 
 Matrix::Matrix(std::size_t row, std::size_t col, double value)
     : data_(std::vector<double>(row * col, value)), row_(row), col_(col) {}
@@ -38,6 +37,14 @@ Matrix::Matrix(const std::initializer_list<std::initializer_list<double>>& l)
     for (auto row : l) {
         data_.insert(data_.end(), row.begin(), row.end());
     }
+}
+
+Matrix& Matrix::operator=(Matrix&& other) {
+    if (this != &other) {
+        (*this).Swap(other);
+    }
+
+    return *this;
 }
 
 std::size_t Matrix::Row() const { return row_; }
@@ -117,12 +124,15 @@ bool Matrix::operator==(const Matrix& other) const {
 bool Matrix::operator!=(const Matrix& other) const { return !(*this == other); }
 
 Matrix Matrix::Inverse() const {
+    if (Determinant(*this) == 0.0) {
+        throw std::invalid_argument("*this matrix is not invertible matrix");
+    }
     if (row_ != col_) {
         throw std::invalid_argument("matrix should be square");
     }
 
     Matrix eye = Identity(row_);
-    Matrix cat = Concatenate(*this, eye, 1);
+    Matrix cat = Concatenate(*this, eye, MatrixDir::kCol);
 
     // Gauss Elimination
     for (std::size_t i = 0; i < row_ - 1; ++i) {
@@ -161,6 +171,30 @@ Matrix Matrix::Transpose() const {
     return result;
 }
 
+Matrix Matrix::Diagonal() const {
+    std::size_t size = std::min({row_, col_});
+    Matrix result(size, 1);
+
+    for (std::size_t idx = 0; idx < size; ++idx) {
+        result(idx, 0) = (*this)(idx, idx);
+    }
+    return result;
+}
+
+double Matrix::Sum() const { return std::accumulate(std::begin(data_), std::end(data_), 0.0); }
+
+double Matrix::Prod() const {
+    return std::accumulate(std::begin(data_), std::end(data_), 1.0,
+                           [](double prev, double value) { return prev * value; });
+}
+
+double Matrix::Mean() const { return Sum() / static_cast<double>(data_.size()); }
+
+double Matrix::MinCoeff() const { return *std::min_element(std::begin(data_), std::end(data_)); }
+double Matrix::MaxCoeff() const { return *std::max_element(std::begin(data_), std::end(data_)); }
+
+double Matrix::Trace() const { return Diagonal().Sum(); }
+
 Matrix& Matrix::Absolute() {
     std::transform(std::begin(data_), std::end(data_), std::begin(data_), [](double& elm) { return std::abs(elm); });
 
@@ -170,6 +204,9 @@ Matrix& Matrix::Absolute() {
 double Matrix::Determinant(const Matrix& mat) {
     if (mat.row_ != mat.col_) {
         throw std::invalid_argument("determinant should be defined square matrix");
+    }
+    if ((mat.row_ == 1) && (mat.col_ == 1)) {
+        return mat(0, 0);
     }
     if ((mat.row_ == 2) && (mat.col_ == 2)) {
         return mat(0, 0) * mat(1, 1) - mat(1, 0) * mat(0, 1);
@@ -242,24 +279,17 @@ Matrix& Matrix::RowAdd(std::size_t idx, const Matrix& row) {
 }
 
 Matrix Matrix::GetCol(std::size_t idx) const {
-    if (idx >= col_) {
+    if (!IsBoundedCol(idx)) {
         throw std::invalid_argument("check col index");
     }
 
-    Matrix result(row_, 1);
-
-    Matrix transposed = (*this).Transpose();
-
-    auto start = std::next(std::begin(transposed.data_), static_cast<std::ptrdiff_t>(idx * row_));
-    auto finish = std::next(start, static_cast<std::ptrdiff_t>(row_));
-    auto col_start = std::begin(result.data_);
-    std::copy(start, finish, col_start);
+    Matrix result = (*this).Transpose().GetRow(idx);
 
     return result;
 }
 
 Matrix Matrix::GetRow(std::size_t idx) const {
-    if (idx >= row_) {
+    if (!IsBoundedRow(idx)) {
         throw std::invalid_argument("check row index");
     }
 
@@ -273,20 +303,28 @@ Matrix Matrix::GetRow(std::size_t idx) const {
     return row_matrix;
 }
 
-Matrix& Matrix::SetRow(std::size_t idx, const Matrix& src) {
-    if (src.col_ != 1) {
+Matrix& Matrix::SetCol(std::size_t idx, const Matrix& src) {
+    if (src.row_ != 1) {
         throw std::invalid_argument("Set row method can accept row vector");
     }
-    if (row_ != src.row_) {
+    if (col_ != src.col_) {
         throw std::invalid_argument("Set row method should be same row");
     }
 
-    Matrix transposed_this = (*this).Transpose();
-    auto start = std::begin(transposed_this.data_);
+    auto start = std::begin(data_);
 
     std::copy(std::begin(src.data_), std::end(src.data_), std::next(start, static_cast<std::ptrdiff_t>(idx * col_)));
 
-    *this = transposed_this.Transpose();
+    return *this;
+}
+
+Matrix& Matrix::SetRow(std::size_t idx, const Matrix& src) {
+    Matrix this_transposed = (*this).Transpose();
+    Matrix src_transpose = src.Transpose();
+
+    this_transposed.SetCol(idx, src_transpose);
+    (*this).Swap(this_transposed.Transpose());
+
     return *this;
 }
 
@@ -316,6 +354,22 @@ bool Matrix::IsSameSize(const Matrix& other) const { return (row_ == other.row_)
 bool Matrix::CanMultiply(const Matrix& other) const { return (col_ == other.row_); }
 
 Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, const Matrix& other) {
+    if (!IsBoundedSize(start_row, start_col)) {
+        throw std::invalid_argument("start row and col should be in this matrix size");
+    }
+    std::size_t temp_row = row_;
+    std::size_t temp_col = col_;
+
+    temp_row = std::max(temp_row, start_row + other.row_);
+    temp_col = std::max(temp_col, start_col + other.col_);
+
+    if ((temp_row != row_) || (temp_col != col_)) {
+        Matrix temp(temp_row, temp_col);
+        temp.Copy(0, 0, *this);
+
+        (*this).Swap(temp);
+    }
+
     for (std::size_t r = 0; r < other.row_; ++r) {
         for (std::size_t c = 0; c < other.col_; ++c) {
             (*this)(r + start_row, c + start_col) = other(r, c);
@@ -325,10 +379,22 @@ Matrix& Matrix::Copy(std::size_t start_row, std::size_t start_col, const Matrix&
     return *this;
 }
 
-Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis) {
+void Matrix::Swap(Matrix& other) {
+    std::swap(row_, other.row_);
+    std::swap(col_, other.col_);
+    std::swap(data_, other.data_);
+}
+
+void Matrix::Swap(Matrix&& other) {
+    std::swap(row_, other.row_);
+    std::swap(col_, other.col_);
+    std::swap(data_, other.data_);
+}
+
+Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, MatrixDir axis) {
     Matrix result{};
 
-    if (axis == 0) {
+    if (axis == MatrixDir::kRow) {
         if (lhs.col_ != rhs.col_) {
             throw std::invalid_argument("check matrix size!");
         }
@@ -338,7 +404,7 @@ Matrix Matrix::Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axi
         row_concat.Copy(lhs.row_, 0, rhs);
 
         result = row_concat;
-    } else if (axis == 1) {
+    } else if (axis == MatrixDir::kCol) {
         if (lhs.row_ != rhs.row_) {
             throw std::invalid_argument("check matrix size!");
         }
@@ -357,6 +423,23 @@ Matrix Matrix::Identity(std::size_t size) {
     Matrix result(size, size);
     for (std::size_t index = 0; index < size; ++index) {
         result(index, index) = 1.0;
+    }
+
+    return result;
+}
+
+Matrix Matrix::Diag(const Matrix& vec) {
+    if (vec.row_ != 1 && vec.col_ != 1) {
+        throw std::invalid_argument("vec should be vector (row or column size should be 1");
+    }
+    Matrix vec_ = vec;
+    if (vec.row_ == 1) {
+        vec_ = vec_.Transpose();
+    }
+
+    Matrix result(vec_.row_, vec_.row_);
+    for (std::size_t index = 0; index < vec_.row_; ++index) {
+        result(index, index) = vec_(index, 0);
     }
 
     return result;
@@ -382,9 +465,9 @@ double Matrix::Norm2(const Matrix& mat) {
     return std::sqrt(result);
 }
 
-bool Matrix::IsBoundedRow(std::size_t row) const { return (row <= row_); }
+bool Matrix::IsBoundedRow(std::size_t row) const { return (row < row_); }
 
-bool Matrix::IsBoundedCol(std::size_t col) const { return (col <= col_); }
+bool Matrix::IsBoundedCol(std::size_t col) const { return (col < col_); }
 
 bool Matrix::IsBoundedSize(std::size_t row, std::size_t col) const { return IsBoundedRow(row) && IsBoundedCol(col); }
 

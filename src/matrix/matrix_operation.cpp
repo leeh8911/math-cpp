@@ -10,6 +10,8 @@
 
 #include "src/matrix/matrix_operation.h"
 
+#include <cmath>
+
 #include "src/matrix/matrix_core.h"
 
 namespace math_cpp {
@@ -88,5 +90,15 @@ Matrix operator/(const Matrix& lhs, double scalar) { return lhs * (1.0 / scalar)
 
 Matrix operator*(const Matrix& lhs, double scalar) { return scalar * lhs; }
 
+Matrix Sqrt(const Matrix& src) {
+    Matrix result(src.Row(), src.Col());
+    for (std::size_t r = 0; r < src.Row(); ++r) {
+        for (std::size_t c = 0; c < src.Col(); ++c) {
+            result(r, c) = std::sqrt(src(r, c));
+        }
+    }
+
+    return result;
+}
 }  // namespace matrix
 }  // namespace math_cpp

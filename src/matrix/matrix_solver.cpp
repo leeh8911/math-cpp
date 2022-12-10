@@ -10,12 +10,15 @@
 
 #include "src/matrix/matrix_solver.h"
 
+#include <algorithm>
+#include <cmath>
+#include <stdexcept>
 #include <utility>
 
 #include "src/matrix/matrix.h"
 namespace math_cpp {
 namespace matrix {
-EigenSolver::EigenSolver(const Matrix& mat) {
+EigenSolver::EigenSolver(const Matrix& mat, double epsilon) : epsilon_(epsilon) {
     auto eigen = Solve(mat);
 
     eigenvalues_ = eigen.first;
@@ -26,13 +29,12 @@ Matrix EigenSolver::Eigenvalues() const { return eigenvalues_; }
 
 Matrix EigenSolver::Eigenvectors() const { return eigenvectors_; }
 
-/// @brief
+/// @brief Solve eigen problem of input argument matrix.
 /// @param mat
 /// @return Pair of eigen values and eigen vectors. first is 1D matrix made by eigen values. second is 2D matrix made by
 /// eigen vectors. Eigen vectors are column vectors, V = [v1, v2, v3 ...]; Eigen values are 1D row vector, E = [e1, e2,
 /// e2 ...];
 std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
-    // TODO(sangwon) : to be update
     if (mat.Row() != mat.Col()) {
         throw std::invalid_argument("Eigen should be square matrix");
     }
@@ -42,17 +44,18 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
 
     Matrix eigen_vector(mat.Row(), 1);
     Matrix prev(mat.Row(), 1);
-    double eps = 1e-5;
+
     Matrix A = mat;
     for (std::size_t i = 0; i < mat.Row(); ++i) {
         eigen_vector = Matrix::Random(mat.Row(), 1);
-        while ((Matrix::Norm2(eigen_vector - prev) > eps)) {
+        Matrix A_square = A * A;
+        while ((Matrix::Norm2(eigen_vector - prev) > epsilon_)) {
             prev = eigen_vector;
 
             // Prevent negative eigen value effect(?)
             // If there is negative eigen value, then eigen vector flip direction all iterate, and cannot converge.
             // Therefore, doubly multiply A matrix can prevent this effect, because alway positive!
-            eigen_vector = A * A * eigen_vector;
+            eigen_vector = A_square * eigen_vector;
 
             eigen_vector /= Matrix::Norm2(eigen_vector);
         }
@@ -67,6 +70,39 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
     }
 
     return std::make_pair(result_values, result_vectors);
+}
+
+SVDSolver::SVDSolver(const Matrix& mat, double epsilon) : epsilon_(epsilon) {
+    auto USVD = Solve(mat);
+
+    U_ = std::get<0>(USVD);
+    S_ = std::get<1>(USVD);
+    V_ = std::get<2>(USVD);
+    D_ = std::get<3>(USVD);
+}
+
+Matrix SVDSolver::U() const { return U_; }
+Matrix SVDSolver::V() const { return V_; }
+Matrix SVDSolver::S() const { return S_; }
+Matrix SVDSolver::D() const { return D_; }
+
+std::tuple<Matrix, Matrix, Matrix, Matrix> SVDSolver::Solve(const Matrix& A) {
+    EigenSolver es_AAT(A * A.Transpose(), epsilon_);
+    EigenSolver es_ATA(A.Transpose() * A, epsilon_);
+
+    Matrix U = es_AAT.Eigenvectors();
+    Matrix V = es_ATA.Eigenvectors();
+
+    Matrix S(A.Row(), A.Col());
+    Matrix D;
+    if (A.Row() < A.Col()) {
+        D = Sqrt(es_AAT.Eigenvalues());
+        S.Copy(0, 0, Matrix::Diag(D));
+    } else {
+        D = Sqrt(es_ATA.Eigenvalues());
+        S.Copy(0, 0, Matrix::Diag(D));
+    }
+    return std::make_tuple(U, S, V, D);
 }
 }  // namespace matrix
 }  // namespace math_cpp

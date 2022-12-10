@@ -17,6 +17,8 @@
 
 namespace math_cpp {
 namespace matrix {
+
+enum MatrixDir { kRow, kCol };
 class Matrix {
  public:
     using Shape = std::pair<std::size_t, std::size_t>;
@@ -29,7 +31,7 @@ class Matrix {
     Matrix(const Matrix& other) = default;
     Matrix(Matrix&& other) = default;
     Matrix& operator=(const Matrix& other) = default;
-    Matrix& operator=(Matrix&& other) = default;
+    Matrix& operator=(Matrix&& other);
 
     std::size_t Row() const;
     std::size_t Col() const;
@@ -46,6 +48,14 @@ class Matrix {
 
     Matrix Inverse() const;
     Matrix Transpose() const;
+    Matrix Diagonal() const;
+
+    double Sum() const;
+    double Prod() const;
+    double Mean() const;
+    double MinCoeff() const;
+    double MaxCoeff() const;
+    double Trace() const;
 
     Matrix& Absolute();
 
@@ -53,6 +63,7 @@ class Matrix {
     Matrix& RowAdd(std::size_t idx, const Matrix& row);
     Matrix GetCol(std::size_t idx) const;
     Matrix GetRow(std::size_t idx) const;
+    Matrix& SetCol(std::size_t idx, const Matrix& src);
     Matrix& SetRow(std::size_t idx, const Matrix& src);
     Matrix GetSubMatrix(std::size_t start_row, std::size_t start_col);
 
@@ -66,8 +77,12 @@ class Matrix {
 
     Matrix& Copy(std::size_t start_row, std::size_t start_col, const Matrix& other);
 
-    static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, std::size_t axis = 0);
+    void Swap(Matrix& other);
+    void Swap(Matrix&& other);
+
+    static Matrix Concatenate(const Matrix& lhs, const Matrix& rhs, MatrixDir axis = MatrixDir::kRow);
     static Matrix Identity(std::size_t size);
+    static Matrix Diag(const Matrix& vec);
     static Matrix Random(std::size_t row, std::size_t col);
 
     static double Norm2(const Matrix& mat);
