@@ -68,5 +68,36 @@ std::pair<Matrix, Matrix> EigenSolver::Solve(const Matrix& mat) {
 
     return std::make_pair(result_values, result_vectors);
 }
+
+SVDSolver::SVDSolver(const Matrix& mat, double epsilon) : epsilon_(epsilon) {
+    auto USVT = Solve(mat);
+
+    U_ = std::get<0>(USVT);
+    S_ = std::get<1>(USVT);
+    V_ = std::get<2>(USVT).Transpose();
+}
+
+Matrix SVDSolver::U() const { return U_; }
+Matrix SVDSolver::V() const { return V_; }
+Matrix SVDSolver::S() const { return S_; }
+
+Matrix GramSchmidt(const Matrix& A) {
+    std::size_t n = A.Row();
+    std::size_t m = A.Col();
+
+    Matrix Q1(n, m);
+    Q1.SetCol(0, A.GetCol(0));
+
+    return Q1;
+}
+
+std::tuple<Matrix, Matrix, Matrix> SVDSolver::Solve(const Matrix& mat) {
+    std::tuple<Matrix, Matrix, Matrix> result{};
+    Matrix U_(mat.Row(), mat.Row());
+    Matrix S_(mat.Row(), mat.Col());
+    Matrix V_(mat.Col(), mat.Col());
+
+    return result;
+}
 }  // namespace matrix
 }  // namespace math_cpp

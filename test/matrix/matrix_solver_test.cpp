@@ -95,5 +95,18 @@ TEST(MatrixSolverTest, HandmadeEigenCompareEigenLibrary2Case) {
     }
     EXPECT_EQ(A, restore_A);
 }
+
+TEST(MatrixSolverTest, SVDTrivialCase) {
+    Matrix A{{1, 1}, {2, 2}, {2, 0}};
+
+    matrix::SVDSolver solver(A);
+
+    EXPECT_EQ(3, solver.U().Row());
+    EXPECT_EQ(3, solver.S().Row());
+    EXPECT_EQ(2, solver.S().Col());
+    EXPECT_EQ(2, solver.V().Col());
+
+    EXPECT_EQ(A, solver.U() * solver.S() * solver.V().Transpose());
+}
 }  // namespace test
 }  // namespace math_cpp

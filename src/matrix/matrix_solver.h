@@ -11,6 +11,7 @@
 #ifndef SRC_MATRIX_MATRIX_SOLVER_H_
 #define SRC_MATRIX_MATRIX_SOLVER_H_
 
+#include <tuple>
 #include <utility>
 
 #include "src/matrix/matrix_core.h"
@@ -29,6 +30,24 @@ class EigenSolver {
     std::pair<Matrix, Matrix> Solve(const Matrix& mat);
     Matrix eigenvalues_{};
     Matrix eigenvectors_{};
+
+    double epsilon_{};
+};
+
+class SVDSolver {
+ public:
+    explicit SVDSolver(const Matrix& mat, double epsilon = 1e-5);
+
+    Matrix U() const;
+    Matrix V() const;
+    Matrix S() const;
+
+ private:
+    std::tuple<Matrix, Matrix, Matrix> Solve(const Matrix& mat);
+
+    Matrix U_{};
+    Matrix V_{};
+    Matrix S_{};
 
     double epsilon_{};
 };
